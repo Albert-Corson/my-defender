@@ -10,7 +10,7 @@ SRC			=	src/main.c		\
 
 OBJ			=	$(SRC:.c=.o)
 
-NAME		=	msf
+NAME		=	my_defender
 
 GRAPHICS	=	-l csfml-graphics
 WINDOW		=	-l csfml-window

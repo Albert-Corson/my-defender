@@ -11,10 +11,13 @@ sfRenderWindow *window_new(char *title, sfVector2i size, sfUint32 style)
 {
     sfVideoMode mode = {size.x, size.y, 32};
     sfRenderWindow *window = NULL;
+    sfImage *img = sfImage_createFromFile("assets/img/icon.png");
+    const sfUint8 *icon = sfImage_getPixelsPtr(img);
 
     window = sfRenderWindow_create(mode, title, style, NULL);
-    sfRenderWindow_setMouseCursorVisible(window, sfFalse);
     sfRenderWindow_setFramerateLimit(window, 144);
+    sfRenderWindow_setIcon(window, 32, 32, icon);
+    sfImage_destroy(img);
     return (window);
 }
 
