@@ -130,6 +130,7 @@ struct msf_game_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    int nbr;
 };
 
 /*
@@ -155,6 +156,7 @@ struct msf_text_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    int nbr;
 
     sfText *text;
     sfFont *font;
@@ -186,6 +188,7 @@ struct msf_animated_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    int nbr;
 
     sfSprite *sprite;
     sfClock *timer;
@@ -240,6 +243,7 @@ struct msf_input_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    int nbr;
 
     void *background;
     void *foreground;
@@ -264,6 +268,7 @@ struct msf_shape_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    int nbr;
 
     void *shape;
 };

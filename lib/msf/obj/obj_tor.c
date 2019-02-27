@@ -30,6 +30,7 @@ void obj_ctor(void *obj, obj_type type, sfBool is_collider)
     st_obj->mouse_evt = obj_mouse_evt_new();
     st_obj->physics = NULL;
     st_obj->dtor = obj_dtor;
+    st_obj->nbr = 0;
 }
 
 void obj_dtor(void *obj)

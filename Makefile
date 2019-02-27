@@ -5,8 +5,10 @@
 ## Makefile
 ##
 
-SRC			=	src/main.c		\
-				src/menu.c
+SRC			=	src/main.c			\
+				src/menu_scene.c	\
+				src/pres_scene.c	\
+				src/random_gen.c	\
 
 OBJ			=	$(SRC:.c=.o)
 

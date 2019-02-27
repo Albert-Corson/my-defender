@@ -16,7 +16,7 @@ sfRenderWindow *window_new(char *title, sfVector2i size, sfUint32 style)
 
     window = sfRenderWindow_create(mode, title, style, NULL);
     sfRenderWindow_setFramerateLimit(window, 144);
-    sfRenderWindow_setIcon(window, 32, 32, icon);
+    sfRenderWindow_setIcon(window, 256, 256, icon);
     sfImage_destroy(img);
     return (window);
 }
