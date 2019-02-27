@@ -5,10 +5,12 @@
 ## Makefile
 ##
 
-SRC			=	src/main.c			\
-				src/menu_scene.c	\
-				src/pres_scene.c	\
-				src/random_gen.c	\
+SRC			=	src/main.c						\
+				src/menu/menu_scene.c			\
+				src/menu/menu_evt.c				\
+				src/pres_screen/pres_scene.c	\
+				src/pres_screen/pres_evt.c		\
+				src/random_gen.c				\
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -24,12 +26,12 @@ LDLIBS		=	-Llib -lmsf -lmy $(GRAPHICS) $(SYSTEM) $(AUDIO) -lm
 INCLUDE		=	-Iinclude
 CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 
-all:	$(NAME)
-
 $(NAME):	$(OBJ)
 	$(MAKE) -C lib/my
 	$(MAKE) -C lib/msf
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+
+all:	$(NAME)
 
 clean:
 	$(MAKE) clean -C lib/my

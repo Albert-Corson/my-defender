@@ -1,0 +1,30 @@
+/*
+** EPITECH PROJECT, 2019
+** my_defender
+** File description:
+** pres_evt
+*/
+
+#include "defender.h"
+
+void animate_text(hub_t *hub, sfEvent evt)
+{
+    text_obj_t *txt = list_fetch(((scene_t *)hub->scenes)->objs, "press_a_key");
+    sfColor color = sfText_getColor(txt->text);
+
+    evt = evt;
+    if (txt->nbr == 0)
+        txt->nbr = 2;
+    if (color.a + 2 >= 255)
+        txt->nbr = -2;
+    if (color.a - 2 <= 0)
+        txt->nbr = 2;
+    color.a += txt->nbr;
+    text_obj_set_color(txt, color);
+}
+
+void leave_pres(hub_t *hub, sfEvent evt)
+{
+    if (evt.type == sfEvtKeyReleased || evt.type == sfEvtMouseButtonReleased)
+        hub->scenes = list_fetch((scene_t *)hub->scenes, "menu");
+}

@@ -247,6 +247,7 @@ struct msf_input_obj_s {
 
     void *background;
     void *foreground;
+    void (*on_active)(hub_t *, void *);
 };
 
 /*
@@ -434,7 +435,12 @@ void input_obj_render(void *input_obj, hub_t *hub);
 void input_obj_recenter(void *input_obj);
 
 // INPUT SET
-void input_obj_set_value(void *input_obj, void *value);
+void input_obj_set_activity(void *inpt_obj, void (*on_active)(hub_t *, void *));
+void input_set_origin(void *input, sfVector2f origin);
+void input_set_position(void *input, sfVector2f position);
+void input_set_rotation(void *input, float rotation);
+void input_set_scale(void *input, sfVector2f scale);
+void input_set_size(void *input, sfVector2u size);
 
 // INPUT GET
 sfFloatRect input_obj_get_box(void *input_obj);

@@ -13,11 +13,10 @@ int main(void)
     hub_t *hub = hub_new("\n My Defender \n", w_size, sfDefaultStyle);
     pres_scene_create(hub);
     menu_scene_create(hub);
-    // gameloop_scene_create(hub);
     sfEvent evt;
 
     while (sfRenderWindow_isOpen(hub->window)) {
-        sfRenderWindow_clear(hub->window, sfBlack);
+        sfRenderWindow_clear(hub->window, sfYellow);
         hub_trigger_evts_scope(hub, context, evt);
         while (sfRenderWindow_pollEvent(hub->window, &evt)) {
             hub_trigger_evts_scope(hub, inputs, evt);
