@@ -8,8 +8,7 @@
 #ifndef MSF_SCENE_H_
 #define MSF_SCENE_H_
 
-#include <SFML/System/Vector2.h>
-#include "msf/types.h"
+#include "msf.h"
 
 /*
 **  STRUCTS

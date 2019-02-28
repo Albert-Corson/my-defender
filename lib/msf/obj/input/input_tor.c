@@ -26,7 +26,6 @@ void input_obj_ctor(void *input_obj, void *bck, void *frg, sfVector2f pos)
     st_input_obj->dtor = input_obj_dtor;
     st_input_obj->foreground = frg;
     st_input_obj->background = bck;
-    st_input_obj->on_active = NULL;
     VFUNC(bck, set_position, pos);
     VFUNC(frg, set_position, pos);
     input_obj_recenter(input_obj);

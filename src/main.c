@@ -13,8 +13,12 @@ int main(void)
     hub_t *hub = hub_new("\n My Defender \n", w_size, sfDefaultStyle);
     pres_scene_create(hub);
     menu_scene_create(hub);
+    options_scene_create(hub);
+    controls_scene_create(hub);
     sfEvent evt;
 
+    sfMusic *music = sfMusic_createFromFile("assets/ahhh.wav");
+    sfMusic_play(music);
     while (sfRenderWindow_isOpen(hub->window)) {
         sfRenderWindow_clear(hub->window, sfYellow);
         hub_trigger_evts_scope(hub, context, evt);
@@ -24,6 +28,8 @@ int main(void)
         hub_render(hub);
         sfRenderWindow_display(hub->window);
     }
+    sfMusic_stop(music);
+    sfMusic_destroy(music);
     hub_destroy(hub);
     return (0);
 }

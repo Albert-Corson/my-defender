@@ -8,10 +8,7 @@
 #ifndef MSF_OBJ_H_
 #define MSF_OBJ_H_
 
-#include <SFML/Graphics.h>
-#include <SFML/System/Vector2.h>
-#include <time.h>
-#include "msf/types.h"
+#include "msf.h"
 
 /*
 **  ENUMS
@@ -130,6 +127,7 @@ struct msf_game_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void (*on_active)(hub_t *, void *);
     int nbr;
 };
 
@@ -156,6 +154,7 @@ struct msf_text_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void (*on_active)(hub_t *, void *);
     int nbr;
 
     sfText *text;
@@ -188,6 +187,7 @@ struct msf_animated_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void (*on_active)(hub_t *, void *);
     int nbr;
 
     sfSprite *sprite;
@@ -243,11 +243,11 @@ struct msf_input_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void (*on_active)(hub_t *, void *);
     int nbr;
 
     void *background;
     void *foreground;
-    void (*on_active)(hub_t *, void *);
 };
 
 /*
@@ -269,6 +269,7 @@ struct msf_shape_obj_s {
     obj_vtable_t *vtable;
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
+    void (*on_active)(hub_t *, void *);
     int nbr;
 
     void *shape;

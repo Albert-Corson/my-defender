@@ -31,6 +31,7 @@ void obj_ctor(void *obj, obj_type type, sfBool is_collider)
     st_obj->physics = NULL;
     st_obj->dtor = obj_dtor;
     st_obj->nbr = 0;
+    st_obj->on_active = NULL;
 }
 
 void obj_dtor(void *obj)

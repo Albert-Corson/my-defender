@@ -6,8 +6,9 @@
 */
 
 #include "defender.h"
+#include <SFML/Window/Keyboard.h>
 
-void animate_text(hub_t *hub, sfEvent evt)
+void pres_animate_text(hub_t *hub, sfEvent evt)
 {
     text_obj_t *txt = list_fetch(((scene_t *)hub->scenes)->objs, "press_a_key");
     sfColor color = sfText_getColor(txt->text);
@@ -23,8 +24,14 @@ void animate_text(hub_t *hub, sfEvent evt)
     text_obj_set_color(txt, color);
 }
 
-void leave_pres(hub_t *hub, sfEvent evt)
+void pres_quit_game(hub_t *hub, sfEvent evt)
+{
+    // if (evt.type == sfEvtKeyReleased && sfKeyboard_isKeyPressed(sfKeyEscape))
+        // sfRenderWindow_close(hub->window);
+}
+
+void pres_show_menu(hub_t *hub, sfEvent evt)
 {
     if (evt.type == sfEvtKeyReleased || evt.type == sfEvtMouseButtonReleased)
-        hub->scenes = list_fetch((scene_t *)hub->scenes, "menu");
+        hub->scenes = list_fetch((scene_t *)hub->scenes, "menu_scene");
 }

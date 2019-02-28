@@ -5,12 +5,18 @@
 ## Makefile
 ##
 
-SRC			=	src/main.c						\
-				src/menu/menu_scene.c			\
-				src/menu/menu_evt.c				\
-				src/pres_screen/pres_scene.c	\
-				src/pres_screen/pres_evt.c		\
-				src/random_gen.c				\
+SRC			=	src/main.c								\
+				src/menu/menu_scene.c					\
+				src/menu/menu_evt.c						\
+				src/menu/menu_btn_action.c				\
+				src/menu/controls/controls_evt.c		\
+				src/menu/controls/controls_scene.c		\
+				src/menu/options/options_evt.c			\
+				src/menu/options/options_scene.c		\
+				src/menu/options/options_btn_action.c	\
+				src/pres_screen/pres_scene.c			\
+				src/pres_screen/pres_evt.c				\
+				src/random_gen.c						\
 
 OBJ			=	$(SRC:.c=.o)
 

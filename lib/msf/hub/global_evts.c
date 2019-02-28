@@ -48,6 +48,18 @@ void mouse_evt_updater(void *obj, sfEvent evt)
     }
 }
 
+void launch_on_active_func(hub_t *hub, void *obj)
+{
+    obj_t *st_obj = obj;
+
+    if (st_obj->on_active) {
+        if (st_obj->mouse_evt->active || st_obj->mouse_evt->hover)
+            st_obj->on_active(hub, st_obj);
+        else if (st_obj->mouse_evt->focus)
+            st_obj->on_active(hub, st_obj);
+    }
+}
+
 void mouse_evt_updater_evt(hub_t *hub, sfEvent evt)
 {
     obj_t *begin = NULL;
@@ -61,8 +73,10 @@ void mouse_evt_updater_evt(hub_t *hub, sfEvent evt)
     next = curr->next;
     while (next != begin) {
         mouse_evt_updater(curr, evt);
+        launch_on_active_func(hub, curr);
         curr = next;
         next = (obj_t *)next->next;
     };
     mouse_evt_updater(curr, evt);
+    launch_on_active_func(hub, curr);
 }

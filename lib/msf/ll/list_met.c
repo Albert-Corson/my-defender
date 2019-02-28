@@ -6,7 +6,6 @@
 */
 
 #include "msf/msf.h"
-#include <stdio.h>
 
 void *list_append(void **begin, void *node)
 {
@@ -51,7 +50,7 @@ void *list_fetch(void *begin, char *label)
 {
     node_t *tmp = (node_t *)begin;
 
-    while (tmp->next != begin) {
+    while (tmp->next && tmp->next != begin) {
         if (my_memcmp(tmp->label, label, -1) == 0)
             return (tmp);
         tmp = (node_t *)tmp->next;

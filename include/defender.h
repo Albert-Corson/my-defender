@@ -13,6 +13,8 @@
 // SCENES
 void menu_scene_create(hub_t *hub);
 void pres_scene_create(hub_t *hub);
+void controls_scene_create(hub_t *hub);
+void options_scene_create(hub_t *hub);
 
 // TOOLS
 int readjust_nb(int nb, int min, int max);

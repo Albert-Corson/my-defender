@@ -7,18 +7,16 @@
 
 #include "defender.h"
 
-void quit_game(hub_t *hub, sfEvent evt)
+void menu_show_pres(hub_t *hub, sfEvent evt)
 {
-    input_obj_t *btn = list_fetch(((scene_t *)hub->scenes)->objs, "quit_btn");
-
-    evt = evt;
-    if (btn && btn->mouse_evt->active)
-        sfRenderWindow_close(hub->window);
+    // if (evt.type == sfEvtKeyReleased && sfKeyboard_isKeyPressed(sfKeyEscape))
+    // if (evt.type == sfEvtKeyReleased)
+        // hub->scenes = list_fetch(hub->scenes, "pres_scene");
 }
 
 void place_arrow(hub_t *hub, sfEvent evt)
 {
-    scene_t *scene = list_fetch(hub->scenes, "menu");
+    scene_t *scene = list_fetch(hub->scenes, "menu_scene");
     anim_obj_t *arrow = list_fetch(scene->objs, "arrow");
     obj_t *next = ((obj_t *)scene->objs)->next;
     sfVector2f a_pos = {0, 0};
