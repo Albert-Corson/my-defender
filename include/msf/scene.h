@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** Untitled (Workspace)
+** msf
 ** File description:
 ** scene
 */
@@ -31,6 +31,8 @@ struct msf_scene_s {
     void *evts;
     sfVector2f cam_speed;
     sfVector2f cam_pos;
+    sound_buffer_t *sound_buffers;
+    sfSound *sound;
 };
 
 /*
@@ -46,9 +48,12 @@ void scene_destroy(void *scene);
 void scene_add_evt(void *scene, void *evt, char *label);
 void scene_add_obj(void *scene, void *obj, char *label);
 void scene_render(hub_t *hub, void *scene);
+void scene_add_buffer(void *scene, void *buffer, char *label);
 
 // SCENE SETTERS
 void scene_set_cam_speed(void *scene, float sx, float sy);
 void scene_set_cam_pos(void *scene, float x, float y);
+void scene_set_sound_buffer(void *scene, void *buffer);
+void scenes_set_volume(void *obj, float volume);
 
 #endif /* !SCENE_H_ */

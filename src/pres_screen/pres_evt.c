@@ -26,12 +26,15 @@ void pres_animate_text(hub_t *hub, sfEvent evt)
 
 void pres_quit_game(hub_t *hub, sfEvent evt)
 {
-    // if (evt.type == sfEvtKeyReleased && sfKeyboard_isKeyPressed(sfKeyEscape))
-        // sfRenderWindow_close(hub->window);
+    if (evt.type == sfEvtKeyReleased && evt.key.code == sfKeyEscape)
+        sfRenderWindow_close(hub->window);
 }
 
 void pres_show_menu(hub_t *hub, sfEvent evt)
 {
-    if (evt.type == sfEvtKeyReleased || evt.type == sfEvtMouseButtonReleased)
+    if (evt.type == sfEvtKeyReleased || evt.type == sfEvtMouseButtonReleased) {
         hub->scenes = list_fetch((scene_t *)hub->scenes, "menu_scene");
+        FAIL_IF_VOID(!hub->scenes || !((scene_t *)hub->scenes)->sound);
+        sfSound_play(((scene_t *)hub->scenes)->sound);
+    }
 }

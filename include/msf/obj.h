@@ -128,6 +128,7 @@ struct msf_game_obj_s {
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
     void (*on_active)(hub_t *, void *);
+    sfSound *sound;
     int nbr;
 };
 
@@ -155,6 +156,7 @@ struct msf_text_obj_s {
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
     void (*on_active)(hub_t *, void *);
+    sfSound *sound;
     int nbr;
 
     sfText *text;
@@ -188,6 +190,7 @@ struct msf_animated_obj_s {
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
     void (*on_active)(hub_t *, void *);
+    sfSound *sound;
     int nbr;
 
     sfSprite *sprite;
@@ -244,6 +247,7 @@ struct msf_input_obj_s {
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
     void (*on_active)(hub_t *, void *);
+    sfSound *sound;
     int nbr;
 
     void *background;
@@ -270,6 +274,7 @@ struct msf_shape_obj_s {
     obj_physics_t *physics;
     obj_mouse_evt_t *mouse_evt;
     void (*on_active)(hub_t *, void *);
+    sfSound *sound;
     int nbr;
 
     void *shape;
@@ -300,6 +305,7 @@ void obj_set_group(void *obj, int group);
 void obj_set_state(void *obj, sfBool state);
 void obj_set_speed(void *obj, float sx, float sy);
 void obj_set_pos(void *obj, float x, float y);
+void objs_set_volume(void *obj, float volume);
 
 // OBJ MOUSE EVT TOR
 void *obj_mouse_evt_new(void);

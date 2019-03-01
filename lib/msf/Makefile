@@ -20,6 +20,8 @@ SRC			=	utils/vector.c							\
 				scene/scene_tor.c						\
 				scene/scene_met.c						\
 				scene/scene_set.c						\
+				sound/sound_buffer_tor.c				\
+				sound/sound_set.c						\
 				obj/obj_tor.c							\
 				obj/obj_met.c							\
 				obj/obj_set.c							\

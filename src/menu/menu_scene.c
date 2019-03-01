@@ -31,9 +31,9 @@ void menu_create_buttons(scene_t *menu)
     input_obj_t *quit = input_obj_new(rect_quit, text_quit, VECT2F(1025, 625));
 
     scene_add_obj(menu, play, "play_btn");
-    scene_add_obj(menu, quit, "quit_btn");
-    scene_add_obj(menu, opt, "opt_btn");
     scene_add_obj(menu, ctrl, "ctrl_btn");
+    scene_add_obj(menu, opt, "opt_btn");
+    scene_add_obj(menu, quit, "quit_btn");
     quit->on_active = menu_quit_game;
     opt->on_active =  menu_show_options;
     ctrl->on_active = menu_show_controls;
@@ -47,7 +47,10 @@ void menu_scene_create(hub_t *hub)
     anim_obj_t *tower = anim_obj_new();
     anim_t *arrow_img = anim_new("assets/img/arrow.png", 1, 0);
     anim_obj_t *arrow = anim_obj_new();
+    sound_buffer_t *ahhh = sound_buffer_new("assets/ahhh.wav");
 
+    scene_add_buffer(menu, ahhh, "background");
+    scene_set_sound_buffer(menu, ahhh->buffer);
     menu_create_buttons(menu);
     anim_obj_add_anim(arrow, arrow_img, "arrow");
     anim_obj_add_anim(tower, tower_img, "tower");

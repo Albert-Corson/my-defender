@@ -17,6 +17,7 @@ SRC			=	src/main.c								\
 				src/pres_screen/pres_scene.c			\
 				src/pres_screen/pres_evt.c				\
 				src/random_gen.c						\
+				src/sound.c								\
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -28,7 +29,7 @@ SYSTEM		=	-l csfml-system
 AUDIO		=	-l csfml-audio
 NETWORK		=	-l csfml-network
 
-LDLIBS		=	-Llib -lmsf -lmy $(GRAPHICS) $(SYSTEM) $(AUDIO) -lm
+LDLIBS		=	-Llib -lmsf -lmy $(GRAPHICS) $(SYSTEM) $(AUDIO) $(WINDOW) -lm
 INCLUDE		=	-Iinclude
 CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 

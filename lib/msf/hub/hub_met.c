@@ -28,7 +28,6 @@ void hub_add_scene(void *hub, void *scene, char *label)
 void hub_render(hub_t *hub)
 {
     FAIL_IF_VOID(!hub || !hub->scenes);
-
     scene_render(hub, hub->scenes);
 }
 
