@@ -7,18 +7,6 @@
 
 #include "defender.h"
 
-void scene_sound_apply(scene_t *scene, void (*func)(sfSound *))
-{
-    obj_t *tmp = ((obj_t *)(scene->objs))->next;
-
-    while (tmp != scene->objs) {
-        func(tmp->sound);
-        tmp = tmp->next;
-    }
-    func(tmp->sound);
-    func(scene->sound);
-}
-
 void other_scenes_sound_apply(hub_t *hub, void (*func)(sfSound *))
 {
     scene_t *tmp = ((scene_t *)(hub->scenes))->next;

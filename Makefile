@@ -6,6 +6,8 @@
 ##
 
 SRC			=	src/main.c								\
+				src/random_gen.c						\
+				src/sound.c								\
 				src/menu/menu_scene.c					\
 				src/menu/menu_evt.c						\
 				src/menu/menu_btn_action.c				\
@@ -16,8 +18,12 @@ SRC			=	src/main.c								\
 				src/menu/options/options_btn_action.c	\
 				src/pres_screen/pres_scene.c			\
 				src/pres_screen/pres_evt.c				\
-				src/random_gen.c						\
-				src/sound.c								\
+				src/gameloop/game_scene.c				\
+				src/gameloop/game_btn_action.c			\
+				src/gameloop/game_evt.c					\
+				# src/gameloop/pause/pause_scene.c		\
+				# src/gameloop/pause/pause_evt.c			\
+				# src/gameloop/pause/pause_btn_action.c	\
 
 OBJ			=	$(SRC:.c=.o)
 

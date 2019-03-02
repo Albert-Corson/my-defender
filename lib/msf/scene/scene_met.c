@@ -31,7 +31,6 @@ void scene_add_buffer(void *scene, void *buffer, char *label)
 
     FAIL_IF_VOID(!st_scene || !buffer);
     node_ctor(buffer, label, NULL);
-    list_append((void **)(&st_scene->sound_buffers), buffer);
 }
 
 void scene_render(hub_t *hub, void *scene)

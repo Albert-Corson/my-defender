@@ -305,7 +305,6 @@ void obj_set_group(void *obj, int group);
 void obj_set_state(void *obj, sfBool state);
 void obj_set_speed(void *obj, float sx, float sy);
 void obj_set_pos(void *obj, float x, float y);
-void objs_set_volume(void *obj, float volume);
 
 // OBJ MOUSE EVT TOR
 void *obj_mouse_evt_new(void);

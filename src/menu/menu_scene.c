@@ -49,8 +49,8 @@ void menu_scene_create(hub_t *hub)
     anim_obj_t *arrow = anim_obj_new();
     sound_buffer_t *ahhh = sound_buffer_new("assets/ahhh.wav");
 
-    scene_add_buffer(menu, ahhh, "background");
-    scene_set_sound_buffer(menu, ahhh->buffer);
+    hub_add_buffer(hub, ahhh, "background");
+    scene_set_sound_buffer(hub, menu, "background");
     menu_create_buttons(menu);
     anim_obj_add_anim(arrow, arrow_img, "arrow");
     anim_obj_add_anim(tower, tower_img, "tower");
