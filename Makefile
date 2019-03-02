@@ -21,9 +21,13 @@ SRC			=	src/main.c								\
 				src/gameloop/game_scene.c				\
 				src/gameloop/game_btn_action.c			\
 				src/gameloop/game_evt.c					\
-				# src/gameloop/pause/pause_scene.c		\
-				# src/gameloop/pause/pause_evt.c			\
-				# src/gameloop/pause/pause_btn_action.c	\
+				src/test/defense/defense_tor.c			\
+				src/test/defense/defense_evts.c			\
+				src/test/ennemy/ennemy_tor.c			\
+				src/test/ennemy/ennemy_evts.c			\
+				src/test/missile/missile_tor.c			\
+				src/test/missile/missile_evts.c			\
+				src/test/test_scene.c
 
 OBJ			=	$(SRC:.c=.o)
 

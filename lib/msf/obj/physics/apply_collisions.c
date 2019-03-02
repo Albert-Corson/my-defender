@@ -16,6 +16,7 @@ sfBool obj_apply_collision(hub_t *hub, void *obj_a, void *obj_b)
     sfVector2f pos_a = VGET(st_obj_a, get_position);
 
     obj_b = obj_b;
+    FAIL_IF(physics_a->gravity == 0, sfTrue);
     if (speed_a.x != 0 || speed_a.y != 0)
         pos_a.y -= hub->manifold->penetration * physics_a->inv_mass;
     speed_a.x = 0;

@@ -20,8 +20,8 @@ SRC	=	my_atoi.c													\
 		my_memcat.c													\
 		my_memchr.c													\
 		my_memmem.c													\
-		my_strtok.c													\
-		my_perror.c
+		my_perror.c													\
+		my_format.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -12,7 +12,7 @@ void obj_render(void *obj, hub_t *hub)
 {
     obj_t *st_obj = (obj_t *)obj;
 
-    FAIL_IF_VOID(!st_obj || !hub);
+    FAIL_IF_VOID(!st_obj || !hub || !((obj_t *)obj)->state);
     VFUNC(st_obj, render, hub);
     obj_move(obj, hub);
 }

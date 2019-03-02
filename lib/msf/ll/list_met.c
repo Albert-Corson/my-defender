@@ -60,3 +60,15 @@ void *list_fetch(void *begin, char *label)
     else
         return (NULL);
 }
+
+int list_poll(void *begin, void **buffer)
+{
+    FAIL_IF(!begin, 0);
+    if (!*buffer)
+        *buffer = begin;
+    else if (((node_t *)*buffer)->next != begin)
+        *buffer = ((node_t *)*buffer)->next;
+    else
+        return (0);
+    return (1);
+}

@@ -27,13 +27,11 @@ void anim_obj_animate(void *anim_obj)
     st_anim = (anim_t *)st_anim_obj->anims;
     FAIL_IF_VOID(!st_anim);
     st_frame = (frame_t *)st_anim->frames;
-    FAIL_IF_VOID(!st_frame);
+    FAIL_IF_VOID(!st_frame || st_frame->next == st_frame);
     elapsed_time = sfClock_getElapsedTime(st_anim_obj->timer).microseconds;
-    if (st_frame->next != st_frame) {
-        if (elapsed_time / 1000 >= st_anim->frame_duration) {
-            st_anim->frames = st_frame->next;
-            sfClock_restart(st_anim_obj->timer);
-        }
+    if (elapsed_time / 1000 >= st_anim->frame_duration) {
+        st_anim->frames = st_frame->next;
+        sfClock_restart(st_anim_obj->timer);
     }
 }
 

@@ -16,6 +16,7 @@ int main(void)
     options_scene_create(hub);
     controls_scene_create(hub);
     game_scene_create(hub);
+    test_scene_create(hub);
     sfEvent evt;
 
     while (sfRenderWindow_isOpen(hub->window)) {
