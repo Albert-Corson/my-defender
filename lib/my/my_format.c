@@ -40,7 +40,6 @@ char *my_format(char const *format, ...)
 
 int concat_data(char **str, char spec, va_list ap)
 {
-    char *new_str = NULL;
     int len = my_memlen(*str, sizeof(char));
     char *flags = "sdic";
     int index = -1;
