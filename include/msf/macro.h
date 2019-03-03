@@ -14,8 +14,6 @@
 #endif
 #define RAD(deg)            ((deg) * M_PI / 180)
 #define DEG(rad)            ((rad) * 180 / M_PI)
-#define DEFAULT_GRAVITY     0.5
-#define DEFAULT_RESTITUTION 0.5
 
 #ifndef FAIL_IF
     #define FAIL_IF(cond, exit_status)     if (cond) return (exit_status)

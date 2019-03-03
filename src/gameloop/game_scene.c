@@ -7,7 +7,6 @@
 
 #include "defender.h"
 
-// EVENTS FUNCTIONS
 void game_show_menu(hub_t *hub, sfEvent evt);
 
 void game_create_buttons(scene_t *game)

@@ -29,8 +29,8 @@ void input_obj_recenter(void *input_obj)
         bg_box = VGET(bg, get_box);
     if (fg)
         fg_box = VGET(fg, get_box);
-    pos = (sfVector2f){fg_box.left, fg_box.top - fg_box.height / 2};
-    VFUNC(bg, set_origin, (sfVector2f){bg_box.width / 2, bg_box.height / 2});
-    VFUNC(fg, set_origin, (sfVector2f){fg_box.width / 2, fg_box.height / 2});
+    pos = VECT2F(fg_box.left, fg_box.top - fg_box.height / 2);
+    VFUNC(bg, set_origin, VECT2F(bg_box.width / 2, bg_box.height / 2));
+    VFUNC(fg, set_origin, VECT2F(fg_box.width / 2, fg_box.height / 2));
     VFUNC(fg, set_position, pos);
 }

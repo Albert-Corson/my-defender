@@ -62,6 +62,6 @@ sfVector2u anim_obj_get_size(void *anim_obj)
     st_frame = (frame_t *)st_anim->frames;
     size = sfTexture_getSize(st_frame->texture);
     scale = VGET(anim_obj, get_scale);
-    size = (sfVector2u){ABS(size.x * scale.x), ABS(size.y * scale.y)};
+    size = VECT2U(ABS(size.x * scale.x), ABS(size.y * scale.y));
     return (size);
 }

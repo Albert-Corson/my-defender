@@ -30,22 +30,17 @@ sfBool obj_apply_collision_with_all(hub_t *hub, void *obj)
 {
     obj_t *begin = NULL;
     obj_t *curr = NULL;
-    obj_t *next = NULL;
     sfBool collide = sfFalse;
 
     FAIL_IF(!hub || !hub->scenes, sfFalse);
     begin = ((scene_t *)hub->scenes)->objs;
     FAIL_IF(!begin, sfFalse);
-    curr = begin;
-    next = curr->next;
-    while (next != begin) {
-        if (obj_collide(hub, obj, curr))
-            collide = obj_apply_collision(hub, obj, curr);
-        curr = next;
-        next = (obj_t *)next->next;
-    };
-    if (obj_collide(hub, obj, curr))
-        collide = obj_apply_collision(hub, obj, curr);
+    while (list_poll(begin, (void **)&curr)) {
+        if (obj_collide(hub, obj, curr)) {
+            obj_apply_collision(hub, obj, curr);
+            collide = sfTrue;
+        }
+    }
     return (collide);
 }
 
@@ -53,21 +48,16 @@ sfBool obj_apply_collision_with_group(hub_t *hub, void *obj, int group)
 {
     obj_t *begin = NULL;
     obj_t *curr = NULL;
-    obj_t *next = NULL;
     sfBool collide = sfFalse;
 
     FAIL_IF(!hub || !hub->scenes, sfFalse);
     begin = ((scene_t *)hub->scenes)->objs;
     FAIL_IF(!begin, sfFalse);
-    curr = begin;
-    next = curr->next;
-    while (next != begin) {
-        if (curr->group == group && obj_collide(hub, obj, curr))
-            collide = obj_apply_collision(hub, obj, curr);
-        curr = next;
-        next = (obj_t *)next->next;
-    };
-    if (curr->group == group && obj_collide(hub, obj, curr))
-        collide = obj_apply_collision(hub, obj, curr);
+    while (list_poll(begin, (void **)&curr)) {
+        if (curr->group == group && obj_collide(hub, obj, curr)) {
+            obj_apply_collision(hub, obj, curr);
+            collide = sfTrue;
+        }
+    }
     return (collide);
 }

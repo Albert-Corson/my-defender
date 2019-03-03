@@ -7,12 +7,16 @@
 
 #include "defender.h"
 
-// EVENTS FUNCTIONS
 void place_arrow(hub_t *hub, sfEvent evt);
+
 void menu_quit_game(hub_t *hub, void *obj);
+
 void menu_show_options(hub_t *hub, void *obj);
+
 void menu_show_controls(hub_t *hub, void *obj);
+
 void menu_show_game(hub_t *hub, void *obj);
+
 void menu_show_pres(hub_t *hub, sfEvent evt);
 
 void menu_create_buttons(scene_t *menu)
@@ -54,9 +58,9 @@ void menu_scene_create(hub_t *hub)
     menu_create_buttons(menu);
     anim_obj_add_anim(arrow, arrow_img, "arrow");
     anim_obj_add_anim(tower, tower_img, "tower");
-    anim_obj_set_position(tower, (sfVector2f){100, 170});
-    anim_obj_set_position(arrow, (sfVector2f){-100, 0});
-    anim_obj_set_scale(tower, (sfVector2f){2.2, 2.2});
+    anim_obj_set_position(tower, VECT2F(100, 170));
+    anim_obj_set_position(arrow, VECT2F(-100, 0));
+    anim_obj_set_scale(tower, VECT2F(2.2, 2.2));
     scene_add_obj(menu, tower, "tower");
     scene_add_obj(menu, arrow, "arrow");
     scene_add_evt(menu, evt_new(place_arrow, inputs), "place_arrow");

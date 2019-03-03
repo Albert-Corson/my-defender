@@ -6,6 +6,7 @@
 ##
 
 SRC			=	utils/vector.c							\
+				utils/objs.c							\
 				ll/list_met.c							\
 				ll/node_tor.c							\
 				ll/node_met.c							\

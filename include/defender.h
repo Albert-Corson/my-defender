@@ -13,6 +13,16 @@
 /*
 **  STRUCTS
 */
+typedef struct ennemy_data_s {
+    char *aspect;
+    int level;
+    sfBool aerial;
+    sfBool ground;
+    float max_hp;
+    float hp;
+    float speed;
+} ennemy_data_t;
+
 typedef struct defense_data_s {
     char *aspect;
     int level;
@@ -25,6 +35,7 @@ typedef struct defense_data_s {
 } defense_data_t;
 
 typedef struct missile_data_s {
+    float speed;
     obj_t *sender;
     obj_t *target;
 } missile_data_t;

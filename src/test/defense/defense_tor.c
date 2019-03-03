@@ -31,8 +31,8 @@ void *defense_new(scene_t *scene, char *aspect, int lvl, sfVector2f pos)
     FAIL_IF(!aspect || !(st_defense = malloc(sizeof(anim_obj_t))), NULL);
     defense_ctor(st_defense, aspect, lvl);
     extra = st_defense->extra;
-    VFUNC(extra->base, set_origin, (sfVector2f){96, 96});
-    VFUNC(st_defense, set_origin, (sfVector2f){96, 96});
+    VFUNC(extra->base, set_origin, VECT2F(96, 96));
+    VFUNC(st_defense, set_origin, VECT2F(96, 96));
     VFUNC(extra->base, set_position, pos);
     VFUNC(st_defense, set_position, pos);
     scene_add_obj(scene, extra->base, NULL);
@@ -53,7 +53,7 @@ void defense_ctor(anim_obj_t *defense, char *aspect, int lvl)
     extra->aspect = my_memdup(aspect, -1);
     extra->level = lvl;
     extra->dps = 100;
-    extra->range = 600;
+    extra->range = 400;
     extra->target = NULL;
     extra->firerate = 1000;
     extra->timer = sfClock_create();

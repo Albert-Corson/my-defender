@@ -33,6 +33,6 @@ void place_arrow(hub_t *hub, sfEvent evt)
     if (next->type != input || !next->mouse_evt->hover)
         return;
     box = input_obj_get_box(next);
-    arr_pos = (sfVector2f){box.left - VGET(arrow, get_size).x - 20, box.top};
+    arr_pos = VECT2F(box.left - VGET(arrow, get_size).x - 20, box.top);
     VFUNC(arrow, set_position, arr_pos);
 }

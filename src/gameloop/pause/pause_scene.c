@@ -7,10 +7,12 @@
 
 #include "defender.h"
 
-// EVENTS FUNCTIONS
 void options_show_menu(hub_t *hub, sfEvent evt);
+
 void change_volume_slider(hub_t *hub, void *obj);
+
 void change_sfx_slider(hub_t *hub, void *obj);
+
 void change_music_slider(hub_t *hub, void *obj);
 
 void create_volume_slider(scene_t *options)
@@ -42,6 +44,7 @@ void create_sfx_slider(scene_t *options)
     scene_add_obj(options, back_sldr, "sfx_sldr_bg");
     scene_add_obj(options, slider, "sfx_sldr");
 }
+
 void create_music_slider(scene_t *options)
 {
     text_obj_t *text = text_obj_new("Music volume", sfRed, 35);

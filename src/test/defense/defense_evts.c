@@ -11,21 +11,22 @@ void missile_update(obj_t *missile);
 
 void defense_lock_target(hub_t *hub, obj_t *defense)
 {
-    defense_data_t *extra = NULL;
+    defense_data_t *extra = defense->extra;
+    float range = extra->range;
+    obj_t *target = extra->target;
+    obj_t *begin = ((scene_t *)hub->scenes)->objs;
     obj_t *curr = NULL;
 
-    FAIL_IF_VOID(!defense || !defense->extra);
-    extra = defense->extra;
     if (extra->target) {
-        if (objs_distance(defense, extra->target) > extra->range) {
+        if (!target->state || objs_distance(defense, target) > range) {
             extra->target = NULL;
         } else {
-            VFUNC(defense, set_rotation, objs_angle(defense, extra->target));
+            VFUNC(defense, set_rotation, objs_angle(defense, target));
             return;
         }
     }
-    while (list_poll(((scene_t *)hub->scenes)->objs, (void *)&curr)) {
-        if (curr->group == 2 && objs_distance(defense, curr) <= extra->range) {
+    while (list_poll((void *)begin, (void *)&curr)) {
+        if (curr->group == 2 && objs_distance(defense, curr) <= range) {
             extra->target = curr;
             return;
         }
@@ -51,11 +52,12 @@ void defense_fire(hub_t *hub, obj_t *defense)
 
 void defense_update_evt(hub_t *hub, sfEvent evt)
 {
+    obj_t *begin = ((scene_t *)hub->scenes)->objs;
     obj_t *curr = NULL;
 
     evt = evt;
     FAIL_IF_VOID(!hub || !hub->scenes || !((scene_t *)hub->scenes)->objs);
-    while (list_poll(((scene_t *)hub->scenes)->objs, (void *)&curr)) {
+    while (list_poll((void *)begin, (void *)&curr)) {
         if (curr->state && curr->group == 3) {
             defense_lock_target(hub, curr);
             defense_fire(hub, curr);

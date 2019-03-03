@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** MUL_my_defender_2018
+** def_upd
 ** File description:
 ** my_format
 */
@@ -8,8 +8,11 @@
 #include "my.h"
 
 int concat_data(char **str, char spec, va_list ap);
+
 int concat_s(char **str, va_list ap);
+
 int concat_di(char **str, va_list ap);
+
 int concat_c(char **str, va_list ap);
 
 char *my_format(char const *format, ...)

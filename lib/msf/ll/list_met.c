@@ -48,17 +48,13 @@ void list_apply(void *begin, void (*func)(void *))
 
 void *list_fetch(void *begin, char *label)
 {
-    node_t *tmp = (node_t *)begin;
+    node_t *curr = NULL;
 
-    while (tmp->next && tmp->next != begin) {
-        if (my_memcmp(tmp->label, label, -1) == 0)
-            return (tmp);
-        tmp = (node_t *)tmp->next;
+    while (list_poll(begin, (void **)&curr)) {
+        if (my_memcmp(curr->label, label, -1) == 0)
+            return (curr);
     }
-    if (my_memcmp(tmp->label, label, -1) == 0)
-        return (tmp);
-    else
-        return (NULL);
+    return (NULL);
 }
 
 int list_poll(void *begin, void **buffer)
