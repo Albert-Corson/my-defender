@@ -35,12 +35,11 @@ CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 
 all:
 	uptodate=0;\
-	if [ -f $(PATH)$(NAME) ];then\
+	if [ -f $(PATHNAME) ];then\
 		uptodate=1;\
 		for file in $(SRC);do\
 			if [[ ! -f $${file//.c/.o} ]];then\
 				uptodate=0;\
-				echo "ko";\
 			fi;\
 			if [[ -n "$$(find . -regex \.?\/?$$file -a -newer $(PATHNAME))" ]];then\
 				uptodate=0;\
