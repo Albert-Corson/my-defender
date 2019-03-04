@@ -26,6 +26,7 @@ SRC			=	my_atoi.c													\
 OBJ			=	$(patsubst %.c,%.o,$(SRC))
 
 NAME		=	libmy.a
+PATHNAME	=	../$(NAME)
 
 CSFML		=	-lcsfml-graphics -lcsfml-system -lcsfml-audio
 LDLIBS		=	-L../ -lmy $(CSFML) -lm
@@ -34,13 +35,14 @@ CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
 
 all:
 	uptodate=0;\
-	if [ -f $(NAME) ];then\
+	if [ -f $(PATH)$(NAME) ];then\
 		uptodate=1;\
 		for file in $(SRC);do\
 			if [[ ! -f $${file//.c/.o} ]];then\
 				uptodate=0;\
+				echo "ko";\
 			fi;\
-			if [[ -n "$$(find . -regex \.?\/?$$file -a -newer $(NAME))" ]];then\
+			if [[ -n "$$(find . -regex \.?\/?$$file -a -newer $(PATHNAME))" ]];then\
 				uptodate=0;\
 			fi;\
 		done;\
@@ -48,7 +50,7 @@ all:
 	if [ $$uptodate == 1 ];then\
 		echo "make: '$(NAME)' is up to date.";\
 	else\
-		rm -f $(NAME);\
+		rm -f $(PATHNAME);\
 		make $(NAME);\
 	fi;
 
@@ -72,7 +74,7 @@ $(NAME):
 	done;\
 	$(call TERMLOG,$(HEADER),\nARCHIVING OBJECTS : );\
 	if [ "$$status" == 1 ];then\
-		ar rc ../$(NAME) $(OBJ);\
+		ar rc $(PATHNAME) $(OBJ);\
 		if [[ "$$?" == 0 ]];then\
 			$(call TERMLOG,$(NORMAL),creating '$(NAME)' ,$(SUCCESS),[OK]);\
 		else\
@@ -93,7 +95,7 @@ clean:
 
 fclean:	clean
 	$(call TERMLOG,$(HEADER),\nDELETING TARGET : );\
-	rm -f $(NAME);\
+	rm -f $(PATHNAME);\
 	if [ "$$?" == 0 ];then\
 		$(call TERMLOG,$(NORMAL),removing '$(NAME)' ,$(SUCCESS),[OK]);\
 	else\
