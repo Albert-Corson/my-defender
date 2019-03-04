@@ -6,9 +6,9 @@
 ##
 
 SRC			=	src/main.c								\
-				src/random_gen.c						\
-				src/sound.c								\
-				src/create_btn.c						\
+				src/tools/random_gen.c					\
+				src/tools/sound.c						\
+				src/tools/create_btn.c					\
 				src/menu/menu_scene.c					\
 				src/menu/menu_evt.c						\
 				src/menu/menu_btn_action.c				\

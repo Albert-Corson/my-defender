@@ -11,6 +11,7 @@ int main(void)
 {
     sfVector2i w_size = {1600, 900};
     hub_t *hub = hub_new("\n My Defender \n", w_size, sfDefaultStyle);
+    window_set_icon(hub->window, "assets/img/icon.png");
     pres_scene_create(hub);
     menu_scene_create(hub);
     options_scene_create(hub);

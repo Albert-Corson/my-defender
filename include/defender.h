@@ -14,7 +14,6 @@
 **  STRUCTS
 */
 typedef struct ennemy_data_s {
-    char *aspect;
     int level;
     sfBool aerial;
     sfBool ground;
@@ -24,7 +23,6 @@ typedef struct ennemy_data_s {
 } ennemy_data_t;
 
 typedef struct defense_data_s {
-    char *aspect;
     int level;
     sfInt64 firerate;
     float dps;
@@ -40,26 +38,6 @@ typedef struct missile_data_s {
     obj_t *target;
 } missile_data_t;
 
-void *defense_vtable_new(void);
-void defense_vtable_destroy(void *obj_vtable);
-void menu_create(hub_t *hub);
-void *ennemy_new(char *aspect, sfVector2f pos);
-void *defense_new(scene_t *scene, char *aspect, int lvl, sfVector2f pos);
-void defense_ctor(anim_obj_t *defense, char *aspect, int lvl);
-void defense_dtor(void *defense);
-void defense_destroy(void *defense);
-void turret_create(hub_t *hub);
-void *missile_new(void *launcher, char *aspect);
-
-// CREATE SCENES
-void menu_scene_create(hub_t *hub);
-void pres_scene_create(hub_t *hub);
-void options_scene_create(hub_t *hub);
-void game_scene_create(hub_t *hub);
-void pause_scene_create(hub_t *hub);
-
-void test_scene_create(hub_t *hub);
-
 // TOOLS
 int readjust_nb(int nb, int min, int max);
 int random_nbr(sfClock *random);
@@ -71,10 +49,29 @@ void outline_hovered_btn(hub_t *hub, sfEvent evt);
 void create_volume_slider(scene_t *options);
 input_obj_t *create_btn(sfFloatRect box, sfColor bg, int txt_size, char *txt);
 
+// GAME NPC
+void *ennemy_new(char *aspect, sfVector2f pos);
+void *ennemy_data_new(float max_hp, float speed);
+void *defense_new(scene_t *scene, char *aspect, int lvl, sfVector2f pos);
+void defense_ctor(anim_obj_t *defense, char *aspect, int lvl);
+void defense_dtor(void *defense);
+void defense_destroy(void *defense);
+void *missile_new(void *launcher, char *aspect);
+
+// CREATE SCENES
+void menu_scene_create(hub_t *hub);
+void pres_scene_create(hub_t *hub);
+void options_scene_create(hub_t *hub);
+void game_scene_create(hub_t *hub);
+void pause_scene_create(hub_t *hub);
+
+void test_scene_create(hub_t *hub);
+
 // PRESENTATION SCENE
 void pres_animate_text(hub_t *hub, sfEvent evt);
 void pres_show_menu(hub_t *hub, sfEvent evt);
 void pres_quit_game(hub_t *hub, sfEvent evt);
+void mini_game_txt(hub_t *hub, sfEvent evt);
 
 // MENU SCENE
 void menu_place_arrow(hub_t *hub, sfEvent evt);

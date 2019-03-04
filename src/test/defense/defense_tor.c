@@ -50,7 +50,6 @@ void defense_ctor(anim_obj_t *defense, char *aspect, int lvl)
     defense->dtor = defense_dtor;
     defense->extra = extra;
     defense->group = 3;
-    extra->aspect = my_memdup(aspect, -1);
     extra->level = lvl;
     extra->dps = 100;
     extra->range = 400;
@@ -71,7 +70,6 @@ void defense_dtor(void *defense)
     FAIL_IF_VOID(!st_defense);
     anim_obj_dtor(defense);
     sfClock_destroy(extra->timer);
-    free(extra->aspect);
     free(extra);
 }
 

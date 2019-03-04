@@ -8,6 +8,23 @@
 #include "defender.h"
 #include <SFML/Window/Keyboard.h>
 
+void mini_game_txt(hub_t *hub, sfEvent evt)
+{
+    shape_obj_t *me = list_fetch(((scene_t *)hub->scenes)->objs, "ennemy");
+    text_obj_t *txt = list_fetch(((scene_t *)hub->scenes)->objs, "press_a_key");
+    char *score = NULL;
+    int hp = 0;
+
+    FAIL_IF_VOID(!me || !txt);
+    hp = ((ennemy_data_t *)me->extra)->hp;
+    if (hp != 100) {
+        ((ennemy_data_t *)me->extra)->hp = 100;
+        ++me->nbr;
+        text_obj_set_string(txt, my_format("HITS: %d", me->nbr));
+        text_obj_set_position(txt, VECT2F(745, 775));
+    }
+}
+
 void pres_animate_text(hub_t *hub, sfEvent evt)
 {
     text_obj_t *txt = list_fetch(((scene_t *)hub->scenes)->objs, "press_a_key");
