@@ -22,7 +22,7 @@ void change_volume_slider(hub_t *hub, void *obj)
         rect.x = 0;
     if (rect.x > 800)
         rect.x = 800;
-    rect_set_size(slider, VECT2U(rect.x, VGET(obj, get_size).y));
+    rect_set_size(slider, VECT2U(rect.x, VGET(slider, get_size).y));
     sfListener_setGlobalVolume((rect.x / 800) * 100);
 }
 

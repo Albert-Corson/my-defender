@@ -14,8 +14,8 @@ int main(void)
     pres_scene_create(hub);
     menu_scene_create(hub);
     options_scene_create(hub);
-    controls_scene_create(hub);
     game_scene_create(hub);
+    pause_scene_create(hub);
     test_scene_create(hub);
     sfEvent evt;
 

@@ -8,11 +8,10 @@
 SRC			=	src/main.c								\
 				src/random_gen.c						\
 				src/sound.c								\
+				src/create_btn.c						\
 				src/menu/menu_scene.c					\
 				src/menu/menu_evt.c						\
 				src/menu/menu_btn_action.c				\
-				src/menu/controls/controls_evt.c		\
-				src/menu/controls/controls_scene.c		\
 				src/menu/options/options_evt.c			\
 				src/menu/options/options_scene.c		\
 				src/menu/options/options_btn_action.c	\
@@ -21,6 +20,9 @@ SRC			=	src/main.c								\
 				src/gameloop/game_scene.c				\
 				src/gameloop/game_btn_action.c			\
 				src/gameloop/game_evt.c					\
+				src/gameloop/pause/pause_btn_action.c	\
+				src/gameloop/pause/pause_evt.c			\
+				src/gameloop/pause/pause_scene.c		\
 				src/test/defense/defense_tor.c			\
 				src/test/defense/defense_evts.c			\
 				src/test/ennemy/ennemy_tor.c			\
@@ -84,8 +86,8 @@ $(NAME):
 			fi;\
 		fi;\
 	done;\
-	$(call TERMLOG,$(HEADER),\nLINKING OBJECTS : );\
 	if [ "$$status" == 1 ];then\
+		$(call TERMLOG,$(HEADER),\nLINKING OBJECTS : );\
 		cc -o $(NAME) $(OBJ) $(CFLAGS);\
 		if [[ "$$?" == 0 ]];then\
 			$(call TERMLOG,$(NORMAL),linking '$(NAME)' ,$(SUCCESS),[OK]);\

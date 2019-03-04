@@ -14,6 +14,7 @@ SRC			=	utils/vector.c							\
 				hub/hub_met.c							\
 				hub/hub_set.c							\
 				hub/window_tor.c						\
+				hub/window_set.c						\
 				hub/window_met.c						\
 				hub/global_evts.c						\
 				evt/evt_tor.c							\
@@ -132,8 +133,8 @@ $(NAME):
 			fi;\
 		fi;\
 	done;\
-	$(call TERMLOG,$(HEADER),\nARCHIVING OBJECTS : );\
 	if [ "$$status" == 1 ];then\
+		$(call TERMLOG,$(HEADER),\nARCHIVING OBJECTS : );\
 		ar rc $(PATHNAME) $(OBJ);\
 		if [[ "$$?" == 0 ]];then\
 			$(call TERMLOG,$(NORMAL),creating '$(NAME)' ,$(SUCCESS),[OK]);\

@@ -13,7 +13,7 @@ void menu_show_pres(hub_t *hub, sfEvent evt)
         hub->scenes = list_fetch(hub->scenes, "pres_scene");
 }
 
-void place_arrow(hub_t *hub, sfEvent evt)
+void menu_place_arrow(hub_t *hub, sfEvent evt)
 {
     scene_t *scene = list_fetch(hub->scenes, "menu_scene");
     obj_t *objs = scene ? scene->objs : NULL;
@@ -33,6 +33,6 @@ void place_arrow(hub_t *hub, sfEvent evt)
     if (next->type != input || !next->mouse_evt->hover)
         return;
     box = input_obj_get_box(next);
-    arr_pos = VECT2F(box.left - VGET(arrow, get_size).x - 20, box.top);
+    arr_pos = (sfVector2f){box.left - VGET(arrow, get_size).x - 20, box.top};
     VFUNC(arrow, set_position, arr_pos);
 }

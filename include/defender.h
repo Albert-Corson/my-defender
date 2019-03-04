@@ -51,12 +51,13 @@ void defense_destroy(void *defense);
 void turret_create(hub_t *hub);
 void *missile_new(void *launcher, char *aspect);
 
-// SCENES
+// CREATE SCENES
 void menu_scene_create(hub_t *hub);
 void pres_scene_create(hub_t *hub);
-void controls_scene_create(hub_t *hub);
 void options_scene_create(hub_t *hub);
 void game_scene_create(hub_t *hub);
+void pause_scene_create(hub_t *hub);
+
 void test_scene_create(hub_t *hub);
 
 // TOOLS
@@ -65,5 +66,35 @@ int random_nbr(sfClock *random);
 int random_clamp(sfClock *random, int min, int max);
 void other_scenes_sound_apply(hub_t *hub, void (*func)(sfSound *));
 void sfx_set_volume(scene_t *scene, float volume);
+void outline_focused_btn(hub_t *hub, sfEvent evt);
+void outline_hovered_btn(hub_t *hub, sfEvent evt);
+void create_volume_slider(scene_t *options);
+input_obj_t *create_btn(sfFloatRect box, sfColor bg, int txt_size, char *txt);
+
+// PRESENTATION SCENE
+void pres_animate_text(hub_t *hub, sfEvent evt);
+void pres_show_menu(hub_t *hub, sfEvent evt);
+void pres_quit_game(hub_t *hub, sfEvent evt);
+
+// MENU SCENE
+void menu_place_arrow(hub_t *hub, sfEvent evt);
+void menu_quit_game(hub_t *hub, void *obj);
+void menu_show_options(hub_t *hub, void *obj);
+void menu_show_game(hub_t *hub, void *obj);
+void menu_show_pres(hub_t *hub, sfEvent evt);
+
+// OPTIONS SCENE
+void options_show_menu(hub_t *hub, sfEvent evt);
+void change_volume_slider(hub_t *hub, void *obj);
+void change_sfx_slider(hub_t *hub, void *obj);
+void change_music_slider(hub_t *hub, void *obj);
+
+// GAME SCENE
+void game_pause(hub_t *hub, sfEvent evt);
+
+// PAUSE SCENE
+void pause_menu_action(hub_t *hub, void *obj);
+void pause_quit_action(hub_t *hub, void *obj);
+void pause_resume_action(hub_t *hub, void *obj);
 
 #endif /* !PROJECT_H_ */

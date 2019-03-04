@@ -66,27 +66,20 @@ void mouse_evt_updater(void *obj, sfEvent evt)
     }
 }
 
-void launch_on_active_func(hub_t *hub, void *obj)
-{
-    obj_t *st_obj = obj;
-
-    if (st_obj->on_active) {
-        if (st_obj->mouse_evt->active || st_obj->mouse_evt->hover)
-            st_obj->on_active(hub, st_obj);
-        else if (st_obj->mouse_evt->focus)
-            st_obj->on_active(hub, st_obj);
-    }
-}
-
 void mouse_evt_updater_evt(hub_t *hub, sfEvent evt)
 {
     obj_t *begin = ((scene_t *)hub->scenes)->objs;
     obj_t *curr = NULL;
+    int check = 0;
 
     FAIL_IF_VOID(evt.type != 11 && evt.type != 9 && evt.type != 10);
     FAIL_IF_VOID(!hub || !hub->scenes || !((scene_t *)hub->scenes)->objs);
     while (list_poll((void *)begin, (void **)&curr)) {
         mouse_evt_updater(curr, evt);
-        launch_on_active_func(hub, curr);
+        check = curr->on_active ? 1 : 0;
+        if ((curr->mouse_evt->active || curr->mouse_evt->focus) && check)
+            curr->on_active(hub, curr);
+        else if (curr->mouse_evt->hover && check)
+            curr->on_active(hub, curr);
     }
 }

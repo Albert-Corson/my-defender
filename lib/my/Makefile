@@ -71,8 +71,8 @@ $(NAME):
 			fi;\
 		fi;\
 	done;\
-	$(call TERMLOG,$(HEADER),\nARCHIVING OBJECTS : );\
 	if [ "$$status" == 1 ];then\
+		$(call TERMLOG,$(HEADER),\nARCHIVING OBJECTS : );\
 		ar rc $(PATHNAME) $(OBJ);\
 		if [[ "$$?" == 0 ]];then\
 			$(call TERMLOG,$(NORMAL),creating '$(NAME)' ,$(SUCCESS),[OK]);\
