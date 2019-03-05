@@ -12,7 +12,7 @@ void ennemy_move_evt(hub_t *hub, sfEvent evt);
 
 static void ennemy_circle_dtor(void *obj)
 {
-    free(((obj_t *)obj)->extra);    
+    free(((obj_t *)obj)->extra);
     circle_dtor(obj);
 }
 
@@ -25,6 +25,7 @@ void create_defense(scene_t *pres)
     ennemy->extra = ennemy_data_new(100, 3);
     ennemy->dtor = ennemy_circle_dtor;
     ((defense_data_t *)defense->extra)->dps = 1;
+    ((defense_data_t *)defense->extra)->range = 700;
     scene_add_obj(pres, defense, "defense");
     scene_add_obj(pres, ennemy, "ennemy");
     scene_add_evt(pres, evt_new(defense_update_evt, context), NULL);

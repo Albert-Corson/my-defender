@@ -22,3 +22,11 @@ void outline_hovered_btn(hub_t *hub, sfEvent evt)
             rect_set_outline_color(next->background, sfBlack);
     }
 }
+
+void pause_esc_key(hub_t *hub, sfEvent evt)
+{
+    evt = evt;
+    FAIL_IF_VOID(!hub);
+    if (KRELEASED(evt, sfKeyEscape))
+        hub->scenes = list_fetch(hub->scenes, "game_scene");
+}

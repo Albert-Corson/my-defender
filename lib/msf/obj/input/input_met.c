@@ -19,18 +19,24 @@ void input_obj_render(void *input_obj, hub_t *hub)
 void input_obj_recenter(void *input_obj)
 {
     input_obj_t *st_input_obj = (input_obj_t *)input_obj;
-    obj_t *bg = st_input_obj->background;
-    obj_t *fg = st_input_obj->foreground;
-    sfFloatRect fg_box = {0, 0, 0, 0};
-    sfFloatRect bg_box = {0, 0, 0, 0};
-    sfVector2f pos = {0, 0};
+    obj_t *bg = st_input_obj ? st_input_obj->background : NULL;
+    obj_t *fg = st_input_obj ? st_input_obj->foreground : NULL;
+    sfVector2u size;
+    sfVector2f ori;
+    sfVector2f scale;
 
-    if (bg)
-        bg_box = VGET(bg, get_box);
-    if (fg)
-        fg_box = VGET(fg, get_box);
-    pos = VECT2F(fg_box.left, fg_box.top - fg_box.height / 2);
-    VFUNC(bg, set_origin, VECT2F(bg_box.width / 2, bg_box.height / 2));
-    VFUNC(fg, set_origin, VECT2F(fg_box.width / 2, fg_box.height / 2));
-    VFUNC(fg, set_position, pos);
+    if (bg) {
+        scale = VGET(bg, get_scale);
+        size = VGET(bg, get_size);
+        ori.x = size.x / 2 / scale.x;
+        ori.y = size.y / 2 / scale.y;
+        VFUNC(bg, set_origin, ori);
+    }
+    if (fg) {
+        scale = VGET(fg, get_scale);
+        size = VGET(fg, get_size);
+        ori.x = size.x / 2 / scale.x;
+        ori.y = size.y / ((fg->type == text) ? 1 : 2) / scale.y;
+        VFUNC(fg, set_origin, ori);
+    }
 }

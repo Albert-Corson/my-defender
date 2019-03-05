@@ -11,7 +11,7 @@ void game_pause(hub_t *hub, sfEvent evt)
 {
     shape_obj_t *slider = NULL;
 
-    if (evt.type == sfEvtKeyReleased && evt.key.code == sfKeyEscape) {
+    if (KRELEASED(evt, sfKeyEscape)) {
         hub->scenes = list_fetch(hub->scenes, "pause_scene");
         slider = list_fetch(((scene_t *)hub->scenes)->objs, "general_sldr");
         VFUNC(slider, set_size, VECT2U(8 * sfListener_getGlobalVolume(), 80));
@@ -27,13 +27,13 @@ void outline_focused_btn(hub_t *hub, sfEvent evt)
     FAIL_IF_VOID(!st_input || !next);
     while (next != st_input) {
         if (next->type == input && next->mouse_evt->focus)
-            rect_set_outline_color(st_input->background, sfRed);
+            rect_set_outline_color(next->background, sfBlack);
         else if (next->type == input)
-            rect_set_outline_color(st_input->background, sfTransparent);
+            rect_set_outline_color(next->background, sfTransparent);
         next = next->next;
     }
     if (next->type == input && next->mouse_evt->focus)
-        rect_set_outline_color(st_input->background, sfRed);
+        rect_set_outline_color(next->background, sfBlack);
     else if (next->type == input)
-        rect_set_outline_color(st_input->background, sfTransparent);
+        rect_set_outline_color(next->background, sfTransparent);
 }

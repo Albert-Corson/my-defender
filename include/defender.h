@@ -88,10 +88,15 @@ void change_music_slider(hub_t *hub, void *obj);
 
 // GAME SCENE
 void game_pause(hub_t *hub, sfEvent evt);
+void create_img_btn(scene_t *game, char *path, sfVector2f pos, char *label);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);
 void pause_quit_action(hub_t *hub, void *obj);
 void pause_resume_action(hub_t *hub, void *obj);
+void pause_esc_key(hub_t *hub, sfEvent evt);
+
+#define KRELEASED(evt, keycode)\
+    ((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)
 
 #endif /* !PROJECT_H_ */

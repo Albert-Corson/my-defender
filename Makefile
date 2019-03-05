@@ -18,6 +18,7 @@ SRC			=	src/main.c								\
 				src/pres_screen/pres_scene.c			\
 				src/pres_screen/pres_evt.c				\
 				src/gameloop/game_scene.c				\
+				src/gameloop/game_create_btns.c			\
 				src/gameloop/game_btn_action.c			\
 				src/gameloop/game_evt.c					\
 				src/gameloop/pause/pause_btn_action.c	\

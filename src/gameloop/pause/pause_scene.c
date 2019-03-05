@@ -39,5 +39,6 @@ void pause_scene_create(hub_t *hub)
     pause_create_btn(pause);
     scene_add_obj(pause, title, "title");
     scene_add_evt(pause, evt_new(outline_hovered_btn, inputs), "outline_btn");
+    scene_add_evt(pause, evt_new(pause_esc_key, inputs), "esc_key");
     hub_add_scene(hub, pause, "pause_scene");
 }
