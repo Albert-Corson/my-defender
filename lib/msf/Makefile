@@ -23,7 +23,9 @@ SRC			=	utils/vector.c							\
 				scene/scene_met.c						\
 				scene/scene_set.c						\
 				sound/sound_buffer_tor.c				\
+				sound/sound_hub_set.c					\
 				sound/sound_scene_set.c					\
+				sound/sound_scene_set_global.c			\
 				sound/sound_obj_set.c					\
 				obj/obj_tor.c							\
 				obj/obj_met.c							\

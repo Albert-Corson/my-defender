@@ -58,7 +58,10 @@ void options_scene_create(hub_t *hub)
     text_obj_t *title = text_obj_new("OPTIONS", sfBlack, 70);
     input_obj_t *back = NULL;
 
+    options->clear = sfYellow;
+    scene_set_sound_buffer(hub, options, "mouse_click");
     back = create_btn(RECT(100, 840, 160, 80), sfBlack, 25, "BACK");
+    obj_set_sound_buffer(hub, back, "mouse_hover");
     rect_set_outline_thickness(back->background, -5);
     create_volume_slider(options);
     create_sfx_slider(options);

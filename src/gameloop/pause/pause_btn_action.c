@@ -15,7 +15,7 @@ void pause_resume_action(hub_t *hub, void *obj)
     if (st_input->mouse_evt->active) {
         st_input->mouse_evt->active = sfFalse;
         st_input->mouse_evt->hover = sfFalse;
-        st_input->mouse_evt->focus = sfFalse;
+        scene_sound_apply(hub->scenes, sfSound_play);
         hub->scenes = list_fetch(hub->scenes, "game_scene");
     }
 }
@@ -25,8 +25,10 @@ void pause_quit_action(hub_t *hub, void *obj)
     input_obj_t *st_input = obj;
 
     FAIL_IF_VOID(!obj);
-    if (st_input->mouse_evt->active)
+    if (st_input->mouse_evt->active) {
+        scene_sound_apply(hub->scenes, sfSound_play);
         sfRenderWindow_close(hub->window);
+    }
 }
 
 void pause_menu_action(hub_t *hub, void *obj)
@@ -37,7 +39,7 @@ void pause_menu_action(hub_t *hub, void *obj)
     if (st_input->mouse_evt->active) {
         st_input->mouse_evt->active = sfFalse;
         st_input->mouse_evt->hover = sfFalse;
-        st_input->mouse_evt->focus = sfFalse;
+        scene_sound_apply(hub->scenes, sfSound_play);
         hub->scenes = list_fetch(hub->scenes, "menu_scene");
     }
 }

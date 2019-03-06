@@ -6,6 +6,8 @@
 ##
 
 SRC			=	src/main.c								\
+				src/load_sound.c						\
+				src/create_scenes.c						\
 				src/tools/random_gen.c					\
 				src/tools/sound.c						\
 				src/tools/create_btn.c					\
@@ -21,6 +23,7 @@ SRC			=	src/main.c								\
 				src/gameloop/game_create_btns.c			\
 				src/gameloop/game_btn_action.c			\
 				src/gameloop/game_evt.c					\
+				src/gameloop/game_place_defense.c		\
 				src/gameloop/pause/pause_btn_action.c	\
 				src/gameloop/pause/pause_evt.c			\
 				src/gameloop/pause/pause_scene.c		\

@@ -24,6 +24,7 @@ void scene_ctor(void *scene)
     st_scene->objs = NULL;
     st_scene->evts = NULL;
     st_scene->sound = NULL;
+    st_scene->clear = sfBlack;
     st_scene->cam_pos = VECT2F(0, 0);
     st_scene->cam_speed = VECT2F(0, 0);
     st_scene->dtor = scene_dtor;

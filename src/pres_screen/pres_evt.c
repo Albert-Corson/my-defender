@@ -49,8 +49,10 @@ void pres_quit_game(hub_t *hub, sfEvent evt)
 void pres_show_menu(hub_t *hub, sfEvent evt)
 {
     if (evt.type == sfEvtKeyPressed || evt.type == sfEvtMouseButtonPressed) {
+        if (((scene_t *)hub->scenes)->sound)
+            sfSound_play(((scene_t *)hub->scenes)->sound);
         hub->scenes = list_fetch((scene_t *)hub->scenes, "menu_scene");
-        FAIL_IF_VOID(!hub->scenes || !((scene_t *)hub->scenes)->sound);
-        sfSound_play(((scene_t *)hub->scenes)->sound);
+        FAIL_IF_VOID(!hub->sound || sfSound_getStatus(hub->sound) == sfPlaying);
+        sfSound_play(hub->sound);
     }
 }

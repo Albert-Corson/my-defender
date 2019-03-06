@@ -38,6 +38,9 @@ typedef struct missile_data_s {
     obj_t *target;
 } missile_data_t;
 
+void load_sound_buffers(hub_t *hub);
+void create_scenes(hub_t *hub);
+
 // TOOLS
 int readjust_nb(int nb, int min, int max);
 int random_nbr(sfClock *random);
@@ -57,6 +60,8 @@ void defense_ctor(anim_obj_t *defense, char *aspect, int lvl);
 void defense_dtor(void *defense);
 void defense_destroy(void *defense);
 void *missile_new(void *launcher, char *aspect);
+void defense_update_evt(hub_t *hub, sfEvent evt);
+void ennemy_move_evt(hub_t *hub, sfEvent evt);
 
 // CREATE SCENES
 void menu_scene_create(hub_t *hub);
@@ -89,6 +94,7 @@ void change_music_slider(hub_t *hub, void *obj);
 // GAME SCENE
 void game_pause(hub_t *hub, sfEvent evt);
 void create_img_btn(scene_t *game, char *path, sfVector2f pos, char *label);
+void game_create_buttons(scene_t *game);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);
