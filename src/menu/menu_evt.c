@@ -10,8 +10,7 @@
 void menu_show_pres(hub_t *hub, sfEvent evt)
 {
     if (evt.type == sfEvtKeyReleased && evt.key.code == sfKeyEscape) {
-        if (hub->scenes->sound)
-            sfSound_play(hub->scenes->sound);
+        scene_sound_apply(hub->scenes, sfSound_play);
         hub->scenes = list_fetch(hub->scenes, "pres_scene");
     }
 }

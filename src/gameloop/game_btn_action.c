@@ -16,20 +16,21 @@ static void resize_circle(shape_obj_t *circle, float radius)
 
 void hide_previews(hub_t *hub)
 {
-    sfBool f = sfFalse;
-    anim_obj_t *rect = list_fetch(hub->scenes->objs, "prev_tools");
+    scene_t *scene = hub->scenes;
+    anim_obj_t *rect = list_fetch(scene->objs, "prev_tools");
 
-    ((anim_obj_t *)list_fetch(hub->scenes->objs, "prev_defenses"))->state = f;
-    ((anim_obj_t *)list_fetch(hub->scenes->objs, "prev_range"))->state = f;
-    ((anim_obj_t *)list_fetch(hub->scenes->objs, "prev_emp"))->state = f;
+    ((anim_obj_t *)list_fetch(scene->objs, "prev_defenses"))->state = sfFalse;
+    ((anim_obj_t *)list_fetch(scene->objs, "prev_range"))->state = sfFalse;
+    ((anim_obj_t *)list_fetch(scene->objs, "prev_emp"))->state = sfFalse;
     rect_set_fill_color(rect, RGBA(0, 0, 0, 0));
 }
 
 void towers_preview(hub_t *hub, sfEvent evt)
 {
+    scene_t *scene = hub->scenes;
     input_obj_t *focused = get_focused_btn(hub);
-    anim_obj_t *defenses = list_fetch(hub->scenes->objs, "prev_defenses");
-    shape_obj_t *circle = list_fetch(hub->scenes->objs, "prev_range");
+    anim_obj_t *defenses = list_fetch(scene->objs, "prev_defenses");
+    shape_obj_t *circle = list_fetch(scene->objs, "prev_range");
     sfVector2f pos = get_positioning(hub->window);
     char c;
     float range = 400;
@@ -46,13 +47,14 @@ void towers_preview(hub_t *hub, sfEvent evt)
     VFUNC(defenses, set_position, pos);
     VFUNC(circle, set_position, VECT2F(pos.x + 30, pos.y + 30));
     // if (LCLICK(evt))
-        // defense_new(hub->scenes, focused->label + 4, 1, pos);
+        // defense_new(scene, focused->label + 4, 1, pos);
 }
 
 void emp_preview(hub_t *hub, sfEvent evt)
 {
-    input_obj_t *emp_btn = list_fetch(hub->scenes->objs, "btn_emp");
-    anim_obj_t *emp = list_fetch(hub->scenes->objs, "prev_emp");
+    scene_t *scene = hub->scenes;
+    input_obj_t *emp_btn = list_fetch(scene->objs, "btn_emp");
+    anim_obj_t *emp = list_fetch(scene->objs, "prev_emp");
     sfVector2i mouse = sfMouse_getPositionRenderWindow(hub->window);
     sfVector2f pos;
 
@@ -68,7 +70,7 @@ void emp_preview(hub_t *hub, sfEvent evt)
 int tool_preview(hub_t *hub, sfEvent evt)
 {
     input_obj_t *focused = get_focused_btn(hub);
-    anim_obj_t *rect = list_fetch(hub->scenes->objs, "prev_tools");
+    anim_obj_t *rect = list_fetch(((scene_t *)hub->scenes)->objs, "prev_tools");
     // void (**func)(hub_t *) = {destroy_defense, upgrade_defense};
     sfVector2f pos = get_positioning(hub->window);
     char c;

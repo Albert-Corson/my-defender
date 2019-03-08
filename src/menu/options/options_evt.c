@@ -16,8 +16,7 @@ void options_show_menu(hub_t *hub, sfEvent evt)
         obj->mouse_evt->active = sfFalse;
         obj->mouse_evt->hover = sfFalse;
         rect_set_outline_color(obj->background, sfBlack);
-        if (hub->scenes->sound)
-            sfSound_play(hub->scenes->sound);
+        scene_sound_apply(hub->scenes, sfSound_play);
         hub->scenes = list_fetch(hub->scenes, "menu_scene");
         return;
     }

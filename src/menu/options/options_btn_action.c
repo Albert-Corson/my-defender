@@ -41,8 +41,8 @@ void change_sfx_slider(hub_t *hub, void *obj)
         rect.x = 0;
     if (rect.x > 600)
         rect.x = 600;
-    if (sfSound_getStatus(hub->scenes->sound) != sfPlaying)
-        sfSound_play(hub->scenes->sound);
+    if (sfSound_getStatus(((scene_t *)hub->scenes)->sound) != sfPlaying)
+        scene_sound_apply(hub->scenes, sfSound_play);
     rect_set_size(slider, VECT2U(rect.x, VGET(obj, get_size).y));
     scenes_set_global_volume(hub->scenes, (rect.x / 600) * 100);
 }

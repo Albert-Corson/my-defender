@@ -13,7 +13,7 @@ input_obj_t *get_focused_btn(hub_t *hub)
     input_obj_t *next = NULL;
 
     FAIL_IF(!hub || !hub->scenes, NULL);
-    obj = hub->scenes->objs;
+    obj = ((scene_t *)hub->scenes)->objs;
     while (list_poll(obj, (void **)&next)) {
         if (next->type == input && next->mouse_evt->focus)
             obj = NULL;

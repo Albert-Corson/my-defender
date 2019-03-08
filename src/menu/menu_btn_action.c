@@ -12,8 +12,7 @@ void menu_quit_game(hub_t *hub, void *btn)
     input_obj_t *st_btn = btn;
 
     if (st_btn && st_btn->mouse_evt->active) {
-        if (hub->scenes->sound)
-            sfSound_play(hub->scenes->sound);
+        scene_sound_apply(hub->scenes, sfSound_play);
         sfRenderWindow_close(hub->window);
     }
 }

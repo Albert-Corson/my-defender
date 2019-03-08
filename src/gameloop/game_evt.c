@@ -14,14 +14,14 @@ void game_pause(hub_t *hub, sfEvent evt)
     if (KRELEASED(evt, sfKeyEscape)) {
         scene_sound_apply(hub->scenes, sfSound_play);
         hub->scenes = list_fetch(hub->scenes, "pause_scene");
-        slider = list_fetch(hub->scenes->objs, "general_sldr");
+        slider = list_fetch(((scene_t *)hub->scenes)->objs, "general_sldr");
         VFUNC(slider, set_size, VECT2U(8 * sfListener_getGlobalVolume(), 80));
     }
 }
 
 void outline_focused_btn(hub_t *hub, sfEvent evt)
 {
-    input_obj_t *st_input =  hub->scenes->objs;
+    input_obj_t *st_input =  ((scene_t *)hub->scenes)->objs;
     input_obj_t *next = NULL;
     input_obj_t *tmp = NULL;
     sfColor save;
