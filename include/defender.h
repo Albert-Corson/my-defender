@@ -5,8 +5,8 @@
 ** project
 */
 
-#ifndef PROJECT_H_
-#define PROJECT_H_
+#ifndef DEFENDER_H_
+    #define DEFENDER_H_
 
 #include "msf/msf.h"
 
@@ -93,8 +93,16 @@ void change_music_slider(hub_t *hub, void *obj);
 
 // GAME SCENE
 void game_pause(hub_t *hub, sfEvent evt);
-void create_img_btn(scene_t *game, char *path, sfVector2f pos, char *label);
+input_obj_t *create_img_btn(char *path, sfVector2f pos);
 void game_create_buttons(scene_t *game);
+void create_positioning_preview(scene_t *game);
+sfVector2f get_positioning(sfRenderWindow *window);
+input_obj_t *get_focused_btn(hub_t *hub);
+void select_defenses(hub_t *hub, sfEvent evt);
+void hide_previews(hub_t *hub);
+void towers_preview(hub_t *hub, sfEvent evt);
+void emp_preview(hub_t *hub, sfEvent evt);
+int tool_preview(hub_t *hub, sfEvent evt);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);
@@ -105,4 +113,7 @@ void pause_esc_key(hub_t *hub, sfEvent evt);
 #define KRELEASED(evt, keycode)\
     ((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)
 
-#endif /* !PROJECT_H_ */
+#define LCLICK(evt)\
+    ((evt.mouseButton.type == sfEvtMouseButtonReleased && \
+    evt.mouseButton.button == sfMouseLeft) ? 1 : 0)
+#endif /* !DEFENDER_H_ */

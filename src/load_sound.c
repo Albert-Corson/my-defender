@@ -14,6 +14,6 @@ void load_sound_buffers(hub_t *hub)
     hub_add_buffer(hub, buffer, "mouse_click");
     buffer = sound_buffer_new("assets/audio/hover.ogg");
     hub_add_buffer(hub, buffer, "mouse_hover");
-    buffer = sound_buffer_new("assets/audio/ahhh.wav");
+    buffer = sound_buffer_new("assets/audio/menu.ogg");
     hub_add_buffer(hub, buffer, "bg_music");
 }

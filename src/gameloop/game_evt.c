@@ -21,8 +21,7 @@ void game_pause(hub_t *hub, sfEvent evt)
 
 void outline_focused_btn(hub_t *hub, sfEvent evt)
 {
-    scene_t *scene = hub->scenes;
-    input_obj_t *st_input = scene->objs;
+    input_obj_t *st_input =  hub->scenes->objs;
     input_obj_t *next = NULL;
     input_obj_t *tmp = NULL;
     sfColor save;
@@ -39,4 +38,14 @@ void outline_focused_btn(hub_t *hub, sfEvent evt)
     }
     if (save.a != 255 && tmp)
         scene_sound_apply(hub->scenes, sfSound_play);
+}
+
+void select_defenses(hub_t *hub, sfEvent evt)
+{
+    hide_previews(hub);
+    int check = tool_preview(hub, evt);
+    if (check == 2)
+        towers_preview(hub, evt);
+    else if (!check)
+        emp_preview(hub, evt);
 }

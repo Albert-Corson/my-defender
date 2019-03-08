@@ -29,6 +29,7 @@ void hub_render(hub_t *hub)
 {
     FAIL_IF_VOID(!hub || !hub->scenes);
     scene_render(hub, hub->scenes);
+    sfClock_restart(hub->timer);
 }
 
 void hub_trigger_evts_scope(hub_t *hub, evt_scope scope, sfEvent data)

@@ -11,6 +11,7 @@ SRC			=	src/main.c								\
 				src/tools/random_gen.c					\
 				src/tools/sound.c						\
 				src/tools/create_btn.c					\
+				src/tools/get_focused_btn.c				\
 				src/menu/menu_scene.c					\
 				src/menu/menu_evt.c						\
 				src/menu/menu_btn_action.c				\
@@ -20,7 +21,7 @@ SRC			=	src/main.c								\
 				src/pres_screen/pres_scene.c			\
 				src/pres_screen/pres_evt.c				\
 				src/gameloop/game_scene.c				\
-				src/gameloop/game_create_btns.c			\
+				src/gameloop/game_create_hud.c			\
 				src/gameloop/game_btn_action.c			\
 				src/gameloop/game_evt.c					\
 				src/gameloop/game_place_defense.c		\

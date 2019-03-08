@@ -40,7 +40,7 @@ struct msf_hub_s {
     void *global_evts;
     uint framerate;
     sfClock *timer;
-    scene_t *scenes;
+    void *scenes;
     manifold_t *manifold;
     sound_buffer_t *sound_buffers;
     sfSound *sound;

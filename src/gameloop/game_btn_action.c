@@ -6,3 +6,84 @@
 */
 
 #include "defender.h"
+
+static void resize_circle(shape_obj_t *circle, float radius)
+{
+    circle_set_radius(circle, radius);
+    circle_set_origin(circle, VECT2F(radius, radius));
+    circle->state = sfTrue;
+}
+
+void hide_previews(hub_t *hub)
+{
+    sfBool f = sfFalse;
+    anim_obj_t *rect = list_fetch(hub->scenes->objs, "prev_tools");
+
+    ((anim_obj_t *)list_fetch(hub->scenes->objs, "prev_defenses"))->state = f;
+    ((anim_obj_t *)list_fetch(hub->scenes->objs, "prev_range"))->state = f;
+    ((anim_obj_t *)list_fetch(hub->scenes->objs, "prev_emp"))->state = f;
+    rect_set_fill_color(rect, RGBA(0, 0, 0, 0));
+}
+
+void towers_preview(hub_t *hub, sfEvent evt)
+{
+    input_obj_t *focused = get_focused_btn(hub);
+    anim_obj_t *defenses = list_fetch(hub->scenes->objs, "prev_defenses");
+    shape_obj_t *circle = list_fetch(hub->scenes->objs, "prev_range");
+    sfVector2f pos = get_positioning(hub->window);
+    char c;
+    float range = 400;
+
+    FAIL_IF_VOID(!focused || pos.y == -1);
+    c = (focused->label + 4)[0];
+    if (c == 'm')
+        range = 200;
+    else if (c == 'r')
+        range = 300;
+    resize_circle(circle, range);
+    defenses->state = sfTrue;
+    defenses->anims = list_fetch(defenses->anims, focused->label + 4);
+    VFUNC(defenses, set_position, pos);
+    VFUNC(circle, set_position, VECT2F(pos.x + 30, pos.y + 30));
+    // if (LCLICK(evt))
+        // defense_new(hub->scenes, focused->label + 4, 1, pos);
+}
+
+void emp_preview(hub_t *hub, sfEvent evt)
+{
+    input_obj_t *emp_btn = list_fetch(hub->scenes->objs, "btn_emp");
+    anim_obj_t *emp = list_fetch(hub->scenes->objs, "prev_emp");
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(hub->window);
+    sfVector2f pos;
+
+    FAIL_IF_VOID(!emp_btn->mouse_evt->focus || mouse.y >= 780);
+    emp->state = sfTrue;
+    emp->anims = list_fetch(emp->anims, "emp");
+    pos = VECT2F(mouse.x, mouse.y);
+    VFUNC(emp, set_position, pos);
+    // if (LCLICK(evt))
+        // EMP HERE
+}
+
+int tool_preview(hub_t *hub, sfEvent evt)
+{
+    input_obj_t *focused = get_focused_btn(hub);
+    anim_obj_t *rect = list_fetch(hub->scenes->objs, "prev_tools");
+    // void (**func)(hub_t *) = {destroy_defense, upgrade_defense};
+    sfVector2f pos = get_positioning(hub->window);
+    char c;
+
+    FAIL_IF(!focused || pos.y == -1, 0);
+    c = (focused->label + 4)[0];
+    FAIL_IF(c == 'e', 0);
+    rect_set_position(rect, pos);
+    rect_set_fill_color(rect, RGBA(0, 0, 0, 150));
+    FAIL_IF(c == 'm' || c == 'r' || c == 'c', 2);
+    if (c == 'd')
+        rect_set_fill_color(rect, RGBA(255, 0, 0, 150));
+    else if (c == 'u')
+        rect_set_fill_color(rect, RGBA(0, 0, 200, 150));
+    // if (LCLICK(evt))
+        // func[c == 'd' ? 0 : 1](hub);
+    return (1);
+}

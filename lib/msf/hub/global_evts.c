@@ -62,7 +62,13 @@ void mouse_evt_updater(void *obj, sfEvent evt)
         mouse_evt_update_move(obj, evt);
     }
     if (evt.type == 9 || evt.type == 10) {
-        mouse_evt_update_button(obj, evt);
+        if (st_obj->state) {
+            mouse_evt_update_button(obj, evt);
+        } else {
+            st_obj->mouse_evt->active = sfFalse;
+            st_obj->mouse_evt->focus = sfFalse;
+            st_obj->mouse_evt->hover = sfFalse;
+        }
     }
 }
 

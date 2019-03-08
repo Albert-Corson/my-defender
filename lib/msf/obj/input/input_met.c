@@ -40,3 +40,21 @@ void input_obj_recenter(void *input_obj)
         VFUNC(fg, set_origin, ori);
     }
 }
+
+void input_obj_auto_scale_fg(input_obj_t *st_input)
+{
+    sfVector2u bg_size;
+    sfVector2u fg_size;
+    float bg_max = 0.0;
+    float fg_max = 0.0;
+    float ratio = 1.0;
+
+    FAIL_IF_VOID(!st_input || !st_input->background || !st_input->foreground)
+    bg_size = VGET(st_input->background, get_size);
+    fg_size = VGET(st_input->foreground, get_size);
+    bg_max = bg_size.x > bg_size.y ? bg_size.x : bg_size.y;
+    fg_max = fg_size.x > fg_size.y ? fg_size.x : fg_size.y;
+    FAIL_IF_VOID(fg_max < bg_max * 0.80);
+    ratio = bg_max * 0.80 / fg_max;
+    VFUNC(st_input->foreground, set_scale, VECT2F(ratio, ratio));
+}

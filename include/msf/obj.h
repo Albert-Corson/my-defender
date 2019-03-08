@@ -200,7 +200,7 @@ struct msf_animated_obj_s {
     int nbr;
 
     sfSprite *sprite;
-    sfClock *timer;
+    sfInt64 elapsed;
     void *anims;
 };
 
@@ -307,6 +307,7 @@ sfBool obj_collide_with_all(hub_t *hub, void *obj);
 sfBool obj_apply_collision_with_all(hub_t *hub, void *obj);
 sfBool obj_collide_with_group(hub_t *hub, void *obj, int group);
 sfBool obj_apply_collision_with_group(hub_t *hub, void *obj, int group);
+void obj_recenter_origin(void *obj);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);
@@ -447,6 +448,7 @@ void input_obj_destroy(void *input_obj);
 // INPUT MET
 void input_obj_render(void *input_obj, hub_t *hub);
 void input_obj_recenter(void *input_obj);
+void input_obj_auto_scale_fg(input_obj_t *st_input);
 
 // INPUT SET
 void input_obj_set_activity(void *inpt_obj, void (*on_active)(hub_t *, void *));

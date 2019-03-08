@@ -7,21 +7,21 @@
 
 #include "defender.h"
 
-void preview_defense_pos(hub_t *hub, sfEvent evt);
-
 void game_scene_create(hub_t *hub)
 {
     scene_t *game = scene_new();
-    shape_obj_t *rect = rect_new(VECT2U(1600, 125), RGBA(255, 255, 255, 200));
+    shape_obj_t *rect = rect_new(VECT2U(1600, 120), RGBA(255, 255, 255, 200));
 
     game->clear = sfYellow;
-    scene_set_sound_buffer(hub, game, "mouse_click");
-    VFUNC(rect, set_position, VECT2F(0, 775));
-    scene_add_obj(game, rect, "hud_rect");
     rect_set_outline_thickness(rect, 5);
     rect_set_outline_color(rect, sfRed);
+    VFUNC(rect, set_position, VECT2F(0, 785));
+    create_positioning_preview(game);
+    scene_add_obj(game, rect, "hud_rect");
     game_create_buttons(game);
+    scene_set_sound_buffer(hub, game, "mouse_click");
     scene_add_evt(game, evt_new(outline_focused_btn, inputs), "focused_btn");
+    scene_add_evt(game, evt_new(select_defenses, inputs), NULL);
     scene_add_evt(game, evt_new(game_pause, inputs), "pause");
     hub_add_scene(hub, game, "game_scene");
 }
