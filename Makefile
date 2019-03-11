@@ -34,7 +34,10 @@ SRC			=	src/main.c								\
 				src/test/ennemy/ennemy_evts.c			\
 				src/test/missile/missile_tor.c			\
 				src/test/missile/missile_evts.c			\
-				src/test/test_scene.c
+				src/test/test_scene.c					\
+				src/parsing/checks.c					\
+				src/parsing/parser.c					\
+				src/parsing/textures.c
 
 OBJ			=	$(patsubst %.c,%.o,$(SRC))
 

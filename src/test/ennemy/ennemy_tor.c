@@ -29,9 +29,9 @@ void ennemy_ctor(anim_obj_t *ennemy, char *aspect)
     FAIL_IF_VOID(!ennemy || !aspect);
     anim_obj_ctor(ennemy);
     ennemy->dtor = ennemy_dtor;
-    ennemy->group = 2;
+    ennemy->group = GR_ENEMY;
     ennemy->extra = ennemy_data_new(400, 3);
-    path = my_format("assets/img/%s.png", aspect);
+    path = my_format("assets/img/mob/%s.png", aspect);
     anim = anim_new(path, 1, 0);
     anim_obj_add_anim(ennemy, anim, NULL);
 }

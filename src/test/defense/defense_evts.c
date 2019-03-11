@@ -26,7 +26,7 @@ void defense_lock_target(hub_t *hub, obj_t *defense)
         }
     }
     while (list_poll((void *)begin, (void *)&curr)) {
-        if (curr->group == 2 && objs_distance(defense, curr) <= range) {
+        if (curr->group == GR_ENEMY && objs_distance(defense, curr) <= range) {
             extra->target = curr;
             return;
         }
@@ -58,10 +58,10 @@ void defense_update_evt(hub_t *hub, sfEvent evt)
     evt = evt;
     FAIL_IF_VOID(!hub || !hub->scenes || !((scene_t *)hub->scenes)->objs);
     while (list_poll((void *)begin, (void *)&curr)) {
-        if (curr->state && curr->group == 3) {
+        if (curr->state && curr->group == GR_DEFENSE) {
             defense_lock_target(hub, curr);
             defense_fire(hub, curr);
-        } else if (curr->state && curr->group == 4) {
+        } else if (curr->state && curr->group == GR_MISSILE) {
             missile_update(curr);
         }
     }

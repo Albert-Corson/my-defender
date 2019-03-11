@@ -30,9 +30,9 @@ void menu_create_buttons(hub_t *hub, scene_t *menu)
 void menu_scene_create(hub_t *hub)
 {
     scene_t *menu = scene_new();
-    anim_t *tower_img = anim_new("assets/img/icon.png", 1, 0);
+    anim_t *tower_img = anim_new("assets/img/hud/icon.png", 1, 0);
     anim_obj_t *tower = anim_obj_new();
-    anim_t *arrow_img = anim_new("assets/img/arrow.png", 1, 0);
+    anim_t *arrow_img = anim_new("assets/img/hud/arrow.png", 1, 0);
     anim_obj_t *arrow = anim_obj_new();
 
     menu->clear = sfYellow;

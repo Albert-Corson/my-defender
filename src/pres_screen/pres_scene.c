@@ -18,7 +18,7 @@ void create_defense(scene_t *pres)
     anim_obj_t *defense = defense_new(pres, "rocket", 3, VECT2F(800, 290));
     shape_obj_t *ennemy = circle_new(10, 15, sfTransparent);
 
-    ennemy->group = 2;
+    ennemy->group = GR_ENEMY;
     ennemy->extra = ennemy_data_new(100, 3);
     ennemy->dtor = ennemy_circle_dtor;
     ((defense_data_t *)defense->extra)->dps = 1;
@@ -31,7 +31,7 @@ void create_defense(scene_t *pres)
 
 static void create_tower_icon(scene_t *pres)
 {
-    anim_t *tower = anim_new("assets/img/icon.png", 1, 0);
+    anim_t *tower = anim_new("assets/img/hud/icon.png", 1, 0);
     anim_obj_t *icon = anim_obj_new();
 
     anim_obj_add_anim(icon, tower, "tower");

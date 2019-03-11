@@ -7,17 +7,38 @@
 
 #include "defender.h"
 
-int main(void)
+int main(int ac, char *av[])
+{
+    char *mappath = NULL;
+    int status = 0;
+
+    if (ac != 2) {
+        mappath = my_memdup("bonus/default", -1);
+    } else if (ac == 2) {
+        mappath = my_memdup(av[1], -1);
+    } else {
+        return (84);
+    }
+    if (check_map(mappath)) {
+        status = gameloop(mappath);
+    } else {
+        status = my_perror("Error: bad map format.", 0);
+    }
+    free(mappath);
+    return (status);
+}
+
+int gameloop(char *mappath)
 {
     hub_t *hub = hub_new("\n My Defender \n", VECT2I(1600, 900), sfClose);
     sfEvent evt;
 
-    window_set_icon(hub->window, "assets/img/icon.png");
+    window_set_icon(hub->window, "assets/img/hud/icon.png");
     load_sound_buffers(hub);
     hub_set_sound_buffer(hub, "bg_music");
     if (hub->sound)
         sfSound_setLoop(hub->sound, sfTrue);
-    create_scenes(hub);
+    create_scenes(hub, mappath);
     while (sfRenderWindow_isOpen(hub->window)) {
         sfRenderWindow_clear(hub->window, ((scene_t *)hub->scenes)->clear);
         hub_trigger_evts_scope(hub, context, evt);

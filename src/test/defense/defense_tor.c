@@ -14,7 +14,7 @@ obj_t *base_create(int lvl)
     anim_t *anim = NULL;
 
     FAIL_IF(lvl < 0 || lvl > 3 || !(obj = anim_obj_new()), NULL);
-    path = my_format("assets/img/base_%d.png", lvl);
+    path = my_format("assets/img/mob/base_%d.png", lvl);
     if (!path || !(anim = anim_new(path, 1, 0))) {
         anim_obj_destroy(obj);
         return (NULL);
@@ -49,7 +49,7 @@ void defense_ctor(anim_obj_t *defense, char *aspect, int lvl)
     anim_obj_ctor(defense);
     defense->dtor = defense_dtor;
     defense->extra = extra;
-    defense->group = 3;
+    defense->group = GR_DEFENSE;
     extra->level = lvl;
     extra->dps = 100;
     extra->range = 400;
@@ -57,7 +57,7 @@ void defense_ctor(anim_obj_t *defense, char *aspect, int lvl)
     extra->firerate = 1000;
     extra->timer = sfClock_create();
     extra->base = base_create(lvl);
-    path = my_format("assets/img/%s_%d.png", aspect, lvl);
+    path = my_format("assets/img/mob/%s_%d.png", aspect, lvl);
     anim = anim_new(path, 1, 0);
     anim_obj_add_anim(defense, anim, NULL);
 }

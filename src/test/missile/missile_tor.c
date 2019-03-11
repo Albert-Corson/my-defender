@@ -28,14 +28,14 @@ void missile_ctor(void *missile, void *launcher, char *aspect)
 {
     anim_obj_t *st_missile = (anim_obj_t *)missile;
     float speed = ((missile_data_t *)st_missile->extra)->speed;
-    char *path = my_format("assets/img/%s.png", aspect);
+    char *path = my_format("assets/img/mob/%s.png", aspect);
     anim_t *anim = anim_new(path, 1, 0);
     sfVector2f pos = VGET(launcher, get_position);
     sfVector2u b_size = VGET(missile, get_size);
     sfFloatRect t_box = VGET(launcher, get_box);
     float rot = VGET(launcher, get_rotation);
 
-    st_missile->group = 4;
+    st_missile->group = GR_MISSILE;
     anim_obj_add_anim(st_missile, anim, NULL);
     pos.x = t_box.left - cos(RAD(rot)) * (t_box.width / 2 - b_size.x);
     pos.y = t_box.top - sin(RAD(rot)) * (t_box.height / 2 - b_size.y);

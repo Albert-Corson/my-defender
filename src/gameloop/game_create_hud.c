@@ -24,22 +24,22 @@ void game_create_buttons(scene_t *game)
 {
     input_obj_t *tmp = NULL;
 
-    tmp = create_img_btn("assets/img/mg_1.png", VECT2F(880, 842.5));
+    tmp = create_img_btn("assets/img/mob/mg_1.png", VECT2F(880, 842.5));
     anim_obj_set_scale(tmp->foreground, VECT2F(0.7, 0.7));
     scene_add_obj(game, tmp, "btn_mg");
-    tmp = create_img_btn("assets/img/canon_1.png", VECT2F(1000, 842.5));
+    tmp = create_img_btn("assets/img/mob/canon_1.png", VECT2F(1000, 842.5));
     anim_obj_set_scale(tmp->foreground, VECT2F(0.7, 0.7));
     scene_add_obj(game, tmp, "btn_canon");
-    tmp = create_img_btn("assets/img/rocket_1.png", VECT2F(1120, 842.5));
+    tmp = create_img_btn("assets/img/mob/rocket_1.png", VECT2F(1120, 842.5));
     anim_obj_set_scale(tmp->foreground, VECT2F(0.7, 0.7));
     scene_add_obj(game, tmp, "btn_rocket");
-    tmp = create_img_btn("assets/img/emp.png", VECT2F(1240, 842.5));
+    tmp = create_img_btn("assets/img/mob/emp.png", VECT2F(1240, 842.5));
     input_obj_auto_scale_fg(tmp);
     scene_add_obj(game, tmp, "btn_emp");
-    tmp = create_img_btn("assets/img/upgrade.png", VECT2F(1360, 842.5));
+    tmp = create_img_btn("assets/img/hud/upgrade.png", VECT2F(1360, 842.5));
     input_obj_auto_scale_fg(tmp);
     scene_add_obj(game, tmp, "btn_upgrade");
-    tmp = create_img_btn("assets/img/destroy.png", VECT2F(1510, 842.5));
+    tmp = create_img_btn("assets/img/hud/destroy.png", VECT2F(1510, 842.5));
     input_obj_auto_scale_fg(tmp);
     scene_add_obj(game, tmp, "btn_destroy");
 }
@@ -47,9 +47,9 @@ void game_create_buttons(scene_t *game)
 void create_defenses_prev(scene_t *game)
 {
     shape_obj_t *range = circle_new(0, 50, sfTransparent);
-    anim_t * mg = anim_new("assets/img/mg_1.png", 1, -1);
-    anim_t * rocket = anim_new("assets/img/rocket_1.png", 1, -1);
-    anim_t * canon = anim_new("assets/img/canon_1.png", 1, -1);
+    anim_t * mg = anim_new("assets/img/mob/mg_1.png", 1, -1);
+    anim_t * rocket = anim_new("assets/img/mob/rocket_1.png", 1, -1);
+    anim_t * canon = anim_new("assets/img/mob/canon_1.png", 1, -1);
     anim_obj_t *prev_defense = anim_obj_new();
     sfVector2u scale;
     float ratio = 0;
@@ -71,7 +71,7 @@ void create_defenses_prev(scene_t *game)
 void create_positioning_preview(scene_t *game)
 {
     shape_obj_t *tool = rect_new(VECT2U(60, 60), RGBA(0, 0, 0, 150));
-    anim_t *emp = anim_new("assets/img/emp.png", 1, -1);
+    anim_t *emp = anim_new("assets/img/mob/emp.png", 1, -1);
     anim_obj_t *prev_emp = anim_obj_new();
     sfVector2u tmp;
 

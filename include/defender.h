@@ -6,9 +6,21 @@
 */
 
 #ifndef DEFENDER_H_
-    #define DEFENDER_H_
+#define DEFENDER_H_
 
+#include <fcntl.h>
 #include "msf/msf.h"
+
+/*
+**  ENUMS
+*/
+typedef enum {
+    GR_DEFAULT,
+    GR_TERRAIN,
+    GR_DEFENSE,
+    GR_ENEMY,
+    GR_MISSILE
+} group_e;
 
 /*
 **  STRUCTS
@@ -38,8 +50,16 @@ typedef struct missile_data_s {
     obj_t *target;
 } missile_data_t;
 
+int gameloop(char *mappath);
 void load_sound_buffers(hub_t *hub);
-void create_scenes(hub_t *hub);
+void create_scenes(hub_t *hub, char *mappath);
+
+// PARSING
+int check_map(char *mappath);
+void parse_map(scene_t *scene, char *mappath);
+char *get_grass_texture(char **map, sfVector2i coords);
+char *get_grass_road_texture(char **map, sfVector2i coords);
+char *get_tower_texture(char **map, sfVector2i coords);
 
 // TOOLS
 int readjust_nb(int nb, int min, int max);
@@ -67,7 +87,7 @@ void ennemy_move_evt(hub_t *hub, sfEvent evt);
 void menu_scene_create(hub_t *hub);
 void pres_scene_create(hub_t *hub);
 void options_scene_create(hub_t *hub);
-void game_scene_create(hub_t *hub);
+void game_scene_create(hub_t *hub, char *mappath);
 void pause_scene_create(hub_t *hub);
 
 void test_scene_create(hub_t *hub);

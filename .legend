@@ -1,0 +1,9 @@
+### [ LEGEND FILE ] ###
+
+My Defender has a default map, but you can specify a map file of your choice 
+in the command line arguments: 
+
+    ./my_defender [map path]
+
+The map must be 32 characters wide and 16 tall. Any further character won't be 
+taken in consideration.
