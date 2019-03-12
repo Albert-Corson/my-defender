@@ -74,11 +74,12 @@ void mouse_evt_updater(void *obj, sfEvent evt)
 
 void mouse_evt_updater_evt(hub_t *hub, sfEvent evt)
 {
-    obj_t *begin = ((scene_t *)hub->scenes)->objs;
+    scene_t *scene = hub->scenes;
+    obj_t *begin = scene ? scene->objs : NULL;
     obj_t *curr = NULL;
     int check = 0;
 
-    FAIL_IF_VOID(evt.type != 11 && evt.type != 9 && evt.type != 10);
+    FAIL_IF_VOID(!begin || (evt.type != 11 && evt.type != 9 && evt.type != 10));
     FAIL_IF_VOID(!hub || !hub->scenes || !((scene_t *)hub->scenes)->objs);
     while (list_poll((void *)begin, (void **)&curr)) {
         mouse_evt_updater(curr, evt);

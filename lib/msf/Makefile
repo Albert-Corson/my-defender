@@ -22,6 +22,7 @@ SRC			=	utils/vector.c							\
 				scene/scene_tor.c						\
 				scene/scene_met.c						\
 				scene/scene_set.c						\
+				scene/scene_clear_objs.c				\
 				sound/sound_buffer_tor.c				\
 				sound/sound_hub_set.c					\
 				sound/sound_scene_set.c					\

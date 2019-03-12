@@ -10,7 +10,7 @@
 sfVector2f get_positioning(sfRenderWindow *window)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
-    sfVector2f rtn = VECT2F(mouse.x - (mouse.x % 60), mouse.y - (mouse.y % 60));
+    sfVector2f rtn = VECT2F(mouse.x - (mouse.x % 50), mouse.y - (mouse.y % 50));
 
     if (rtn.y >= 780)
         return (VECT2F(-1, -1));

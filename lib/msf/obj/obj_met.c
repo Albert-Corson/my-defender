@@ -22,16 +22,16 @@ void obj_move(void *obj, hub_t *hub)
     obj_t *st_obj = (obj_t *)obj;
     obj_physics_t *st_physics = NULL;
     sfVector2f position;
-    float elapsed_ms = 0;
+    float elapsed_sec = 0;
 
     FAIL_IF_VOID(!st_obj || !st_obj->physics || !hub);
-    elapsed_ms = sfClock_getElapsedTime(hub->timer).microseconds / 1000;
+    elapsed_sec = sfClock_getElapsedTime(hub->timer).microseconds / 1000000.0;
     st_physics = st_obj->physics;
     if (!obj_apply_collision_with_all(hub, obj))
         st_physics->speed.y += st_obj->physics->gravity;
     position = VGET(st_obj, get_position);
-    position.x += st_physics->speed.x * elapsed_ms;
-    position.y += st_physics->speed.y * elapsed_ms;
+    position.x += st_physics->speed.x * elapsed_sec;
+    position.y += st_physics->speed.y * elapsed_sec;
     VFUNC(st_obj, set_position, position);
 }
 

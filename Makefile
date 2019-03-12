@@ -7,10 +7,12 @@
 
 SRC			=	src/main.c								\
 				src/load_sound.c						\
-				src/create_scenes.c						\
+				src/tools/create_scenes.c				\
+				src/tools/create_anim_obj.c				\
 				src/tools/random_gen.c					\
 				src/tools/sound.c						\
 				src/tools/create_btn.c					\
+				src/tools/create_defense.c				\
 				src/tools/get_focused_btn.c				\
 				src/menu/menu_scene.c					\
 				src/menu/menu_evt.c						\
@@ -20,18 +22,22 @@ SRC			=	src/main.c								\
 				src/menu/options/options_btn_action.c	\
 				src/pres_screen/pres_scene.c			\
 				src/pres_screen/pres_evt.c				\
-				src/gameloop/game_scene.c				\
-				src/gameloop/game_create_hud.c			\
-				src/gameloop/game_btn_action.c			\
-				src/gameloop/game_evt.c					\
-				src/gameloop/game_place_defense.c		\
-				src/gameloop/pause/pause_btn_action.c	\
-				src/gameloop/pause/pause_evt.c			\
-				src/gameloop/pause/pause_scene.c		\
-				src/test/defense/defense_tor.c			\
-				src/test/defense/defense_evts.c			\
-				src/test/ennemy/ennemy_tor.c			\
-				src/test/ennemy/ennemy_evts.c			\
+				src/game/game_scene.c					\
+				src/game/game_create_hud.c				\
+				src/game/game_btn_action.c				\
+				src/game/game_evt.c						\
+				src/game/game_place_defense.c			\
+				src/game/pause/pause_btn_action.c		\
+				src/game/pause/pause_evt.c				\
+				src/game/pause/pause_scene.c			\
+				src/defense/defense_get.c				\
+				src/defense/defense_set.c				\
+				src/defense/defense_met.c				\
+				src/defense/defense_vtable.c			\
+				src/defense/defense_tor.c				\
+				src/defense/defense_evts.c				\
+				src/enemy/enemy_tor.c					\
+				src/enemy/enemy_evts.c					\
 				src/test/missile/missile_tor.c			\
 				src/test/missile/missile_evts.c			\
 				src/test/test_scene.c					\

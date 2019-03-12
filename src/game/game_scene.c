@@ -10,12 +10,12 @@
 void game_scene_create(hub_t *hub, char *mappath)
 {
     scene_t *game = scene_new();
-    shape_obj_t *rect = rect_new(VECT2U(1600, 120), RGBA(255, 255, 255, 200));
+    shape_obj_t *rect = rect_new(VECT2U(1600, 100), RGBA(255, 255, 255, 200));
 
     game->clear = sfYellow;
-    rect_set_outline_thickness(rect, 5);
+    rect_set_outline_thickness(rect, 2);
     rect_set_outline_color(rect, sfRed);
-    VFUNC(rect, set_position, VECT2F(0, 785));
+    VFUNC(rect, set_position, VECT2F(0, 802));
     scene_add_obj(game, rect, "hud_rect");
     game_create_buttons(game);
     scene_set_sound_buffer(hub, game, "mouse_click");

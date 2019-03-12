@@ -45,9 +45,9 @@ void towers_preview(hub_t *hub, sfEvent evt)
     defenses->state = sfTrue;
     defenses->anims = list_fetch(defenses->anims, focused->label + 4);
     VFUNC(defenses, set_position, pos);
-    VFUNC(circle, set_position, VECT2F(pos.x + 30, pos.y + 30));
-    // if (LCLICK(evt))
-        // defense_new(scene, focused->label + 4, 1, pos);
+    VFUNC(circle, set_position, VECT2F(pos.x + 25, pos.y + 25));
+    if (KRELEASED(evt, sfKeySpace))
+        create_defense(hub->scenes, focused->label + 4, 1, pos);
 }
 
 void emp_preview(hub_t *hub, sfEvent evt)
@@ -63,15 +63,16 @@ void emp_preview(hub_t *hub, sfEvent evt)
     emp->anims = list_fetch(emp->anims, "emp");
     pos = VECT2F(mouse.x, mouse.y);
     VFUNC(emp, set_position, pos);
-    // if (LCLICK(evt))
+    // if (CLICK(evt, sfMouseLeft))
         // EMP HERE
+    evt = evt;
 }
 
 int tool_preview(hub_t *hub, sfEvent evt)
 {
     input_obj_t *focused = get_focused_btn(hub);
     anim_obj_t *rect = list_fetch(((scene_t *)hub->scenes)->objs, "prev_tools");
-    // void (**func)(hub_t *) = {destroy_defense, upgrade_defense};
+    void (*func[2])(scene_t *, sfVector2f) = {sell_defense, upgrade_defense};
     sfVector2f pos = get_positioning(hub->window);
     char c;
 
@@ -85,7 +86,7 @@ int tool_preview(hub_t *hub, sfEvent evt)
         rect_set_fill_color(rect, RGBA(255, 0, 0, 150));
     else if (c == 'u')
         rect_set_fill_color(rect, RGBA(0, 0, 200, 150));
-    // if (LCLICK(evt))
-        // func[c == 'd' ? 0 : 1](hub);
+    if (KRELEASED(evt, sfKeySpace))
+        func[c == 'd' ? 0 : 1](hub->scenes, pos);
     return (1);
 }

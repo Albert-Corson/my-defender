@@ -22,7 +22,6 @@ void anim_obj_animate(hub_t *hub, void *anim_obj)
     anim_t *st_anim = NULL;
     frame_t *st_frame = NULL;
     float elapsed_time = 0;
-    int i = 0;
 
     FAIL_IF_VOID(!st_anim_obj || !(anim_t *)st_anim_obj->anims);
     st_anim = (anim_t *)st_anim_obj->anims;
@@ -33,7 +32,6 @@ void anim_obj_animate(hub_t *hub, void *anim_obj)
     while (elapsed_time >= st_anim->frame_duration) {
         st_anim->frames = st_frame->next;
         elapsed_time -= st_anim->frame_duration;
-        ++i;
     }
     st_anim_obj->elapsed = elapsed_time * 1000;
 }

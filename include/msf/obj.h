@@ -134,6 +134,7 @@ struct msf_game_obj_s {
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 };
 
 /*
@@ -163,11 +164,10 @@ struct msf_text_obj_s {
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     sfText *text;
     sfFont *font;
-    sfColor color;
-    uint char_size;
     char *str;
 };
 
@@ -198,6 +198,7 @@ struct msf_animated_obj_s {
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     sfSprite *sprite;
     sfInt64 elapsed;
@@ -256,6 +257,7 @@ struct msf_input_obj_s {
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     void *background;
     void *foreground;
@@ -284,6 +286,7 @@ struct msf_shape_obj_s {
     void (*on_active)(hub_t *, void *);
     sfSound *sound;
     int nbr;
+    sfBool is_alive;
 
     void *shape;
 };

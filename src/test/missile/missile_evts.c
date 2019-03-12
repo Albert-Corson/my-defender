@@ -30,15 +30,15 @@ void missile_update(obj_t *missile)
 {
     missile_data_t *extra = missile->extra;
     obj_t *target = extra->target;
-    defense_data_t *sender_extra = extra->sender->extra;
-    ennemy_data_t *target_extra = extra->target->extra;
+    defense_obj_t *sender = extra->sender;
+    enemy_data_t *target_extra = target->extra;
     sfVector2f pos = {0, 0};
     sfFloatRect target_box = VGET(extra->target, get_box);
 
     pos = VGET(missile, get_position);
     if (!target->state || sfFloatRect_contains(&target_box, pos.x, pos.y)) {
         if (target->state)
-            target_extra->hp -= sender_extra->dps;
+            target_extra->hp -= sender->dps;
         if (target_extra->hp <= 0) {
             target_extra->hp = 0;
             obj_set_state(target, sfFalse);

@@ -40,6 +40,7 @@ int gameloop(char *mappath)
         sfSound_setLoop(hub->sound, sfTrue);
     create_scenes(hub, mappath);
     while (sfRenderWindow_isOpen(hub->window)) {
+        scene_clear_objs(hub->scenes);
         sfRenderWindow_clear(hub->window, ((scene_t *)hub->scenes)->clear);
         hub_trigger_evts_scope(hub, context, evt);
         while (sfRenderWindow_pollEvent(hub->window, &evt)) {

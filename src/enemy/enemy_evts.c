@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2019
 ** Untitled (Workspace)
 ** File description:
-** ennemy_evts
+** enemy_evts
 */
 
 #include "defender.h"
 
-void ennemy_move_evt(hub_t *hub, sfEvent evt)
+void enemy_follow_mouse(hub_t *hub, sfEvent evt)
 {
     sfVector2f mouse = {0, 0};
-    obj_t *ennemy = list_fetch(((scene_t *)hub->scenes)->objs, "ennemy");
+    obj_t *enemy = list_fetch(((scene_t *)hub->scenes)->objs, "enemy");
 
     if (evt.type == sfEvtMouseMoved) {
         mouse.x = evt.mouseMove.x;
         mouse.y = evt.mouseMove.y;
-        VFUNC(ennemy, set_position, mouse);
+        VFUNC(enemy, set_position, mouse);
     }
 }

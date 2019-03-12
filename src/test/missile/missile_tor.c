@@ -42,19 +42,19 @@ void missile_ctor(void *missile, void *launcher, char *aspect)
     VFUNC(st_missile, set_position, pos);
     VFUNC(st_missile, set_rotation, rot);
     obj_set_speed(st_missile, -cos(RAD(rot)) * speed, -sin(RAD(rot)) * speed);
+    free(path);
 }
 
 void missile_set_data(void *missile, void *launcher)
 {
     anim_obj_t *st_missile = (anim_obj_t *)missile;
-    anim_obj_t *st_launcher = (anim_obj_t *)launcher;
-    defense_data_t *launcher_extra = st_launcher->extra;
+    defense_obj_t *st_launcher = launcher;
     missile_data_t *missile_extra = malloc(sizeof(missile_data_t));
 
     st_missile->extra = missile_extra;
-    missile_extra->speed = 5;
-    missile_extra->sender = launcher;
-    missile_extra->target = launcher_extra->target;
+    missile_extra->speed = 550;
+    missile_extra->sender = st_launcher;
+    missile_extra->target = st_launcher->target;
 }
 
 void missile_dtor(void *missile)

@@ -9,45 +9,46 @@
 
 void missile_update(obj_t *missile);
 
-void defense_lock_target(hub_t *hub, obj_t *defense)
+void defense_lock_target(hub_t *hub, obj_t *obj)
 {
-    defense_data_t *extra = defense->extra;
-    float range = extra->range;
-    obj_t *target = extra->target;
+    defense_obj_t *defense = (defense_obj_t *)obj;
+    float range = defense->range;
+    obj_t *tower = (obj_t *)defense->tower;
+    obj_t *target = defense->target;
     obj_t *begin = ((scene_t *)hub->scenes)->objs;
     obj_t *curr = NULL;
 
-    if (extra->target) {
-        if (!target->state || objs_distance(defense, target) > range) {
-            extra->target = NULL;
+    if (target) {
+        if (!target->state || objs_distance(obj, target) > range) {
+            defense->target = NULL;
         } else {
-            VFUNC(defense, set_rotation, objs_angle(defense, target));
+            VFUNC(defense, set_rotation, objs_angle(tower, target));
             return;
         }
     }
-    while (list_poll((void *)begin, (void *)&curr)) {
-        if (curr->group == GR_ENEMY && objs_distance(defense, curr) <= range) {
-            extra->target = curr;
+    while (list_poll((void *)begin, (void **)&curr)) {
+        if (curr->group == GR_ENEMY && objs_distance(obj, curr) <= range) {
+            defense->target = curr;
             return;
         }
     }
 }
 
-void defense_fire(hub_t *hub, obj_t *defense)
+void defense_fire(hub_t *hub, obj_t *obj)
 {
+    defense_obj_t *defense = (defense_obj_t *)obj;
     sfInt64 delay = 0;
-    defense_data_t *extra = NULL;
     anim_obj_t *missile = NULL;
 
-    FAIL_IF_VOID(!hub || !defense || !defense->extra);
-    extra = defense->extra;
-    FAIL_IF_VOID(!extra->target);
-    delay = sfClock_getElapsedTime(extra->timer).microseconds;
-    if (delay / 1000 >= extra->firerate) {
+    FAIL_IF_VOID(!hub || !defense || !defense->target);
+    delay = sfClock_getElapsedTime(hub->timer).microseconds / 1000;
+    delay += defense->elapsed;
+    if (delay >= defense->firerate) {
         missile = missile_new(defense, "bullet");
         scene_add_obj(hub->scenes, missile, NULL);
-        sfClock_restart(extra->timer);
+        delay -= defense->firerate;
     }
+    defense->elapsed = delay;
 }
 
 void defense_update_evt(hub_t *hub, sfEvent evt)

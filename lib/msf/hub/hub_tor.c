@@ -45,6 +45,7 @@ void hub_dtor(void *hub)
     list_destroy(st_hub->global_evts);
     list_destroy(st_hub->scenes);
     list_destroy(st_hub->sound_buffers);
+    manifold_destroy(st_hub->manifold);
     if (st_hub->sound)
         sfSound_destroy(st_hub->sound);
 }

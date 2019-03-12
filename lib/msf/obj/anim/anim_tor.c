@@ -23,6 +23,7 @@ void anim_obj_ctor(void *anim_obj)
     FAIL_IF_VOID(!st_anim_obj);
     obj_ctor(st_anim_obj, animated, sfTrue);
     st_anim_obj->anims = NULL;
+    st_anim_obj->label = NULL;
     st_anim_obj->sprite = sfSprite_create();
     st_anim_obj->elapsed = 0;
     st_anim_obj->vtable = anim_obj_vtable_new();

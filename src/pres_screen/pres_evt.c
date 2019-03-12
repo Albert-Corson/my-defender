@@ -9,15 +9,15 @@
 
 void mini_game_txt(hub_t *hub, sfEvent evt)
 {
-    shape_obj_t *me = list_fetch(((scene_t *)hub->scenes)->objs, "ennemy");
+    shape_obj_t *me = list_fetch(((scene_t *)hub->scenes)->objs, "enemy");
     text_obj_t *txt = list_fetch(((scene_t *)hub->scenes)->objs, "press_a_key");
     int hp = 0;
 
     evt = evt;
     FAIL_IF_VOID(!me || !txt);
-    hp = ((ennemy_data_t *)me->extra)->hp;
+    hp = ((enemy_data_t *)me->extra)->hp;
     if (hp != 100) {
-        ((ennemy_data_t *)me->extra)->hp = 100;
+        ((enemy_data_t *)me->extra)->hp = 100;
         ++me->nbr;
         text_obj_set_string(txt, my_format("HITS: %d", me->nbr));
         text_obj_set_position(txt, VECT2F(745, 775));
@@ -48,10 +48,13 @@ void pres_quit_game(hub_t *hub, sfEvent evt)
 
 void pres_show_menu(hub_t *hub, sfEvent evt)
 {
+    scene_t *next = list_fetch((scene_t *)hub->scenes, "menu_scene");
+
+    FAIL_IF_VOID(!next);
     if (evt.type == sfEvtKeyPressed || evt.type == sfEvtMouseButtonPressed) {
         if (((scene_t *)hub->scenes)->sound)
             sfSound_play(((scene_t *)hub->scenes)->sound);
-        hub->scenes = list_fetch((scene_t *)hub->scenes, "menu_scene");
+        hub->scenes = next;
         FAIL_IF_VOID(!hub->sound || sfSound_getStatus(hub->sound) == sfPlaying);
         sfSound_play(hub->sound);
     }
