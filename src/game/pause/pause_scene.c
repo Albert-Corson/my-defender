@@ -28,7 +28,6 @@ void pause_create_btn(hub_t *hub, scene_t *pause)
     scene_add_obj(pause, resume, "resume_btn");
     scene_add_obj(pause, menu, "menu_btn");
     scene_add_obj(pause, quit, "quit_btn");
-
 }
 
 void pause_scene_create(hub_t *hub)

@@ -43,7 +43,7 @@ char *get_grass_road_texture(char **map, sfVector2i coords)
         else
             file = get_grass_road_hor_ver(map, coords);
     } else if (coords.y < 16 && map[coords.y + 1][coords.x] == ' ') {
-        if (coords.x > 0 &&map[coords.y][coords.x - 1] == ' ')
+        if (coords.x > 0 && map[coords.y][coords.x - 1] == ' ')
             file = my_memdup("assets/img/terrain/grass_road_ll.png", -1);
         else if (coords.x < 32 && map[coords.y][coords.x + 1] == ' ')
             file = my_memdup("assets/img/terrain/grass_road_lr.png", -1);

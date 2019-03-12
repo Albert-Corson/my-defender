@@ -27,7 +27,7 @@ void enemy_ctor(anim_obj_t *enemy, char *aspect, float life_multiplier)
     enemy->dtor = enemy_dtor;
     enemy->group = GR_ENEMY;
     enemy->extra = enemy_data_new(400 * life_multiplier, 3);
-    path = my_format("assets/img/%s.png", aspect);
+    path = my_format("assets/img/mob/%s.png", aspect);
     anim = anim_new(path, 1, 0);
     anim_obj_add_anim(enemy, anim, NULL);
 }

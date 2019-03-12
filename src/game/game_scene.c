@@ -24,5 +24,7 @@ void game_scene_create(hub_t *hub, char *mappath)
     scene_add_evt(game, evt_new(game_pause, inputs), "pause");
     parse_map(game, mappath);
     create_positioning_preview(game);
+    create_tower_lifebar(game);
+    create_price_txts(game);
     hub_add_scene(hub, game, "game_scene");
 }

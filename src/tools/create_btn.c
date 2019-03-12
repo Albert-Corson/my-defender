@@ -18,13 +18,13 @@ input_obj_t *create_btn(sfFloatRect box, sfColor bg, int txt_size, char *txt)
 
 input_obj_t *create_img_btn(char *path, sfVector2f pos)
 {
-    shape_obj_t *rect = rect_new(VECT2U(80, 80), RGBA(0, 0, 0, 150));
+    shape_obj_t *rect = rect_new(VECT2U(65, 65), RGBA(0, 0, 0, 150));
     anim_t *img = anim_new(path, 1, 0);
     anim_obj_t *sprite = anim_obj_new();
     input_obj_t *obj = NULL;
 
     anim_obj_add_anim(sprite, img, NULL);
     obj = input_obj_new(rect, sprite, pos);
-    rect_set_outline_thickness(obj->background, -5);
+    rect_set_outline_thickness(obj->background, -3);
     return (obj);
 }

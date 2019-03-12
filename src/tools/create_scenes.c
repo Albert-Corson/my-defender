@@ -14,5 +14,5 @@ void create_scenes(hub_t *hub, char *mappath)
     options_scene_create(hub);
     game_scene_create(hub, mappath);
     pause_scene_create(hub);
-    // test_scene_create(hub);
+    test_scene_create(hub);
 }

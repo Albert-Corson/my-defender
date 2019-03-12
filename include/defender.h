@@ -166,6 +166,8 @@ void hide_previews(hub_t *hub);
 void towers_preview(hub_t *hub, sfEvent evt);
 void emp_preview(hub_t *hub, sfEvent evt);
 int tool_preview(hub_t *hub, sfEvent evt);
+void create_tower_lifebar(scene_t *game);
+void create_price_txts(scene_t *game);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);
