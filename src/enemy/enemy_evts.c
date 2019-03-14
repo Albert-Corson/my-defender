@@ -27,7 +27,7 @@ void enemy_move(hub_t *hub, obj_t *enemy)
     sfVector2f speed = {0, 0};
 
     while (list_poll(begin, (void **)&curr)) {
-        if (curr->group == GR_TERRAIN && curr->nbr == step + 1 && 
+        if (curr->group == GR_TERRAIN && curr->nbr == step + 1 &&
         objs_distance(enemy, curr) <= 51) {
             ((enemy_data_t *)enemy->extra)->tile_step++;
             speed = vector_normalize(objs_vector(enemy, curr));

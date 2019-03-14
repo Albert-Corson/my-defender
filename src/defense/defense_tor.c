@@ -14,7 +14,7 @@ void *defense_new(char *aspect, int lvl, sfVector2f pos)
     char *path_base = NULL;
 
     FAIL_IF(!aspect || !st_defense || lvl > 3 || lvl < 0, NULL);
-    defense_ctor(st_defense, lvl);
+    defense_ctor(st_defense, lvl, aspect[0]);
     path_tower = my_format("assets/img/mob/%s_%d.png", aspect, lvl);
     path_base = my_format("assets/img/mob/base_%d.png", lvl);
     st_defense->tower = create_anim_obj(path_tower, pos, 1, -1);
@@ -28,7 +28,7 @@ void *defense_new(char *aspect, int lvl, sfVector2f pos)
     return (st_defense);
 }
 
-void defense_ctor(defense_obj_t *st_defense, int lvl)
+void defense_ctor(defense_obj_t *st_defense, int lvl, char c)
 {
     FAIL_IF_VOID(!st_defense || lvl < 0 || lvl > 3);
     obj_ctor(st_defense, custom, sfFalse);
@@ -37,10 +37,12 @@ void defense_ctor(defense_obj_t *st_defense, int lvl)
     st_defense->dtor = defense_dtor;
     st_defense->group = GR_DEFENSE;
     st_defense->level = lvl;
-    st_defense->dps = 100;
+    st_defense->dps = 50 + (c == 'r' ? 150 : (c == 'c' ? 150 : 0));
+    st_defense->dps += lvl == 3 ? 100 : 0;
     st_defense->range = 400;
     st_defense->target = NULL;
-    st_defense->firerate = 1000;
+    st_defense->firerate = 500 + (c == 'r' ? 500 : (c == 'c' ? 1000 : 0));
+    st_defense->firerate += lvl >= 2 ? -200 : 0;
     st_defense->elapsed = 0;
 }
 

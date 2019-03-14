@@ -5,47 +5,48 @@
 ## Makefile
 ##
 
-SRC			=	src/main.c								\
-				src/load_sound.c						\
-				src/tools/create_scenes.c				\
-				src/tools/create_anim_obj.c				\
-				src/tools/random_gen.c					\
-				src/tools/sound.c						\
-				src/tools/create_btn.c					\
-				src/tools/create_defense.c				\
-				src/tools/get_focused_btn.c				\
-				src/tools/is_tile_available.c			\
-				src/menu/menu_scene.c					\
-				src/menu/menu_evt.c						\
-				src/menu/menu_btn_action.c				\
-				src/menu/options/options_evt.c			\
-				src/menu/options/options_scene.c		\
-				src/menu/options/options_btn_action.c	\
-				src/pres_screen/pres_scene.c			\
-				src/pres_screen/pres_evt.c				\
-				src/game/game_scene.c					\
-				src/game/game_btn_action.c				\
-				src/game/game_evt.c						\
-				src/game/game_place_defense.c			\
-				src/game/create_objs/game_create_hud.c	\
-				src/game/create_objs/create_sound.c		\
-				src/game/pause/pause_btn_action.c		\
-				src/game/pause/pause_evt.c				\
-				src/game/pause/pause_scene.c			\
-				src/defense/defense_get.c				\
-				src/defense/defense_set.c				\
-				src/defense/defense_met.c				\
-				src/defense/defense_vtable.c			\
-				src/defense/defense_tor.c				\
-				src/defense/defense_evts.c				\
-				src/enemy/enemy_tor.c					\
-				src/enemy/enemy_evts.c					\
-				src/test/missile/missile_tor.c			\
-				src/test/missile/missile_evts.c			\
-				src/test/test_scene.c					\
-				src/parsing/checks.c					\
-				src/parsing/parser.c					\
-				src/parsing/textures.c					\
+SRC			=	src/main.c									\
+				src/load_sound.c							\
+				src/tools/create_scenes.c					\
+				src/tools/create_anim_obj.c					\
+				src/tools/random_gen.c						\
+				src/tools/sound.c							\
+				src/tools/create_btn.c						\
+				src/tools/create_defense.c					\
+				src/tools/get_focused_btn.c					\
+				src/tools/is_tile_available.c				\
+				src/menu/menu_scene.c						\
+				src/menu/menu_evt.c							\
+				src/menu/menu_btn_action.c					\
+				src/menu/options/options_evt.c				\
+				src/menu/options/options_scene.c			\
+				src/menu/options/options_btn_action.c		\
+				src/pres_screen/pres_scene.c				\
+				src/pres_screen/pres_evt.c					\
+				src/game/game_scene.c						\
+				src/game/game_btn_action.c					\
+				src/game/game_evt.c							\
+				src/game/game_place_defense.c				\
+				src/game/create_objs/game_create_hud.c		\
+				src/game/create_objs/game_create_sound.c	\
+				src/game/create_objs/game_create_emp.c		\
+				src/game/pause/pause_btn_action.c			\
+				src/game/pause/pause_evt.c					\
+				src/game/pause/pause_scene.c				\
+				src/defense/defense_get.c					\
+				src/defense/defense_set.c					\
+				src/defense/defense_met.c					\
+				src/defense/defense_vtable.c				\
+				src/defense/defense_tor.c					\
+				src/defense/defense_evts.c					\
+				src/enemy/enemy_tor.c						\
+				src/enemy/enemy_evts.c						\
+				src/test/missile/missile_tor.c				\
+				src/test/missile/missile_evts.c				\
+				src/test/test_scene.c						\
+				src/parsing/checks.c						\
+				src/parsing/parser.c						\
+				src/parsing/textures.c						\
 				src/parsing/pathfinding/check_path.c
 
 OBJ			=	$(patsubst %.c,%.o,$(SRC))

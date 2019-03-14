@@ -71,9 +71,20 @@ void select_defenses(hub_t *hub, sfEvent evt)
         emp_preview(hub, evt);
 }
 
-void spawn_enemy(hub_t *hub, sfEvent evt)
+void update_cash(hub_t *hub, sfEvent evt)
 {
-    if (evt.type == sfEvtMouseButtonPressed) {
-        enemy_spawn(hub->scenes);
+    game_scene_data_t *data = ((scene_t *)hub->scenes)->extra;
+    text_obj_t *text = list_fetch(((scene_t *)hub->scenes)->objs, "cash_text");
+    float elapsed = sfClock_getElapsedTime(hub->timer).microseconds / 10;
+    char *str = NULL;
+
+    data->elapsed += elapsed;
+    if (data->elapsed > 1000) {
+        data->elapsed -= 1000;
+        data->cash += 50;
     }
+    str = my_format("%d", data->cash);
+    text_obj_set_string(text, str);
+    free(str);
+    evt = evt;
 }

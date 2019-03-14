@@ -78,6 +78,7 @@ typedef struct game_scene_data_s {
     char **map;
     int cash;
     int wave;
+    sfInt64 elapsed;
 } game_scene_data_t;
 
 int gameloop(char *mappath);
@@ -113,7 +114,7 @@ void *missile_new(void *launcher, char *aspect);
 
 // DEFENSES
 void *defense_new(char *aspect, int lvl, sfVector2f pos);
-void defense_ctor(defense_obj_t *st_defense, int lvl);
+void defense_ctor(defense_obj_t *st_defense, int lvl, char c);
 void defense_dtor(void *defense);
 void defense_destroy(void *defense);
 void defense_obj_set_pos(void *obj, sfVector2f pos);
@@ -176,7 +177,7 @@ void back_btn_action(hub_t *hub, void *btn);
 void game_pause(hub_t *hub, sfEvent evt);
 input_obj_t *create_img_btn(char *path, sfVector2f pos);
 void game_create_buttons(scene_t *game);
-void create_positioning_preview(scene_t *game, hub_t *hub);
+void create_positioning_preview(scene_t *game);
 sfVector2f get_positioning(sfRenderWindow *window);
 input_obj_t *get_focused_btn(hub_t *hub);
 void select_defenses(hub_t *hub, sfEvent evt);
@@ -187,6 +188,11 @@ int tool_preview(hub_t *hub, sfEvent evt);
 void create_tower_lifebar(scene_t *game);
 void create_price_txts(scene_t *game);
 void game_mouse_evt_update_btns(hub_t *hub, sfEvent evt);
+void game_create_sounds(hub_t *hub, scene_t *game);
+void create_emp_anim(scene_t *game, hub_t *hub);
+void drop_emp_explosion(scene_t *scene, sfVector2f pos);
+void create_emp_anim(scene_t *game, hub_t *hub);
+void update_cash(hub_t *hub, sfEvent evt);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);

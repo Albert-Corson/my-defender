@@ -7,13 +7,6 @@
 
 #include "defender.h"
 
-static void resize_circle(shape_obj_t *circle, float radius)
-{
-    circle_set_radius(circle, radius);
-    circle_set_origin(circle, VECT2F(radius, radius));
-    circle->state = sfTrue;
-}
-
 void hide_previews(hub_t *hub)
 {
     scene_t *scene = hub->scenes;
@@ -32,18 +25,11 @@ void towers_preview(hub_t *hub, sfEvent evt)
     anim_obj_t *defenses = list_fetch(scene->objs, "prev_defenses");
     shape_obj_t *circle = list_fetch(scene->objs, "prev_range");
     sfVector2f pos = get_positioning(hub->window);
-    char c;
-    float range = 400;
 
     FAIL_IF_VOID(!focused || pos.y == -1);
-    c = (focused->label + 4)[0];
-    if (c == 'm')
-        range = 200;
-    else if (c == 'r')
-        range = 300;
-    resize_circle(circle, range);
     defenses->state = sfTrue;
     defenses->anims = list_fetch(defenses->anims, focused->label + 4);
+    circle->state = sfTrue;
     VFUNC(defenses, set_position, pos);
     VFUNC(circle, set_position, VECT2F(pos.x + 25, pos.y + 25));
     if (CLICK(evt, sfMouseLeft))
@@ -55,7 +41,6 @@ void emp_preview(hub_t *hub, sfEvent evt)
     scene_t *scene = hub->scenes;
     input_obj_t *emp_btn = list_fetch(scene->objs, "btn_emp");
     anim_obj_t *prev_emp = list_fetch(scene->objs, "prev_emp");
-    anim_obj_t *emp = list_fetch(scene->objs, "explosion");
     sfVector2i mouse = sfMouse_getPositionRenderWindow(hub->window);
     sfVector2f pos;
 
@@ -64,8 +49,8 @@ void emp_preview(hub_t *hub, sfEvent evt)
     prev_emp->anims = list_fetch(prev_emp->anims, "emp");
     pos = VECT2F(mouse.x, mouse.y);
     VFUNC(prev_emp, set_position, pos);
-    // if (CLICK(evt, sfMouseLeft))
-        // drop_emp_explosion(emp, pos);
+    if (CLICK(evt, sfMouseLeft))
+        drop_emp_explosion(scene, pos);
 }
 
 int tool_preview(hub_t *hub, sfEvent evt)

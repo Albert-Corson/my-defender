@@ -33,7 +33,6 @@ void game_create_buttons(scene_t *game)
 
 void create_defenses_prev(scene_t *game)
 {
-    shape_obj_t *range = circle_new(0, 50, sfTransparent);
     anim_t * mg = anim_new("assets/img/mob/mg_1.png", 1, -1);
     anim_t * rocket = anim_new("assets/img/mob/rocket_1.png", 1, -1);
     anim_t * canon = anim_new("assets/img/mob/canon_1.png", 1, -1);
@@ -41,8 +40,6 @@ void create_defenses_prev(scene_t *game)
     sfVector2u scale;
     float ratio = 0;
 
-    circle_set_outline_thickness(range, -3);
-    circle_set_outline_color(range, sfBlack);
     anim_obj_add_anim(prev_defense, mg, "mg");
     anim_obj_add_anim(prev_defense, rocket, "rocket");
     anim_obj_add_anim(prev_defense, canon, "canon");
@@ -52,29 +49,27 @@ void create_defenses_prev(scene_t *game)
     anim_obj_set_scale(prev_defense, VECT2F(ratio, ratio));
     prev_defense->state = sfFalse;
     scene_add_obj(game, prev_defense, "prev_defenses");
-    scene_add_obj(game, range, "prev_range");
 }
 
-void create_positioning_preview(scene_t *game, hub_t *hub)
+void create_positioning_preview(scene_t *game)
 {
+    shape_obj_t *range = circle_new(400, 60, sfTransparent);
     shape_obj_t *tool = rect_new(VECT2U(50, 50), RGBA(0, 0, 0, 0));
     anim_t *crosshair = anim_new("assets/img/mob/emp.png", 1, -1);
     anim_obj_t *prev_emp = anim_obj_new();
-    anim_obj_t *emp;
     sfVector2u tmp;
 
-    obj_set_sound_buffer(hub, tool, "mouse_hover");
-    emp = create_anim_obj("assets/img/anim/explosion.png", VECT2F(0, 0), 7, 70);
-    anim_set_loop(emp->anims, sfTrue);
-    emp->state = sfFalse;
-    obj_set_sound_buffer(hub, emp, "explosion");
-    scene_add_obj(game, emp, "explosion");
+    circle_set_outline_thickness(range, -3);
+    circle_set_outline_color(range, sfBlack);
+    range->state = sfFalse;
+    circle_set_origin(range, VECT2F(400, 400));
     prev_emp->state = sfFalse;
     anim_obj_add_anim(prev_emp, crosshair, "emp");
     tmp = anim_obj_get_size(prev_emp);
     anim_obj_set_origin(prev_emp, VECT2F(tmp.x / 2, tmp.y / 2));
     scene_add_obj(game, prev_emp, "prev_emp");
     scene_add_obj(game, tool, "prev_tools");
+    scene_add_obj(game, range, "prev_range");
     create_defenses_prev(game);
 }
 
@@ -104,12 +99,12 @@ void create_tower_lifebar(scene_t *game)
 
 void create_price_txts(scene_t *game)
 {
-    text_obj_t *mg = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
-    text_obj_t *canon = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
-    text_obj_t *rocket = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
-    text_obj_t *emp = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
-    text_obj_t *upgrade = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
-    text_obj_t *sell = text_obj_new("$999", RGBA(0, 200, 0, 220), 15);
+    text_obj_t *mg = text_obj_new("$250", RGBA(200, 0, 0, 220), 15);
+    text_obj_t *canon = text_obj_new("$350", RGBA(200, 0, 0, 220), 15);
+    text_obj_t *rocket = text_obj_new("$350", RGBA(200, 0, 0, 220), 15);
+    text_obj_t *emp = text_obj_new("$500", RGBA(200, 0, 0, 220), 15);
+    text_obj_t *upgrade = text_obj_new("$300", RGBA(200, 0, 0, 220), 15);
+    text_obj_t *sell = text_obj_new("$100", RGBA(0, 200, 0, 220), 15);
 
     VFUNC(mg, set_position, VECT2F(997, 880));
     VFUNC(canon, set_position, VECT2F(1097, 880));
