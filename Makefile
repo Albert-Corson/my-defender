@@ -45,7 +45,8 @@ SRC			=	src/main.c								\
 				src/test/test_scene.c					\
 				src/parsing/checks.c					\
 				src/parsing/parser.c					\
-				src/parsing/textures.c
+				src/parsing/textures.c					\
+				src/parsing/pathfinding/check_path.c
 
 OBJ			=	$(patsubst %.c,%.o,$(SRC))
 

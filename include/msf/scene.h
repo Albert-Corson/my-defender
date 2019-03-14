@@ -33,7 +33,12 @@ struct msf_scene_s {
     sfVector2f cam_pos;
     sfSound *sound;
     sfColor clear;
+    void *extra;
 };
+
+typedef struct msf_scene_extra_s {
+    void (*dtor)(void *);
+} scene_extra_t;
 
 /*
 **  PROTOTYPES

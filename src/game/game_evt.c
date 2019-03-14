@@ -70,3 +70,10 @@ void select_defenses(hub_t *hub, sfEvent evt)
     else if (!check)
         emp_preview(hub, evt);
 }
+
+void spawn_enemy(hub_t *hub, sfEvent evt)
+{
+    if (evt.type == sfEvtMouseButtonPressed) {
+        enemy_spawn(hub->scenes);
+    }
+}

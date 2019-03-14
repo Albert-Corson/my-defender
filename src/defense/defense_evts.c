@@ -65,5 +65,8 @@ void defense_update_evt(hub_t *hub, sfEvent evt)
         } else if (curr->state && curr->group == GR_MISSILE) {
             missile_update(curr);
         }
+        if (curr->state && curr->group == GR_ENEMY) {
+            enemy_move(hub, (anim_obj_t *)curr);
+        }
     }
 }

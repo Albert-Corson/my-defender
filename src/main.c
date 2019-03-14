@@ -38,7 +38,8 @@ int gameloop(char *mappath)
     hub_set_sound_buffer(hub, "bg_music");
     if (hub->sound)
         sfSound_setLoop(hub->sound, sfTrue);
-    create_scenes(hub, mappath);
+    if (!create_scenes(hub, mappath))
+        sfRenderWindow_close(hub->window);
     while (sfRenderWindow_isOpen(hub->window)) {
         scene_clear_objs(hub->scenes);
         sfRenderWindow_clear(hub->window, ((scene_t *)hub->scenes)->clear);

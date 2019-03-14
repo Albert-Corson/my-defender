@@ -32,6 +32,7 @@ typedef struct enemy_data_s {
     float max_hp;
     float hp;
     float speed;
+    int tile_step;
 } enemy_data_t;
 
 typedef struct defense_obj_s {
@@ -72,12 +73,20 @@ typedef struct missile_data_s {
     obj_t *target;
 } missile_data_t;
 
+typedef struct game_scene_data_s {
+    void (*dtor)(void *);
+    char **map;
+    int cash;
+    int wave;
+} game_scene_data_t;
+
 int gameloop(char *mappath);
 void load_sound_buffers(hub_t *hub);
 
 // PARSING
 int check_map(char *mappath);
-void parse_map(scene_t *scene, char *mappath);
+int check_path(char **map, anim_obj_t *tile);
+int parse_map(scene_t *scene, char *mappath);
 char *get_grass_texture(char **map, sfVector2i coords);
 char *get_grass_road_texture(char **map, sfVector2i coords);
 char *get_tower_texture(char **map, sfVector2i coords);
@@ -91,7 +100,7 @@ void sfx_set_volume(scene_t *scene, float volume);
 void outline_focused_btn(hub_t *hub, sfEvent evt);
 void outline_hovered_btn(hub_t *hub, sfEvent evt);
 void create_volume_slider(scene_t *options);
-void create_scenes(hub_t *hub, char *mappath);
+int create_scenes(hub_t *hub, char *mappath);
 input_obj_t *create_btn(sfFloatRect box, sfColor bg, int txt_size, char *txt);
 input_obj_t *create_img_btn(char *path, sfVector2f pos);
 anim_obj_t *create_anim_obj(char *path, sfVector2f pos, int nb_frame, uint lim);
@@ -101,7 +110,8 @@ void upgrade_defense(scene_t *scene, sfVector2f pos);
 
 // GAME NPC
 void *missile_new(void *launcher, char *aspect);
-    // DEFENSES
+
+// DEFENSES
 void *defense_new(char *aspect, int lvl, sfVector2f pos);
 void defense_ctor(defense_obj_t *st_defense, int lvl);
 void defense_dtor(void *defense);
@@ -122,16 +132,22 @@ void defense_lock_target(hub_t *hub, obj_t *obj);
 void defense_fire(hub_t *hub, obj_t *obj);
 void defense_update_evt(hub_t *hub, sfEvent evt);
 int is_tile_available(scene_t *scene, sfVector2f pos);
-    // ENEMY
+
+// ENEMY
+int find_spawn_y(char **map);
 void *enemy_new(char *aspect, sfVector2f pos, float life_multiplier);
 void *enemy_data_new(float max_hp, float speed);
 void enemy_follow_mouse(hub_t *hub, sfEvent evt);
+void enemy_move(hub_t *hub, obj_t *enemy);
+void enemy_move_evt(hub_t *hub, sfEvent evt);
+void enemy_spawn(scene_t *scene);
+void spawn_enemy(hub_t *hub, sfEvent evt);
 
 // CREATE SCENES
 void menu_scene_create(hub_t *hub);
 void pres_scene_create(hub_t *hub);
 void options_scene_create(hub_t *hub);
-void game_scene_create(hub_t *hub, char *mappath);
+int game_scene_create(hub_t *hub, char *mappath);
 void pause_scene_create(hub_t *hub);
 
 void test_scene_create(hub_t *hub);

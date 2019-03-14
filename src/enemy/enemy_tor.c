@@ -41,15 +41,29 @@ void *enemy_data_new(float max_hp, float speed)
     extra->hp = max_hp;
     extra->max_hp = max_hp;
     extra->speed = speed;
+    extra->tile_step = 0;
     return (extra);
 }
 
 void *enemy_new(char *aspect, sfVector2f pos, float life_multiplier)
 {
-    anim_obj_t *st_enemy = malloc(sizeof(enemy_data_t *));
+    anim_obj_t *st_enemy = malloc(sizeof(anim_obj_t));
 
     FAIL_IF(!aspect || !st_enemy, NULL);
     enemy_ctor(st_enemy, aspect, life_multiplier);
     VFUNC(st_enemy, set_position, pos);
     return ((void *)st_enemy);
+}
+
+void enemy_spawn(scene_t *scene)
+{
+    game_scene_data_t *data = scene->extra;
+    sfVector2f pos = VECT2F(31 * 50, 0);
+    anim_obj_t *enemy = NULL;
+
+    FAIL_IF_VOID(!data || !data->map);
+    pos.y = find_spawn_y(data->map) * 50;
+    enemy = enemy_new("mothership_2", pos, 1);
+    VFUNC(enemy, set_size, VECT2U(50, 50));
+    scene_add_obj(scene, enemy, NULL);
 }

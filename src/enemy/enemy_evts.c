@@ -18,3 +18,20 @@ void enemy_follow_mouse(hub_t *hub, sfEvent evt)
         VFUNC(enemy, set_position, mouse);
     }
 }
+
+void enemy_move(hub_t *hub, obj_t *enemy)
+{
+    int step = ((enemy_data_t *)enemy->extra)->tile_step;
+    obj_t *begin = ((scene_t *)hub->scenes)->objs;
+    obj_t *curr = NULL;
+    sfVector2f speed = {0, 0};
+
+    while (list_poll(begin, (void **)&curr)) {
+        if (curr->group == GR_TERRAIN && curr->nbr == step + 1 && 
+        objs_distance(enemy, curr) <= 51) {
+            ((enemy_data_t *)enemy->extra)->tile_step++;
+            speed = vector_normalize(objs_vector(enemy, curr));
+            obj_set_speed(enemy, speed.x * 100, speed.y * 100);
+        }
+    }
+}

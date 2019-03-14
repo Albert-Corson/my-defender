@@ -16,8 +16,8 @@ sfVector2f objs_vector(obj_t *obj_a, obj_t *obj_b)
     FAIL_IF(!obj_a || !obj_b || !obj_a->physics || !obj_b->physics, v);
     box_a = VGET(obj_a, get_box);
     box_b = VGET(obj_b, get_box);
-    v.x = (box_b.left + box_b.width / 2) - (box_a.left);
-    v.y = (box_b.top + box_b.height / 2) - (box_a.top);
+    v.x = (box_b.left) - (box_a.left);
+    v.y = (box_b.top) - (box_a.top);
     return (v);
 }
 
