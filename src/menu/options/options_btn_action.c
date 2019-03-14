@@ -65,3 +65,24 @@ void change_music_slider(hub_t *hub, void *obj)
     rect_set_size(slider, VECT2U(rect.x, VGET(obj, get_size).y));
     hub_set_volume(hub, (rect.x / 600) * 100);
 }
+
+void back_btn_action(hub_t *hub, void *btn)
+{
+    scene_t *menu = list_fetch(hub->scenes, "menu_scene");
+    input_obj_t *st_btn = btn;
+    sfBool hover = st_btn->mouse_evt->hover;
+    sfBool focus = st_btn->mouse_evt->focus;
+    sfBool active = st_btn->mouse_evt->active;
+
+    if (focus && !active && hover) {
+        rect_set_outline_color(st_btn->background, sfBlack);
+        scene_sound_apply(hub->scenes, sfSound_play);
+        hub->scenes = menu ? menu : hub->scenes;
+    }
+    if (active && hover)
+        rect_set_fill_color(st_btn->background, RGBA(100, 100, 100, 255));
+    else if (focus)
+        rect_set_fill_color(st_btn->background, sfBlack);
+    if (focus && !active)
+        st_btn->mouse_evt->focus = sfFalse;
+}

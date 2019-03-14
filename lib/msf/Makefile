@@ -85,6 +85,11 @@ SRC			=	utils/vector.c							\
 				obj/anim/animation/animation_set.c		\
 				obj/anim/animation/frame/frame_tor.c	\
 				obj/anim/animation/frame/frame_met.c	\
+				obj/sound/sound_tor.c					\
+				obj/sound/sound_set.c					\
+				obj/sound/sound_get.c					\
+				obj/sound/sound_vtable.c				\
+				obj/sound/sound_met.c					\
 
 OBJ			=	$(patsubst %.c,%.o,$(SRC))
 

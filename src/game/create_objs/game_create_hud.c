@@ -55,15 +55,22 @@ void create_defenses_prev(scene_t *game)
     scene_add_obj(game, range, "prev_range");
 }
 
-void create_positioning_preview(scene_t *game)
+void create_positioning_preview(scene_t *game, hub_t *hub)
 {
-    shape_obj_t *tool = rect_new(VECT2U(50, 50), RGBA(0, 0, 0, 150));
-    anim_t *emp = anim_new("assets/img/mob/emp.png", 1, -1);
+    shape_obj_t *tool = rect_new(VECT2U(50, 50), RGBA(0, 0, 0, 0));
+    anim_t *crosshair = anim_new("assets/img/mob/emp.png", 1, -1);
     anim_obj_t *prev_emp = anim_obj_new();
+    anim_obj_t *emp;
     sfVector2u tmp;
 
+    obj_set_sound_buffer(hub, tool, "mouse_hover");
+    emp = create_anim_obj("assets/img/anim/explosion.png", VECT2F(0, 0), 7, 70);
+    anim_set_loop(emp->anims, sfTrue);
+    emp->state = sfFalse;
+    obj_set_sound_buffer(hub, emp, "explosion");
+    scene_add_obj(game, emp, "explosion");
     prev_emp->state = sfFalse;
-    anim_obj_add_anim(prev_emp, emp, "emp");
+    anim_obj_add_anim(prev_emp, crosshair, "emp");
     tmp = anim_obj_get_size(prev_emp);
     anim_obj_set_origin(prev_emp, VECT2F(tmp.x / 2, tmp.y / 2));
     scene_add_obj(game, prev_emp, "prev_emp");
@@ -97,7 +104,7 @@ void create_tower_lifebar(scene_t *game)
 
 void create_price_txts(scene_t *game)
 {
-    text_obj_t *mg = text_obj_new("$999", RGBA(200, 0, 0,220), 15);
+    text_obj_t *mg = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
     text_obj_t *canon = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
     text_obj_t *rocket = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);
     text_obj_t *emp = text_obj_new("$999", RGBA(200, 0, 0, 220), 15);

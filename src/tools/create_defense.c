@@ -44,21 +44,6 @@ void sell_defense(scene_t *scene, sfVector2f pos)
     defense->is_alive = sfFalse;
 }
 
-int check_tile_availability(scene_t *scene, sfVector2f pos)
-{
-    obj_t *obj = scene->objs;
-    obj_t *tmp = NULL;
-    sfFloatRect rect = {pos.x, pos.y, 50, 50};
-    sfVector2f xy;
-
-    while (list_poll(obj, (void **)&tmp)) {
-        xy = tmp->group == GR_DEFENSE ? VGET(tmp, get_position) : xy;
-        if (sfFloatRect_contains(&rect, xy.x, xy.y) && tmp->group == GR_DEFENSE && tmp->is_alive)
-            return (0);
-    }
-    return (1);
-}
-
 void create_defense(scene_t *scene, char *aspect, int lvl, sfVector2f pos)
 {
     defense_obj_t *defense = 0;
@@ -66,7 +51,7 @@ void create_defense(scene_t *scene, char *aspect, int lvl, sfVector2f pos)
     sfVector2f good_pos;
     float ratio = 0;
 
-    FAIL_IF_VOID(!check_tile_availability(scene, pos));
+    FAIL_IF_VOID(!is_tile_available(scene, pos));
     good_pos = VECT2F(pos.x + 25, pos.y + 25);
     defense = defense_new(aspect, lvl, good_pos);
     size = VGET(defense->base, get_size);

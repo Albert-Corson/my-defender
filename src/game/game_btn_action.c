@@ -46,7 +46,7 @@ void towers_preview(hub_t *hub, sfEvent evt)
     defenses->anims = list_fetch(defenses->anims, focused->label + 4);
     VFUNC(defenses, set_position, pos);
     VFUNC(circle, set_position, VECT2F(pos.x + 25, pos.y + 25));
-    if (KRELEASED(evt, sfKeySpace))
+    if (CLICK(evt, sfMouseLeft))
         create_defense(hub->scenes, focused->label + 4, 1, pos);
 }
 
@@ -54,18 +54,18 @@ void emp_preview(hub_t *hub, sfEvent evt)
 {
     scene_t *scene = hub->scenes;
     input_obj_t *emp_btn = list_fetch(scene->objs, "btn_emp");
-    anim_obj_t *emp = list_fetch(scene->objs, "prev_emp");
+    anim_obj_t *prev_emp = list_fetch(scene->objs, "prev_emp");
+    anim_obj_t *emp = list_fetch(scene->objs, "explosion");
     sfVector2i mouse = sfMouse_getPositionRenderWindow(hub->window);
     sfVector2f pos;
 
     FAIL_IF_VOID(!emp_btn->mouse_evt->focus || mouse.y >= 780);
-    emp->state = sfTrue;
-    emp->anims = list_fetch(emp->anims, "emp");
+    prev_emp->state = sfTrue;
+    prev_emp->anims = list_fetch(prev_emp->anims, "emp");
     pos = VECT2F(mouse.x, mouse.y);
-    VFUNC(emp, set_position, pos);
+    VFUNC(prev_emp, set_position, pos);
     // if (CLICK(evt, sfMouseLeft))
-        // EMP HERE
-    evt = evt;
+        // drop_emp_explosion(emp, pos);
 }
 
 int tool_preview(hub_t *hub, sfEvent evt)
@@ -86,7 +86,7 @@ int tool_preview(hub_t *hub, sfEvent evt)
         rect_set_fill_color(rect, RGBA(255, 0, 0, 150));
     else if (c == 'u')
         rect_set_fill_color(rect, RGBA(0, 0, 200, 150));
-    if (KRELEASED(evt, sfKeySpace))
+    if (CLICK(evt, sfMouseLeft))
         func[c == 'd' ? 0 : 1](hub->scenes, pos);
     return (1);
 }

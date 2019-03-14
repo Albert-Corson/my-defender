@@ -18,6 +18,7 @@ enum msf_obj_type_e {
     animated,
     input,
     shape,
+    sound,
     custom
 };
 
@@ -219,6 +220,7 @@ struct msf_anim_s {
     sfVector2f origin;
     uint frame_duration;
     void *frames;
+    sfBool loop;
 };
 
 /*
@@ -232,6 +234,7 @@ struct msf_frame_s {
     void (*dtor)(void *);
 
     sfTexture *texture;
+    int index;
 };
 
 /*
@@ -289,6 +292,36 @@ struct msf_shape_obj_s {
     sfBool is_alive;
 
     void *shape;
+};
+
+
+/*
+**  Sound Game Object
+*/
+struct msf_sound_obj_s {
+    // msf_node_s inherited properties
+    char *label;
+    void *next;
+    void (*dtor)(void *);
+
+    // msf_game_obj_s inherited properties
+    obj_fixing fixing;
+    obj_type type;
+    int group;
+    sfBool state;
+    sfBool is_collider;
+    obj_vtable_t *vtable;
+    obj_physics_t *physics;
+    obj_mouse_evt_t *mouse_evt;
+    void *extra;
+    void (*on_active)(hub_t *, void *);
+    sfSound *sound;
+    int nbr;
+    sfBool is_alive;
+
+    sfInt64 elapsed;
+    sfInt64 repeat_delay;
+    sfBool loop;
 };
 
 /*
@@ -432,13 +465,15 @@ void anim_destroy(void *anim);
 
 // ANIM MET
 void anim_add_frame(void *anim, void *frame, char *label);
+void anim_set_loop(void *anim, sfBool loop);
+void anim_reset_loop(void *anim);
 
 // ANIM SET
 void anim_set_frames(void *anim, char *filepath, int nb_frames);
 
 // FRAME TOR
-void *frame_new(sfTexture *texture);
-void frame_ctor(void *frame, sfTexture *texture);
+void *frame_new(sfTexture *texture, int frm_index);
+void frame_ctor(void *frame, sfTexture *texture, int frm_index);
 void frame_dtor(void *frame);
 void frame_destroy(void *frame);
 
@@ -552,5 +587,27 @@ void rect_vtable_ctor_met(void *obj_vtable);
 void rect_vtable_ctor_set(void *obj_vtable);
 void rect_vtable_ctor_get(void *obj_vtable);
 void rect_vtable_destroy(void *obj_vtable);
+
+// SOUND_OBJ TOR
+void *sound_obj_new(hub_t *hub, char *buffer);
+void sound_obj_ctor(void *obj, hub_t *hub, char *buffer);
+void sound_obj_destroy(void *shape_obj);
+
+// SOUND_OBJ MET
+void sound_obj_render(void *sound, hub_t *hub);
+
+// SOUND_OBJ SET
+void sound_obj_set_loop(void *sound, sfBool loop, sfInt64 delay);
+
+// SOUND_OBJ GET
+sfSoundStatus sound_obj_get_status(void *sound);
+sfBool sound_obj_get_loop(void *sound);
+
+// SOUND_OBJ VTABLE
+void *sound_obj_vtable_new(void);
+void sound_obj_vtable_ctor_met(void *obj_vtable);
+void sound_obj_vtable_ctor_set(void *obj_vtable);
+void sound_obj_vtable_ctor_get(void *obj_vtable);
+void sound_obj_vtable_destroy(void *obj_vtable);
 
 #endif /* !MSF_OBJ_H_ */

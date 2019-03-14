@@ -19,6 +19,7 @@ typedef struct msf_shape_obj_s      shape_obj_t;
 typedef struct msf_obj_mouse_evt_s  obj_mouse_evt_t;
 typedef struct msf_obj_vtable_s     obj_vtable_t;
 typedef struct msf_obj_physics_s    obj_physics_t;
+typedef struct msf_sound_obj_s      sound_obj_t;
 typedef struct msf_manifold_s       manifold_t;
 typedef struct msf_anim_s           anim_t;
 typedef struct msf_node_s           node_t;

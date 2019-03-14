@@ -14,6 +14,7 @@ SRC			=	src/main.c								\
 				src/tools/create_btn.c					\
 				src/tools/create_defense.c				\
 				src/tools/get_focused_btn.c				\
+				src/tools/is_tile_available.c			\
 				src/menu/menu_scene.c					\
 				src/menu/menu_evt.c						\
 				src/menu/menu_btn_action.c				\
@@ -23,10 +24,11 @@ SRC			=	src/main.c								\
 				src/pres_screen/pres_scene.c			\
 				src/pres_screen/pres_evt.c				\
 				src/game/game_scene.c					\
-				src/game/game_create_hud.c				\
 				src/game/game_btn_action.c				\
 				src/game/game_evt.c						\
 				src/game/game_place_defense.c			\
+				src/game/create_objs/game_create_hud.c	\
+				src/game/create_objs/create_sound.c		\
 				src/game/pause/pause_btn_action.c		\
 				src/game/pause/pause_evt.c				\
 				src/game/pause/pause_scene.c			\

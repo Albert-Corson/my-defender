@@ -64,6 +64,8 @@ void hub_add_buffer(void *hub, void *buffer, char *label);
 
 // GLOBAL EVTS
 void window_close_evt(hub_t *hub, sfEvent evt);
+void mouse_evt_update_button(void *obj, sfEvent evt);
+void mouse_evt_updater(void *obj, sfEvent evt);
 void mouse_evt_updater_evt(hub_t *hub, sfEvent evt);
 
 // HUB SETTERS

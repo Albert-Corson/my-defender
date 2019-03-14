@@ -121,6 +121,7 @@ void defense_obj_vtable_destroy(void *obj_vtable);
 void defense_lock_target(hub_t *hub, obj_t *obj);
 void defense_fire(hub_t *hub, obj_t *obj);
 void defense_update_evt(hub_t *hub, sfEvent evt);
+int is_tile_available(scene_t *scene, sfVector2f pos);
     // ENEMY
 void *enemy_new(char *aspect, sfVector2f pos, float life_multiplier);
 void *enemy_data_new(float max_hp, float speed);
@@ -153,12 +154,13 @@ void options_show_menu(hub_t *hub, sfEvent evt);
 void change_volume_slider(hub_t *hub, void *obj);
 void change_sfx_slider(hub_t *hub, void *obj);
 void change_music_slider(hub_t *hub, void *obj);
+void back_btn_action(hub_t *hub, void *btn);
 
 // GAME SCENE
 void game_pause(hub_t *hub, sfEvent evt);
 input_obj_t *create_img_btn(char *path, sfVector2f pos);
 void game_create_buttons(scene_t *game);
-void create_positioning_preview(scene_t *game);
+void create_positioning_preview(scene_t *game, hub_t *hub);
 sfVector2f get_positioning(sfRenderWindow *window);
 input_obj_t *get_focused_btn(hub_t *hub);
 void select_defenses(hub_t *hub, sfEvent evt);
@@ -168,6 +170,7 @@ void emp_preview(hub_t *hub, sfEvent evt);
 int tool_preview(hub_t *hub, sfEvent evt);
 void create_tower_lifebar(scene_t *game);
 void create_price_txts(scene_t *game);
+void game_mouse_evt_update_btns(hub_t *hub, sfEvent evt);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);

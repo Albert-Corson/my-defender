@@ -61,6 +61,7 @@ void options_scene_create(hub_t *hub)
     options->clear = sfYellow;
     scene_set_sound_buffer(hub, options, "mouse_click");
     back = create_btn(RECT(100, 840, 160, 80), sfBlack, 25, "BACK");
+    back->on_active = back_btn_action;
     obj_set_sound_buffer(hub, back, "mouse_hover");
     rect_set_outline_thickness(back->background, -5);
     create_volume_slider(options);
@@ -70,6 +71,7 @@ void options_scene_create(hub_t *hub)
     VFUNC(title, set_position, VECT2F(120, 90));
     scene_add_obj(options, title, "title");
     scene_add_obj(options, back, "back_btn");
+    scene_add_evt(options, evt_new(mouse_evt_updater_evt, inputs), NULL);
     scene_add_evt(options, evt_new(options_show_menu, inputs), "show_menu");
     hub_add_scene(hub, options, "options_scene");
 }

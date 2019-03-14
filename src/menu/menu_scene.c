@@ -46,6 +46,7 @@ void menu_scene_create(hub_t *hub)
     scene_add_obj(menu, tower, "tower");
     scene_add_obj(menu, arrow, "arrow");
     scene_add_evt(menu, evt_new(menu_place_arrow, inputs), "place_arrow");
-    scene_add_evt(menu, evt_new(menu_show_pres, inputs), "show_pres");
+    scene_add_evt(menu, evt_new(mouse_evt_updater_evt, inputs), NULL);
+    scene_add_evt(menu, evt_new(menu_show_pres, inputs), "show_pres");\
     hub_add_scene(hub, menu, "menu_scene");
 }

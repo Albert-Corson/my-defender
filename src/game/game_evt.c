@@ -19,9 +19,30 @@ void game_pause(hub_t *hub, sfEvent evt)
     }
 }
 
+void game_mouse_evt_update_btns(hub_t *hub, sfEvent evt)
+{
+    input_obj_t *focused_btn = get_focused_btn(hub);
+    sfVector2i pos = sfMouse_getPositionRenderWindow(hub->window);
+    input_obj_t *st_input = ((scene_t *)hub->scenes)->objs;
+    input_obj_t *next = NULL;
+    int check = 0;
+    sfFloatRect box;
+
+    FAIL_IF_VOID(!CLICK(evt, sfMouseLeft) || !st_input);
+    while (list_poll(st_input, (void **)&next)) {
+        box = next->type == input ? VGET(next, get_box) : RECT(0, 0, 0, 0);
+        if (next->type == input && sfFloatRect_contains(&box, pos.x, pos.y)) {
+            next->mouse_evt->focus = sfTrue;
+            check = 1;
+        }
+    }
+    if (focused_btn && check)
+        focused_btn->mouse_evt->focus = sfFalse;
+}
+
 void outline_focused_btn(hub_t *hub, sfEvent evt)
 {
-    input_obj_t *st_input =  ((scene_t *)hub->scenes)->objs;
+    input_obj_t *st_input = ((scene_t *)hub->scenes)->objs;
     input_obj_t *next = NULL;
     input_obj_t *tmp = NULL;
     sfColor save;

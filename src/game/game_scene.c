@@ -19,12 +19,13 @@ void game_scene_create(hub_t *hub, char *mappath)
     scene_add_obj(game, rect, "hud_rect");
     game_create_buttons(game);
     scene_set_sound_buffer(hub, game, "mouse_click");
+    parse_map(game, mappath);
+    create_positioning_preview(game, hub);
+    create_tower_lifebar(game);
+    create_price_txts(game);
+    scene_add_evt(game, evt_new(game_mouse_evt_update_btns, inputs), NULL);
     scene_add_evt(game, evt_new(outline_focused_btn, inputs), "focused_btn");
     scene_add_evt(game, evt_new(select_defenses, inputs), NULL);
     scene_add_evt(game, evt_new(game_pause, inputs), "pause");
-    parse_map(game, mappath);
-    create_positioning_preview(game);
-    create_tower_lifebar(game);
-    create_price_txts(game);
     hub_add_scene(hub, game, "game_scene");
 }
