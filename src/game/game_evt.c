@@ -10,10 +10,12 @@
 void game_pause(hub_t *hub, sfEvent evt)
 {
     shape_obj_t *slider = NULL;
+    scene_t *pause = list_fetch(hub->scenes, "pause_scene");
 
+    FAIL_IF_VOID(!pause);
     if (KRELEASED(evt, sfKeyEscape)) {
         scene_sound_apply(hub->scenes, sfSound_play);
-        hub->scenes = list_fetch(hub->scenes, "pause_scene");
+        hub->scenes = pause;
         slider = list_fetch(((scene_t *)hub->scenes)->objs, "general_sldr");
         VFUNC(slider, set_size, VECT2U(8 * sfListener_getGlobalVolume(), 80));
     }
@@ -75,13 +77,16 @@ void update_cash(hub_t *hub, sfEvent evt)
 {
     game_scene_data_t *data = ((scene_t *)hub->scenes)->extra;
     text_obj_t *text = list_fetch(((scene_t *)hub->scenes)->objs, "cash_text");
-    float elapsed = sfClock_getElapsedTime(hub->timer).microseconds / 10;
     char *str = NULL;
+    int delay = 500;
 
-    data->elapsed += elapsed;
-    if (data->elapsed > 1000) {
-        data->elapsed -= 1000;
-        data->cash += 50;
+    delay -= ((data->wave - (data->wave % 2)) / 2) * 10;
+    delay = delay < 150 ? 150 : delay;
+    data->elapsed += sfClock_getElapsedTime(hub->timer).microseconds;
+    while (data->elapsed / 1000 > delay) {
+        data->elapsed -= 1000 * delay;
+        data->cash += 25;
+        data->score += 25;
     }
     str = my_format("%d", data->cash);
     text_obj_set_string(text, str);

@@ -86,3 +86,28 @@ void back_btn_action(hub_t *hub, void *btn)
     if (focus && !active)
         st_btn->mouse_evt->focus = sfFalse;
 }
+
+void change_fps_slider(hub_t *hub, void *obj)
+{
+    obj_t *slider;
+    text_obj_t *text;
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(hub->window);
+    sfVector2f rect = VGET(obj, get_position);
+    char *str = NULL;
+    uint fps = 0;
+
+    FAIL_IF_VOID(!hub || !((obj_t *)obj)->mouse_evt->active);
+    slider = list_fetch(((scene_t *)hub->scenes)->objs, "fps_sldr");
+    text = list_fetch(((scene_t *)hub->scenes)->objs, "fps_txt");
+    rect.x = mouse.x - rect.x;
+    if (rect.x < 0)
+        rect.x = 0;
+    if (rect.x > 800)
+        rect.x = 800;
+    rect_set_size(slider, VECT2U(rect.x, VGET(slider, get_size).y));
+    fps = (((800 - rect.x) / 800) * 30) + ((rect.x / 800) * 144);
+    hub_set_framerate(hub, fps);
+    str = my_format("FPS LIMIT: %d", fps);
+    text_obj_set_string(text, str);
+    free(str);
+}

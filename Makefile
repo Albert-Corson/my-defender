@@ -15,6 +15,8 @@ SRC			=	src/main.c									\
 				src/tools/create_defense.c					\
 				src/tools/get_focused_btn.c					\
 				src/tools/is_tile_available.c				\
+				src/tools/reset_game.c						\
+				src/tools/get_env_var.c						\
 				src/menu/menu_scene.c						\
 				src/menu/menu_evt.c							\
 				src/menu/menu_btn_action.c					\
@@ -33,17 +35,18 @@ SRC			=	src/main.c									\
 				src/game/pause/pause_btn_action.c			\
 				src/game/pause/pause_evt.c					\
 				src/game/pause/pause_scene.c				\
+				src/scoreboard/score_scene.c				\
+				src/scoreboard/score_evt.c					\
 				src/defense/defense_get.c					\
 				src/defense/defense_set.c					\
 				src/defense/defense_met.c					\
 				src/defense/defense_vtable.c				\
 				src/defense/defense_tor.c					\
 				src/defense/defense_evts.c					\
+				src/defense/missile/missile_tor.c			\
+				src/defense/missile/missile_evts.c			\
 				src/enemy/enemy_tor.c						\
 				src/enemy/enemy_evts.c						\
-				src/test/missile/missile_tor.c				\
-				src/test/missile/missile_evts.c				\
-				src/test/test_scene.c						\
 				src/parsing/checks.c						\
 				src/parsing/parser.c						\
 				src/parsing/textures.c						\

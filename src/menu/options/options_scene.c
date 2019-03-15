@@ -37,6 +37,7 @@ static void create_sfx_slider(scene_t *options)
     scene_add_obj(options, back_sldr, "sfx_sldr_bg");
     scene_add_obj(options, slider, "sfx_sldr");
 }
+
 static void create_music_slider(scene_t *options)
 {
     text_obj_t *text = text_obj_new("Music volume", sfRed, 35);
@@ -50,6 +51,22 @@ static void create_music_slider(scene_t *options)
     scene_add_obj(options, text, "music_txt");
     scene_add_obj(options, back_sldr, "music_sldr_bg");
     scene_add_obj(options, slider, "music_sldr");
+}
+
+static void create_fps_slider(scene_t *options)
+{
+    text_obj_t *text = text_obj_new("FPS LIMIT: 144", sfRed, 50);
+    shape_obj_t *back_sldr = rect_new(VECT2U(810, 90), sfBlack);
+    shape_obj_t *slider = NULL;
+
+    slider = rect_new(VECT2U(800, 80), sfWhite);
+    VFUNC(back_sldr, set_position, VECT2F(395, 715));
+    VFUNC(slider, set_position, VECT2F(400, 720));
+    VFUNC(text, set_position, VECT2F(400, 660));
+    back_sldr->on_active = change_fps_slider;
+    scene_add_obj(options, text, "fps_txt");
+    scene_add_obj(options, back_sldr, "fps_sldr_bg");
+    scene_add_obj(options, slider, "fps_sldr");
 }
 
 void options_scene_create(hub_t *hub)
@@ -67,6 +84,7 @@ void options_scene_create(hub_t *hub)
     create_volume_slider(options);
     create_sfx_slider(options);
     create_music_slider(options);
+    create_fps_slider(options);
     text_obj_set_font(title, "assets/font/blocks.ttf");
     VFUNC(title, set_position, VECT2F(120, 90));
     scene_add_obj(options, title, "title");

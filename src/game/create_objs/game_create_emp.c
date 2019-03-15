@@ -27,14 +27,16 @@ void drop_emp_explosion(scene_t *scene, sfVector2f pos)
     sfVector2u box = anim_obj_get_size(explo);
 
     FAIL_IF_VOID(500 > ((game_scene_data_t *)scene->extra)->cash);
-    ((game_scene_data_t *)scene->extra)->cash -= 500;
     FAIL_IF_VOID(!explo || !explo->sound);
     FAIL_IF_VOID(sfSound_getStatus(explo->sound) == sfPlaying);
+    ((game_scene_data_t *)scene->extra)->cash -= 500;
     obj_sound_apply((obj_t  *)explo, sfSound_play);
     anim_obj_set_position(explo, pos);
     explo->state = sfTrue;
     while (list_poll(objs, (void **)&next)) {
-        if (next->group == GR_ENEMY && objs_distance(next, explo) < box.y / 2)
-            ((enemy_data_t *)next->extra)->hp -= 200;
+        if (next->group == GR_ENEMY && objs_distance(next, explo) < box.y * 2)
+            ((enemy_data_t *)next->extra)->hp -= 300;
+        if (next->group == GR_ENEMY && ((enemy_data_t *)next->extra)->hp <= 0)
+            next->is_alive = sfFalse;
     }
 }

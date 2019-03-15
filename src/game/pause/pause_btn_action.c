@@ -62,6 +62,7 @@ void pause_menu_action(hub_t *hub, void *obj)
         rect_set_outline_color(st_input->background, sfBlack);
         scene_sound_apply(hub->scenes, sfSound_play);
         hub->scenes = menu;
+        reset_game(hub);
     }
     if (active && hover)
         rect_set_fill_color(st_input->background, RGBA(100, 100, 100, 255));

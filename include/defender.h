@@ -77,11 +77,13 @@ typedef struct game_scene_data_s {
     void (*dtor)(void *);
     char **map;
     int cash;
+    int score;
     int wave;
     sfInt64 elapsed;
 } game_scene_data_t;
 
-int gameloop(char *mappath);
+int init_game(char *mappath);
+void gameloop(hub_t *hub);
 void load_sound_buffers(hub_t *hub);
 
 // PARSING
@@ -101,13 +103,15 @@ void sfx_set_volume(scene_t *scene, float volume);
 void outline_focused_btn(hub_t *hub, sfEvent evt);
 void outline_hovered_btn(hub_t *hub, sfEvent evt);
 void create_volume_slider(scene_t *options);
-int create_scenes(hub_t *hub, char *mappath);
+int create_scenes(hub_t *hub);
 input_obj_t *create_btn(sfFloatRect box, sfColor bg, int txt_size, char *txt);
 input_obj_t *create_img_btn(char *path, sfVector2f pos);
 anim_obj_t *create_anim_obj(char *path, sfVector2f pos, int nb_frame, uint lim);
 void create_defense(scene_t *scene, char *aspect, int lvl, sfVector2f pos);
 void sell_defense(scene_t *scene, sfVector2f pos);
 void upgrade_defense(scene_t *scene, sfVector2f pos);
+void reset_game(hub_t *hub);
+char *get_env_var(char **envp, char *goal);
 
 // GAME NPC
 void *missile_new(void *launcher, char *aspect);
@@ -133,6 +137,9 @@ void defense_lock_target(hub_t *hub, obj_t *obj);
 void defense_fire(hub_t *hub, obj_t *obj);
 void defense_update_evt(hub_t *hub, sfEvent evt);
 int is_tile_available(scene_t *scene, sfVector2f pos);
+void missile_ctor(void *missile, void *launcher, char *aspect);
+void missile_set_data(void *missile, void *launcher);
+void missile_dtor(void *missile);
 
 // ENEMY
 int find_spawn_y(char **map);
@@ -148,7 +155,7 @@ void spawn_enemy(hub_t *hub, sfEvent evt);
 void menu_scene_create(hub_t *hub);
 void pres_scene_create(hub_t *hub);
 void options_scene_create(hub_t *hub);
-int game_scene_create(hub_t *hub, char *mappath);
+int game_scene_create(hub_t *hub);
 void pause_scene_create(hub_t *hub);
 
 void test_scene_create(hub_t *hub);
@@ -199,6 +206,11 @@ void pause_menu_action(hub_t *hub, void *obj);
 void pause_quit_action(hub_t *hub, void *obj);
 void pause_resume_action(hub_t *hub, void *obj);
 void pause_esc_key(hub_t *hub, sfEvent evt);
+
+// SCOREBOARD SCENE
+void score_show_menu(hub_t *hub, sfEvent evt);
+void score_scene_create(hub_t *hub);
+void change_fps_slider(hub_t *hub, void *obj);
 
 #define KRELEASED(evt, keycode)\
     ((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)

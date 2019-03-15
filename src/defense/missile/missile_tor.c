@@ -7,12 +7,6 @@
 
 #include "defender.h"
 
-void missile_ctor(void *missile, void *launcher, char *aspect);
-
-void missile_set_data(void *missile, void *launcher);
-
-void missile_dtor(void *missile);
-
 void *missile_new(void *launcher, char *aspect)
 {
     anim_obj_t *missile = malloc(sizeof(anim_obj_t));
@@ -21,6 +15,7 @@ void *missile_new(void *launcher, char *aspect)
     missile->dtor = missile_dtor;
     missile_set_data(missile, launcher);
     missile_ctor(missile, launcher, aspect);
+    anim_obj_set_scale(missile, VGET(launcher, get_scale));
     return ((void *)missile);
 }
 

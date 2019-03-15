@@ -44,6 +44,7 @@ struct msf_hub_s {
     manifold_t *manifold;
     sound_buffer_t *sound_buffers;
     sfSound *sound;
+    char *mappath;
 };
 
 /*
@@ -79,6 +80,7 @@ void window_destroy(sfRenderWindow *window);
 void window_set_icon(sfRenderWindow *window, char *path);
 
 // WINDOW MET
+void window_clear(hub_t *hub);
 void window_render(hub_t *hub);
 
 #endif /* !MSF_HUB_H_ */

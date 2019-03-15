@@ -33,6 +33,7 @@ void hub_ctor(void *hub, char *title, sfVector2i size, sfUint32 style)
     st_hub->manifold = manifold_new(NULL, NULL);
     st_hub->sound = NULL;
     st_hub->sound_buffers = NULL;
+    st_hub->mappath = NULL;
 }
 
 void hub_dtor(void *hub)
@@ -47,6 +48,8 @@ void hub_dtor(void *hub)
     manifold_destroy(st_hub->manifold);
     if (st_hub->sound)
         sfSound_destroy(st_hub->sound);
+    if (st_hub->mappath)
+        free(st_hub->mappath);
 }
 
 void hub_destroy(void *hub)

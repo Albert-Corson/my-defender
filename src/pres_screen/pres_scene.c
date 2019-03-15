@@ -51,12 +51,11 @@ void pres_scene_create(hub_t *hub)
     create_tower_icon(pres);
     text_obj_set_font(game_name, "assets/font/blocks.ttf");
     VFUNC(game_name, set_position, (sfVector2f){335, 50});
-    VFUNC(press_text, set_position, (sfVector2f){600, 775});
+    VFUNC(press_text, set_position, (sfVector2f){570, 775});
     scene_add_obj(pres, press_text, "press_a_key");
     scene_add_obj(pres, game_name, "game_name");
     scene_add_evt(pres, evt_new(pres_animate_text, context), "txt_anim");
     scene_add_evt(pres, evt_new(mini_game_txt, context), "mini_game");
-    scene_add_evt(pres, evt_new(mouse_evt_updater_evt, inputs), NULL);
     scene_add_evt(pres, evt_new(pres_show_menu, inputs), "show_menu");
     scene_add_evt(pres, evt_new(pres_quit_game, inputs), "quit_game");
     hub_add_scene(hub, pres, "pres_scene");
