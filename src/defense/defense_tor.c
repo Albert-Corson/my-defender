@@ -20,7 +20,7 @@ void *defense_new(char *aspect, int lvl, sfVector2f pos)
     st_defense->tower = create_anim_obj(path_tower, pos, 1, -1);
     st_defense->base = create_anim_obj(path_base, pos, 1, -1);
     obj_recenter_origin(st_defense->tower);
-    obj_recenter_origin( st_defense->base);
+    obj_recenter_origin(st_defense->base);
     free(path_tower);
     free(path_base);
     st_defense->aspect = aspect;

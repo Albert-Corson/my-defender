@@ -17,6 +17,5 @@ int create_scenes(hub_t *hub)
     parsing_failure = game_scene_create(hub);
     pause_scene_create(hub);
     score_scene_create(hub);
-    return (1);
     return (parsing_failure);
 }

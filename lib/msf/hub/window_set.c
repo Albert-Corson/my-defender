@@ -15,8 +15,3 @@ void window_set_icon(sfRenderWindow *window, char *path)
     sfRenderWindow_setIcon(window, 256, 256, icon);
     sfImage_destroy(img);
 }
-
-
-
-
-

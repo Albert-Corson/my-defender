@@ -17,7 +17,7 @@ void menu_create_buttons(hub_t *hub, scene_t *menu)
     optn = create_btn(RECT(1075, 425, 500, 100), sfBlack, 50, "Options");
     quit = create_btn(RECT(1075, 600, 500, 100), sfBlack, 50, "Quit");
     quit->on_active = menu_quit_game;
-    optn->on_active =  menu_show_options;
+    optn->on_active = menu_show_options;
     play->on_active = menu_show_game;
     obj_set_sound_buffer(hub, play, "mouse_hover");
     obj_set_sound_buffer(hub, quit, "mouse_hover");

@@ -30,7 +30,7 @@ void drop_emp_explosion(scene_t *scene, sfVector2f pos)
     FAIL_IF_VOID(!explo || !explo->sound);
     FAIL_IF_VOID(sfSound_getStatus(explo->sound) == sfPlaying);
     ((game_scene_data_t *)scene->extra)->cash -= 500;
-    obj_sound_apply((obj_t  *)explo, sfSound_play);
+    obj_sound_apply((obj_t *)explo, sfSound_play);
     anim_obj_set_position(explo, pos);
     explo->state = sfTrue;
     while (list_poll(objs, (void **)&next)) {

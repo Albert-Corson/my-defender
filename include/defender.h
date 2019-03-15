@@ -213,10 +213,10 @@ void score_scene_create(hub_t *hub);
 void change_fps_slider(hub_t *hub, void *obj);
 
 #define KRELEASED(evt, keycode)\
-    ((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)
+((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)
 
 #define CLICK(evt, keycode)\
-    ((evt.mouseButton.type == sfEvtMouseButtonReleased && \
-    evt.mouseButton.button == keycode) ? 1 : 0)
+((evt.mouseButton.type == sfEvtMouseButtonReleased && \
+evt.mouseButton.button == keycode) ? 1 : 0)
 
 #endif /* !DEFENDER_H_ */
