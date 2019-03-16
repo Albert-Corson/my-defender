@@ -27,7 +27,8 @@ SRC			=	src/main.c									\
 				src/pres_screen/pres_evt.c					\
 				src/game/game_scene.c						\
 				src/game/game_btn_action.c					\
-				src/game/game_evt.c							\
+				src/game/game_evt_context.c					\
+				src/game/game_evt_input.c					\
 				src/game/game_place_defense.c				\
 				src/game/create_objs/game_create_hud.c		\
 				src/game/create_objs/game_create_sound.c	\
@@ -46,6 +47,8 @@ SRC			=	src/main.c									\
 				src/defense/missile/missile_tor.c			\
 				src/defense/missile/missile_evts.c			\
 				src/enemy/enemy_tor.c						\
+				src/enemy/enemy_set.c						\
+				src/enemy/enemy_met.c						\
 				src/enemy/enemy_evts.c						\
 				src/parsing/checks.c						\
 				src/parsing/parser.c						\

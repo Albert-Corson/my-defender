@@ -33,6 +33,8 @@ typedef struct enemy_data_s {
     float hp;
     float speed;
     int tile_step;
+    shape_obj_t *lifebar;
+    float lifebar_size;
 } enemy_data_t;
 
 typedef struct defense_obj_s {
@@ -148,8 +150,13 @@ void *enemy_data_new(float max_hp, float speed);
 void enemy_follow_mouse(hub_t *hub, sfEvent evt);
 void enemy_move(hub_t *hub, obj_t *enemy);
 void enemy_move_evt(hub_t *hub, sfEvent evt);
-void enemy_spawn(scene_t *scene);
 void spawn_enemy(hub_t *hub, sfEvent evt);
+void enemy_set_size(void *obj, sfVector2u size);
+void enemy_set_scale(void *obj, sfVector2f scale);
+void enemy_set_position(void *obj, sfVector2f pos);
+void enemy_spawn(scene_t *scene, char *aspect, float multiplier);
+void enemy_render(void *obj, hub_t *hub);
+void enemy_update_lifebar(anim_obj_t *enemy);
 
 // CREATE SCENES
 void menu_scene_create(hub_t *hub);
@@ -200,6 +207,7 @@ void create_emp_anim(scene_t *game, hub_t *hub);
 void drop_emp_explosion(scene_t *scene, sfVector2f pos);
 void create_emp_anim(scene_t *game, hub_t *hub);
 void update_cash(hub_t *hub, sfEvent evt);
+void update_tower_lifebar(hub_t *hub, sfEvent evt);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);

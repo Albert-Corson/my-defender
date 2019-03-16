@@ -19,6 +19,15 @@ void enemy_follow_mouse(hub_t *hub, sfEvent evt)
     }
 }
 
+void enemy_update_lifebar(anim_obj_t *enemy)
+{
+    enemy_data_t *extra = enemy->extra;
+    sfVector2u size = rect_get_size(extra->lifebar);
+
+    size.x = (extra->hp / extra->max_hp) * extra->lifebar_size;
+    rect_set_size(extra->lifebar, size);
+}
+
 void enemy_move(hub_t *hub, obj_t *enemy)
 {
     int step = ((enemy_data_t *)enemy->extra)->tile_step;

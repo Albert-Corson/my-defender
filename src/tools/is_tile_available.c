@@ -7,6 +7,7 @@
 
 #include "defender.h"
 
+// if (grp != GR_DEFENSE && grp != GR_TOWER && grp != GR_ROAD)
 static int check_tile(obj_t *tmp, sfFloatRect rect)
 {
     sfVector2f pos;
@@ -15,7 +16,6 @@ static int check_tile(obj_t *tmp, sfFloatRect rect)
     FAIL_IF(!tmp, 0);
     if (!tmp->is_alive)
         return (0);
-    // if (grp != GR_DEFENSE && grp != GR_TOWER && grp != GR_ROAD)
     if (grp != GR_DEFENSE)
         return (0);
     pos = VGET(tmp, get_position);
