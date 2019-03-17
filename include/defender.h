@@ -213,8 +213,12 @@ void create_emp_anim(scene_t *game, hub_t *hub);
 void drop_emp_explosion(scene_t *scene, sfVector2f pos);
 void create_emp_anim(scene_t *game, hub_t *hub);
 void update_cash(hub_t *hub, sfEvent evt);
+<<<<<<< HEAD
 void game_scene_create_data(scene_t *scene);
 void game_scene_data_dtor(void *extra);
+=======
+void update_tower_lifebar(hub_t *hub, sfEvent evt);
+>>>>>>> 91348f663bb8c444619944ec46d92da1c068458a
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);

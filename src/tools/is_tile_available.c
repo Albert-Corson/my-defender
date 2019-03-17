@@ -7,6 +7,7 @@
 
 #include "defender.h"
 
+// if (grp != GR_DEFENSE && grp != GR_TOWER && grp != GR_ROAD)
 static int check_tile(obj_t *tmp, sfFloatRect rect)
 {
     sfVector2f pos;
