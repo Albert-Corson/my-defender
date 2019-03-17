@@ -44,7 +44,7 @@ void enemy_move(hub_t *hub, obj_t *enemy)
             ((enemy_data_t *)enemy->extra)->tile_step++;
             speed = vector_normalize(objs_vector(enemy, curr));
             obj_set_speed(enemy, speed.x * 100, speed.y * 100);
-        } else if (enemy->state && curr->group == GR_TOWER && distance < 15) {
+        } else if (enemy->state && curr->group == GR_TOWER && distance < 75) {
             data->tower_hp -= 100;
             enemy_kill(hub->scenes, enemy, sfFalse);
         }

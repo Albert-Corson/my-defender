@@ -60,6 +60,6 @@ char *get_tower_texture(char **map, sfVector2i coords)
     char *file = NULL;
 
     if (id == 'O')
-        file = my_memdup("assets/img/terrain/grass_bush_1.png", -1);
+        file = my_memdup("assets/img/terrain/tower.png", -1);
     return (file);
 }
