@@ -20,7 +20,7 @@ void pres_create_defense(scene_t *pres)
 
     VFUNC(enemy, set_origin, VECT2F(25, 25));
     enemy->group = GR_ENEMY;
-    enemy->extra = enemy_data_new(100, "fighter");
+    enemy->extra = enemy_data_new(100, "mothership_1");
     enemy->dtor = enemy_circle_dtor;
     defense->dps = 1;
     defense->range = 700;

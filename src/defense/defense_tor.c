@@ -34,8 +34,8 @@ void defense_ctor(defense_obj_t *st_defense, int lvl, char c)
     obj_ctor(st_defense, custom, sfFalse);
     st_defense->vtable = defense_obj_vtable_new();
     st_defense->label = NULL;
-    st_defense->aerial = (c == 'c');
-    st_defense->ground = (c != 'c');
+    st_defense->aerial = (c == 'r');
+    st_defense->ground = (c != 'r');
     st_defense->dtor = defense_dtor;
     st_defense->group = GR_DEFENSE;
     st_defense->level = lvl;
