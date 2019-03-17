@@ -9,7 +9,7 @@
 
 void game_scene_add_evts(scene_t *game)
 {
-    scene_add_evt(game, evt_new(update_wave_text, inputs), NULL);
+    scene_add_evt(game, evt_new(update_wave_text, context), NULL);
     scene_add_evt(game, evt_new(game_mouse_evt_update_btns, inputs), NULL);
     scene_add_evt(game, evt_new(outline_focused_btn, inputs), "focused_btn");
     scene_add_evt(game, evt_new(select_defenses, inputs), NULL);
@@ -17,6 +17,7 @@ void game_scene_add_evts(scene_t *game)
     scene_add_evt(game, evt_new(update_tower_lifebar_evt, context), NULL);
     scene_add_evt(game, evt_new(update_wave_evt, context), NULL);
     scene_add_evt(game, evt_new(update_cash, context), NULL);
+    scene_add_evt(game, evt_new(check_tower_life, context), NULL);
     scene_add_evt(game, evt_new(game_pause, inputs), "pause");
 }
 

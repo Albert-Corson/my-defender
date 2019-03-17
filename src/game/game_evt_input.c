@@ -11,14 +11,14 @@ void game_pause(hub_t *hub, sfEvent evt)
 {
     shape_obj_t *slider = NULL;
     scene_t *pause = list_fetch(hub->scenes, "pause_scene");
+    char *label = ((scene_t *)hub->scenes)->label;
 
-    FAIL_IF_VOID(!pause);
-    if (KRELEASED(evt, sfKeyEscape)) {
-        scene_sound_apply(hub->scenes, sfSound_play);
-        hub->scenes = pause;
-        slider = list_fetch(((scene_t *)hub->scenes)->objs, "general_sldr");
-        VFUNC(slider, set_size, VECT2U(8 * sfListener_getGlobalVolume(), 80));
-    }
+    FAIL_IF_VOID(!pause || !KRELEASED(evt, sfKeyEscape));
+    FAIL_IF_VOID(my_memcmp(label, "game_scene", -1) != 0);
+    scene_sound_apply(hub->scenes, sfSound_play);
+    hub->scenes = pause;
+    slider = list_fetch(((scene_t *)hub->scenes)->objs, "general_sldr");
+    VFUNC(slider, set_size, VECT2U(8 * sfListener_getGlobalVolume(), 80));
 }
 
 void game_mouse_evt_update_btns(hub_t *hub, sfEvent evt)

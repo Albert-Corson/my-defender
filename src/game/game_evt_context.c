@@ -77,3 +77,14 @@ void update_wave_text(hub_t *hub, sfEvent evt)
     text_obj_set_string(text, str);
     free(str);
 }
+
+void check_tower_life(hub_t *hub, sfEvent evt)
+{
+    scene_t *scene = hub->scenes;
+    game_scene_data_t *data = scene ? scene->extra : NULL;
+    scene_t *score = list_fetch(hub->scenes, "score_scene");
+
+    evt = evt;
+    FAIL_IF_VOID(data->tower_hp > 0 || !score);
+    hub->scenes = score;
+}

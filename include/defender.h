@@ -230,6 +230,7 @@ void update_cash(hub_t *hub, sfEvent evt);
 void game_scene_create_data(scene_t *scene);
 void game_scene_data_dtor(void *extra);
 void update_wave_text(hub_t *hub, sfEvent evt);
+void check_tower_life(hub_t *hub, sfEvent evt);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);
