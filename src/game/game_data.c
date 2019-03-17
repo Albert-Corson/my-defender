@@ -13,10 +13,12 @@ void game_scene_create_data(scene_t *scene)
 
     data->map = NULL;
     data->wave = 1;
-    data->cash = 500;
+    data->cash = 500000;
     data->elapsed = 0;
     data->elapsed_wave = 0;
     data->max_tower_hp = 10000;
+    data->enemies_count = 3;
+    data->alive_enemies = 0;
     data->tower_hp = 10000;
     data->dtor = game_scene_data_dtor;
     scene->extra = data;

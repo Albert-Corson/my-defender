@@ -14,6 +14,8 @@ sfVector2f objs_vector(obj_t *obj_a, obj_t *obj_b)
     sfFloatRect box_b = {0, 0, 0, 0};
 
     FAIL_IF(!obj_a || !obj_b || !obj_a->physics || !obj_b->physics, v);
+    FAIL_IF(!obj_a->vtable || !obj_a->vtable->get_box, v);
+    FAIL_IF(!obj_b->vtable || !obj_b->vtable->get_box, v);
     box_a = VGET(obj_a, get_box);
     box_b = VGET(obj_b, get_box);
     v.x = (box_b.left + box_b.width / 2) - (box_a.left + box_a.width / 2);

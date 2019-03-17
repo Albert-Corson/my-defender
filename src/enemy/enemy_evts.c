@@ -40,14 +40,13 @@ void enemy_move(hub_t *hub, obj_t *enemy)
     FAIL_IF_VOID(!enemy->state);
     while (list_poll(begin, (void **)&curr)) {
         distance = objs_distance(enemy, curr);
-        if (curr->group == GR_ROAD && curr->nbr == step + 1 && distance <= 51) {
+        if (curr->group == GR_ROAD && curr->nbr == step + 1 && distance <= 60) {
             ((enemy_data_t *)enemy->extra)->tile_step++;
             speed = vector_normalize(objs_vector(enemy, curr));
             obj_set_speed(enemy, speed.x * 100, speed.y * 100);
-        }
-        if (enemy->state && curr->group == GR_TOWER && distance < 10) {
+        } else if (enemy->state && curr->group == GR_TOWER && distance < 15) {
             data->tower_hp -= 100;
-            obj_set_state(enemy, sfFalse);
+            enemy_kill(hub->scenes, enemy, sfFalse);
         }
     }
 }

@@ -31,7 +31,7 @@ void missile_ctor(void *missile, void *launcher, char *aspect)
 
     st_missile->group = GR_MISSILE;
     anim_obj_add_anim(st_missile, anim, NULL);
-    pos.x = t_box.left + t_box.width / 2 - cos(RAD(rot)) * t_box.width / 2.5; 
+    pos.x = t_box.left + t_box.width / 2 - cos(RAD(rot)) * t_box.width / 2.5;
     pos.y = t_box.top + t_box.height / 2 - sin(RAD(rot)) * t_box.height / 2.5;
     VFUNC(st_missile, set_position, pos);
     VFUNC(st_missile, set_rotation, rot);

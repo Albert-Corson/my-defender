@@ -38,7 +38,7 @@ void defense_lock_target(hub_t *hub, obj_t *obj)
             return;
         }
     }
-    acquire_target(hub, defense);    
+    acquire_target(hub, defense);
 }
 
 void defense_fire(hub_t *hub, obj_t *obj)

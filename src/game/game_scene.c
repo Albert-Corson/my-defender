@@ -14,6 +14,7 @@ void game_scene_add_evts(scene_t *game)
     scene_add_evt(game, evt_new(select_defenses, inputs), NULL);
     scene_add_evt(game, evt_new(defense_update_evt, context), NULL);
     scene_add_evt(game, evt_new(update_tower_lifebar_evt, context), NULL);
+    scene_add_evt(game, evt_new(update_wave_evt, context), NULL);
     scene_add_evt(game, evt_new(update_cash, context), NULL);
     scene_add_evt(game, evt_new(game_pause, inputs), "pause");
 }
@@ -44,7 +45,6 @@ int game_scene_create(hub_t *hub)
     status = parse_map(game, hub->mappath);
     write(2, "Invalid map.\n", (status == 0 ? 14 : 0));
     game_scene_create_objs(game, hub);
-    enemy_spawn(game, "mothership_2", 1);
     game_create_sounds(hub, game);
     game_scene_add_evts(game);
     hub_add_scene(hub, game, "game_scene");

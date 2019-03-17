@@ -344,6 +344,7 @@ sfBool obj_apply_collision_with_all(hub_t *hub, void *obj);
 sfBool obj_collide_with_group(hub_t *hub, void *obj, int group);
 sfBool obj_apply_collision_with_group(hub_t *hub, void *obj, int group);
 void obj_recenter_origin(void *obj);
+void obj_kill(void *obj);
 
 // OBJ SETTERS
 void obj_set_group(void *obj, int group);

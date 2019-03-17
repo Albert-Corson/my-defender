@@ -87,6 +87,8 @@ typedef struct game_scene_data_s {
     int max_tower_hp;
     sfInt64 elapsed;
     sfInt64 elapsed_wave;
+    int enemies_count;
+    int alive_enemies;
 } game_scene_data_t;
 
 int init_game(char *mappath);
@@ -163,6 +165,7 @@ void enemy_set_scale(void *obj, sfVector2f scale);
 void enemy_set_position(void *obj, sfVector2f pos);
 void enemy_spawn(scene_t *scene, char *aspect, float multiplier);
 void enemy_render(void *obj, hub_t *hub);
+void enemy_kill(scene_t *scene, obj_t *enemy, sfBool reward);
 void enemy_update_lifebar(anim_obj_t *enemy);
 
 // CREATE SCENES
@@ -206,6 +209,7 @@ void emp_preview(hub_t *hub, sfEvent evt);
 int tool_preview(hub_t *hub, sfEvent evt);
 void create_tower_lifebar(scene_t *game);
 void update_tower_lifebar_evt(hub_t *hub, sfEvent evt);
+void update_wave_evt(hub_t *hub, sfEvent evt);
 void create_price_txts(scene_t *game);
 void game_mouse_evt_update_btns(hub_t *hub, sfEvent evt);
 void game_create_sounds(hub_t *hub, scene_t *game);

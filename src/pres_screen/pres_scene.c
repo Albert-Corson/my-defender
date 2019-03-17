@@ -42,7 +42,7 @@ static void create_tower_icon(scene_t *pres)
 
 void pres_scene_create(hub_t *hub)
 {
-    scene_t *pres = scene_new();                                                                                                                  
+    scene_t *pres = scene_new();
     text_obj_t *press_text = text_obj_new("Press a key to start", sfRed, 30);
     text_obj_t *game_name = text_obj_new("TOWER DEFENSE", sfWhite, 100);
 

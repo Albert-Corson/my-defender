@@ -6,7 +6,6 @@
 */
 
 #include "msf/msf.h"
-#include <stdio.h>
 
 void obj_render(void *obj, hub_t *hub)
 {
@@ -58,4 +57,12 @@ void obj_recenter_origin(void *obj)
     origin.x = size.x / 2;
     origin.y = size.y / 2;
     VFUNC(st_obj, set_origin, origin);
+}
+
+void obj_kill(void *obj)
+{
+    obj_t *st_obj = obj;
+
+    st_obj->state = sfFalse;
+    st_obj->is_alive = sfFalse;
 }

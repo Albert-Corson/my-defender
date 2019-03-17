@@ -14,40 +14,36 @@ void missile_follow_target(obj_t *missile)
     float angle = 0;
     float rot = 0;
 
+    if (!extra->target->is_alive) {
+        obj_kill(missile);
+        return;
+    }
     angle = objs_angle(missile, extra->target);
     rot = VGET(missile, get_rotation);
-    if (ABS(angle) <= 15 || rot <= 5 || rot >= 355) {
+    if (ABS(angle) <= 15 || rot <= 5 || rot >= 355)
         rot += angle;
-    } else if (angle < 180) {
+    else if (angle < 180)
         rot += 3.0;
-    } else {
+    else
         rot -= 3.0;
-    }
     VFUNC(missile, set_rotation, rot);
     obj_set_speed(missile, -cos(RAD(rot)) * speed, -sin(RAD(rot)) * speed);
 }
 
 void missile_update(hub_t *hub, obj_t *missile)
 {
-    missile_data_t *extra = missile->extra;
-    obj_t *target = extra->target;
-    defense_obj_t *sender = extra->sender;
+    obj_t *target = ((missile_data_t *)missile->extra)->target;
+    defense_obj_t *sender = ((missile_data_t *)missile->extra)->sender;
     enemy_data_t *target_extra = target->extra;
     sfVector2f pos = VGET(missile, get_position);
-    sfFloatRect target_box = VGET(extra->target, get_box);
-    game_scene_data_t *data = ((scene_t *)hub->scenes)->extra;
+    sfFloatRect target_box = VGET(target, get_box);
 
     if (sfFloatRect_contains(&target_box, pos.x, pos.y)) {
         if (target->state)
             target_extra->hp -= sender->dps;
-        if (target_extra->hp <= 0) {
-            target_extra->hp = 0;
-            data->cash += 50;
-            data->score += 50;
-            obj_set_state(target, sfFalse);
-        }
-        obj_set_state(missile, sfFalse);
-        return;
+        if (target_extra->hp <= 0)
+            enemy_kill(hub->scenes, target, sfTrue);
+        obj_kill(missile);
     } else
         missile_follow_target(missile);
 }
