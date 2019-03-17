@@ -51,7 +51,7 @@ void defense_fire(hub_t *hub, obj_t *obj)
     delay = sfClock_getElapsedTime(hub->timer).microseconds / 1000;
     delay += defense->elapsed;
     if (delay >= defense->firerate) {
-        missile = missile_new(defense, "bullet");
+        missile = missile_new(defense, defense->aspect);
         scene_add_obj(hub->scenes, missile, NULL);
         delay -= defense->firerate;
     }

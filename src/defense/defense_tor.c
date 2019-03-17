@@ -23,7 +23,7 @@ void *defense_new(char *aspect, int lvl, sfVector2f pos)
     obj_recenter_origin(st_defense->base);
     free(path_tower);
     free(path_base);
-    st_defense->aspect = aspect;
+    st_defense->aspect = my_memdup(aspect, -1);
     st_defense->physics = physics_new(st_defense);
     return (st_defense);
 }
@@ -37,11 +37,11 @@ void defense_ctor(defense_obj_t *st_defense, int lvl, char c)
     st_defense->dtor = defense_dtor;
     st_defense->group = GR_DEFENSE;
     st_defense->level = lvl;
-    st_defense->dps = 50 + (c == 'r' ? 150 : (c == 'c' ? 150 : 0));
-    st_defense->dps += lvl == 3 ? 100 : 0;
+    st_defense->dps = 50 + (c == 'r' ? 150 : (c == 'c' ? 150 : -30));
+    st_defense->dps += lvl == 3 ? (c == 'm' ? 10 : 100) : 0;
     st_defense->range = 400;
     st_defense->target = NULL;
-    st_defense->firerate = 500 + (c == 'r' ? 500 : (c == 'c' ? 1000 : 0));
+    st_defense->firerate = 500 + (c == 'r' ? 500 : (c == 'c' ? 1000 : -250));
     st_defense->firerate += lvl >= 2 ? -200 : 0;
     st_defense->elapsed = 0;
 }
@@ -51,6 +51,8 @@ void defense_dtor(void *defense)
     defense_obj_t *st_defense = defense;
 
     FAIL_IF_VOID(!st_defense);
+    if (st_defense->aspect)
+        free(st_defense->aspect);
     obj_dtor(st_defense);
     node_destroy(st_defense->tower);
     node_destroy(st_defense->base);
