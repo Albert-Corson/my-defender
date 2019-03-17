@@ -11,12 +11,20 @@ void acquire_target(hub_t *hub, defense_obj_t *defense)
 {
     obj_t *begin = ((scene_t *)hub->scenes)->objs;
     obj_t *curr = NULL;
+    enemy_data_t *data = NULL;
     float range = defense->range;
     float distance = 0;
+    sfBool in_range = sfFalse;
+    sfBool compatible = sfFalse;
 
     while (list_poll((void *)begin, (void **)&curr)) {
+        data = curr->extra;
         distance = objs_distance((obj_t *)defense, curr);
-        if (curr->group == GR_ENEMY && curr->state && distance <= range) {
+        in_range = distance <= range;
+        compatible = curr->group == GR_ENEMY && curr->state && data;
+        compatible = compatible && (data->aerial ? defense->aerial : sfTrue);
+        compatible = compatible && (data->ground ? defense->ground : sfTrue);
+        if (compatible && in_range) {
             defense->target = curr;
             return;
         }

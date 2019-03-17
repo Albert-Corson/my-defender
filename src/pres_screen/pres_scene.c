@@ -15,12 +15,12 @@ static void enemy_circle_dtor(void *obj)
 
 void pres_create_defense(scene_t *pres)
 {
-    defense_obj_t *defense = defense_new("rocket", 3, VECT2F(800, 290));
+    defense_obj_t *defense = defense_new("canon", 3, VECT2F(800, 290));
     shape_obj_t *enemy = circle_new(25, 15, sfTransparent);
 
     VFUNC(enemy, set_origin, VECT2F(25, 25));
     enemy->group = GR_ENEMY;
-    enemy->extra = enemy_data_new(100, 3);
+    enemy->extra = enemy_data_new(100, "fighter");
     enemy->dtor = enemy_circle_dtor;
     defense->dps = 1;
     defense->range = 700;

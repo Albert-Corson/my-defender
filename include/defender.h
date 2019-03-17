@@ -61,6 +61,8 @@ typedef struct defense_obj_s {
     sfBool is_alive;
 
     char *aspect;
+    sfBool aerial;
+    sfBool ground;
     anim_obj_t *base;
     anim_obj_t *tower;
     obj_t *target;
@@ -106,9 +108,7 @@ char *get_grass_road_texture(char **map, sfVector2i coords);
 char *get_tower_texture(char **map, sfVector2i coords);
 
 // TOOLS
-int readjust_nb(int nb, int min, int max);
-int random_nbr(sfClock *random);
-int random_clamp(sfClock *random, int min, int max);
+int random_between(int min, int max);
 void other_scenes_sound_apply(hub_t *hub, void (*func)(sfSound *));
 void sfx_set_volume(scene_t *scene, float volume);
 void outline_focused_btn(hub_t *hub, sfEvent evt);
@@ -157,7 +157,7 @@ void missile_dtor(void *missile);
 // ENEMY
 int find_spawn_y(char **map);
 void *enemy_new(char *aspect, sfVector2f pos, float life_multiplier);
-void *enemy_data_new(float max_hp, float speed);
+void *enemy_data_new(float max_hp, char *aspect);
 void enemy_follow_mouse(hub_t *hub, sfEvent evt);
 void enemy_move(hub_t *hub, obj_t *enemy);
 void enemy_move_evt(hub_t *hub, sfEvent evt);

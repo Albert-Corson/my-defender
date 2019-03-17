@@ -32,6 +32,7 @@ SRC			=	src/main.c									\
 				src/game/game_scene.c						\
 				src/game/game_btn_action.c					\
 				src/game/game_data.c						\
+				src/game/waves.c							\
 				src/game/game_evt_context.c					\
 				src/game/game_evt_input.c					\
 				src/game/create_objs/game_create_hud.c		\
@@ -70,7 +71,7 @@ NAME		=	my_defender
 CSFML		=	-lcsfml-graphics -lcsfml-system -lcsfml-audio
 LDLIBS		=	-Llib -lmsf -lmy $(CSFML) -lm
 INCLUDE		=	-Iinclude
-CFLAGS		=	-Wextra -Wall -g $(INCLUDE) $(LDLIBS)
+CFLAGS		=	-Wextra -Wall $(INCLUDE) $(LDLIBS)
 
 all:
 	uptodate=0;\

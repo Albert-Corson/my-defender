@@ -28,6 +28,14 @@ void enemy_update_lifebar(anim_obj_t *enemy)
     rect_set_size(extra->lifebar, size);
 }
 
+void enemy_rotate(obj_t *enemy)
+{
+    sfVector2f speed = enemy->physics->speed;
+    float angle = angle_between_vectors(speed, VECT2F(1, 0));
+
+    VFUNC(enemy, set_rotation, angle);
+}
+
 void enemy_move(hub_t *hub, obj_t *enemy)
 {
     int step = ((enemy_data_t *)enemy->extra)->tile_step;
@@ -48,5 +56,6 @@ void enemy_move(hub_t *hub, obj_t *enemy)
             data->tower_hp -= 100;
             enemy_kill(hub->scenes, enemy, sfFalse);
         }
+        enemy_rotate(enemy);
     }
 }

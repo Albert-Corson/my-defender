@@ -43,28 +43,6 @@ void update_tower_lifebar_evt(hub_t *hub, sfEvent evt)
     VFUNC(lifebar, set_size, size);
 }
 
-void update_wave_evt(hub_t *hub, sfEvent evt)
-{
-    game_scene_data_t *data = ((scene_t *)hub->scenes)->extra;
-    data->elapsed_wave += sfClock_getElapsedTime(hub->timer).microseconds;
-    int delay = 500 - (20 * data->wave);
-    sfBool end_of_wave = data->alive_enemies <= 0 && data->enemies_count <= 0;
-
-    evt = evt;
-    delay = delay < 100 ? 100 : delay;
-    if (end_of_wave && data->elapsed_wave / 1000 > 2000) {
-        data->elapsed_wave -= 2000 * 1000;
-        data->wave++;
-        data->enemies_count = data->wave * 2;
-    }
-    while (data->enemies_count > 0 && data->elapsed_wave / 1000 > delay) {
-        data->elapsed_wave -= 1000 * delay;
-        enemy_spawn(hub->scenes, "tank_1", 1);
-        data->enemies_count--;
-        data->alive_enemies++;
-    }
-}
-
 void update_wave_text(hub_t *hub, sfEvent evt)
 {
     scene_t *scene = hub->scenes;

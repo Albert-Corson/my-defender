@@ -28,21 +28,21 @@ void enemy_ctor(anim_obj_t *enemy, char *aspect, float life_multiplier)
     anim_obj_ctor(enemy);
     enemy->dtor = enemy_dtor;
     enemy->group = GR_ENEMY;
-    enemy->extra = enemy_data_new(400 * life_multiplier, 3);
+    enemy->extra = enemy_data_new(400 * life_multiplier, aspect);
     path = my_format("assets/img/mob/%s.png", aspect);
     anim = anim_new(path, 1, 0);
     anim_obj_add_anim(enemy, anim, NULL);
 }
 
-void *enemy_data_new(float max_hp, float speed)
+void *enemy_data_new(float max_hp, char *aspect)
 {
     enemy_data_t *extra = malloc(sizeof(enemy_data_t));
 
-    extra->aerial = sfFalse;
-    extra->ground = sfTrue;
+    extra->aerial = (*aspect == 'f');
+    extra->ground = (*aspect != 'f');
     extra->hp = max_hp;
     extra->max_hp = max_hp;
-    extra->speed = speed;
+    extra->speed = (*aspect == 'f' ? 5 : 3);
     extra->tile_step = 0;
     extra->lifebar = rect_new(VECT2U(50, 7.5), sfRed);
     extra->lifebar_size = 50;
@@ -73,5 +73,6 @@ void enemy_spawn(scene_t *scene, char *aspect, float multiplier)
     pos.y = find_spawn_y(data->map) * 50;
     enemy = enemy_new(aspect, pos, multiplier);
     VFUNC(enemy, set_size, VECT2U(50, 50));
+    VFUNC(enemy, set_origin, VECT2F(25, 25));
     scene_add_obj(scene, enemy, NULL);
 }
