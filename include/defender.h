@@ -244,6 +244,7 @@ void pause_esc_key(hub_t *hub, sfEvent evt);
 void score_show_menu(hub_t *hub, sfEvent evt);
 void score_scene_create(hub_t *hub);
 void change_fps_slider(hub_t *hub, void *obj);
+void update_score_scene(hub_t *hub, scene_t *game_scene);
 
 #define KRELEASED(evt, keycode)\
 ((evt.type == sfEvtKeyReleased && evt.key.code == keycode) ? 1 : 0)

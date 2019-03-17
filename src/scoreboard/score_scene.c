@@ -18,6 +18,8 @@ void update_score_scene(hub_t *hub, scene_t *game_scene)
 
     text_obj_set_string(score_txt, str_1);
     text_obj_set_string(wave, str_2);
+    free(str_1);
+    free(str_2);
 }
 
 void score_scene_create(hub_t *hub)

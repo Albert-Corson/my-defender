@@ -86,5 +86,6 @@ void check_tower_life(hub_t *hub, sfEvent evt)
 
     evt = evt;
     FAIL_IF_VOID(data->tower_hp > 0 || !score);
+    update_score_scene(hub, hub->scenes);
     hub->scenes = score;
 }
