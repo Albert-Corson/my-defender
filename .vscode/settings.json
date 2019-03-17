@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "defender.h": "c",
-        "fcntl.h": "c"
-    }
-}

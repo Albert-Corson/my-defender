@@ -15,7 +15,7 @@ void acquire_target(hub_t *hub, defense_obj_t *defense)
     float distance = 0;
 
     while (list_poll((void *)begin, (void **)&curr)) {
-        distance = objs_distance(defense, curr);
+        distance = objs_distance((obj_t *)defense, curr);
         if (curr->group == GR_ENEMY && curr->state && distance <= range) {
             defense->target = curr;
             return;
@@ -27,14 +27,14 @@ void defense_lock_target(hub_t *hub, obj_t *obj)
 {
     defense_obj_t *defense = (defense_obj_t *)obj;
     obj_t *target = defense->target;
-    obj_t *tower = defense->tower;
+    anim_obj_t *tower = defense->tower;
     float range = defense->range;
 
     if (target) {
         if (!target->state || objs_distance(obj, target) > range) {
             defense->target = NULL;
         } else {
-            VFUNC(defense, set_rotation, objs_angle(tower, target));
+            VFUNC(defense, set_rotation, objs_angle((obj_t *)tower, target));
             return;
         }
     }

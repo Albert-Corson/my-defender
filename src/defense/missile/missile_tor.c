@@ -26,7 +26,6 @@ void missile_ctor(void *missile, void *launcher, char *aspect)
     char *path = my_format("assets/img/mob/%s.png", aspect);
     anim_t *anim = anim_new(path, 1, 0);
     sfVector2f pos = VGET(launcher, get_position);
-    sfVector2u b_size = VGET(missile, get_size);
     sfFloatRect t_box = VGET(launcher, get_box);
     float rot = VGET(launcher, get_rotation);
 

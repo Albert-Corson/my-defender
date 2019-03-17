@@ -10,7 +10,6 @@
 void game_scene_add_evts(scene_t *game)
 {
     scene_add_evt(game, evt_new(game_mouse_evt_update_btns, inputs), NULL);
-    scene_add_evt(game, evt_new(update_tower_lifebar, context), NULL);
     scene_add_evt(game, evt_new(outline_focused_btn, inputs), "focused_btn");
     scene_add_evt(game, evt_new(select_defenses, inputs), NULL);
     scene_add_evt(game, evt_new(defense_update_evt, context), NULL);
@@ -32,12 +31,6 @@ void game_scene_create_objs(scene_t *game, hub_t *hub)
     create_tower_lifebar(game);
     create_price_txts(game);
     create_emp_anim(game, hub);
-}
-
-static void enemy_circle_dtor(void *obj)
-{
-    free(((obj_t *)obj)->extra);
-    circle_dtor(obj);
 }
 
 int game_scene_create(hub_t *hub)

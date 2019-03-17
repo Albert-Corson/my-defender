@@ -12,7 +12,7 @@ int main(int ac, char *av[], char *env[])
     char *mappath = NULL;
 
     if (!env || !get_env_var(env, "DISPLAY"))
-        return (84);
+        return (0);
     if (ac != 2)
         mappath = my_memdup("bonus/default", -1);
     else if (ac == 2)

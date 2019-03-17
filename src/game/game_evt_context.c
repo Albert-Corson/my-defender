@@ -14,6 +14,7 @@ void update_cash(hub_t *hub, sfEvent evt)
     char *str = NULL;
     int delay = 500;
 
+    evt = evt;
     delay -= ((data->wave - (data->wave % 2)) / 2) * 10;
     delay = delay < 150 ? 150 : delay;
     data->elapsed += sfClock_getElapsedTime(hub->timer).microseconds;
@@ -25,7 +26,6 @@ void update_cash(hub_t *hub, sfEvent evt)
     str = my_format("%d", data->cash);
     text_obj_set_string(text, str);
     free(str);
-    evt = evt;
 }
 
 void update_tower_lifebar_evt(hub_t *hub, sfEvent evt)
@@ -36,6 +36,7 @@ void update_tower_lifebar_evt(hub_t *hub, sfEvent evt)
     obj_t *lifebar_back = list_fetch(scene->objs, "back_lifebar");
     sfVector2u size = {0, 0};
 
+    evt = evt;
     FAIL_IF_VOID(!lifebar || !lifebar_back || !data);
     size = rect_get_size(lifebar_back);
     size = VECT2U(data->tower_hp * size.x / data->max_tower_hp, size.y);
