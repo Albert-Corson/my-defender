@@ -94,6 +94,7 @@ typedef struct game_scene_data_s {
 int init_game(char *mappath);
 void gameloop(hub_t *hub);
 void load_sound_buffers(hub_t *hub);
+void show_usage(void);
 
 // PARSING
 int check_map(char *mappath);

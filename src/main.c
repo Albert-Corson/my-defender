@@ -15,6 +15,10 @@ int main(int ac, char *av[], char *env[])
         return (0);
     if (ac != 2)
         mappath = my_memdup("bonus/default", -1);
+    if (ac == 2 && my_memcmp(av[1], "-h", -1) == 0) {
+        show_usage();
+        return (0);
+    }
     else if (ac == 2)
         mappath = my_memdup(av[1], -1);
     if (check_map(mappath))

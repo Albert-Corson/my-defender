@@ -7,6 +7,7 @@
 
 SRC			=	src/main.c									\
 				src/load_sound.c							\
+				src/show_usage.c							\
 				src/tools/create_scenes.c					\
 				src/tools/create_anim_obj.c					\
 				src/tools/random_gen.c						\
