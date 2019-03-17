@@ -57,9 +57,7 @@ void create_defense(scene_t *scene, char *aspect, int lvl, sfVector2f pos)
 {
     defense_obj_t *defense = NULL;
     sound_obj_t *sound = list_fetch(scene->objs, "sfx_place");
-    sfVector2u size;
     sfVector2f good_pos;
-    float ratio = 0;
     int price = 250 + (aspect[0] == 'c' || aspect[0] == 'r' ? 100 : 0);
 
     FAIL_IF_VOID(price > ((game_scene_data_t *)scene->extra)->cash);
@@ -68,9 +66,6 @@ void create_defense(scene_t *scene, char *aspect, int lvl, sfVector2f pos)
     obj_sound_apply((obj_t *)sound, sfSound_play);
     good_pos = VECT2F(pos.x + 25, pos.y + 25);
     defense = defense_new(aspect, lvl, good_pos);
-    size = VGET(defense->base, get_size);
-    ratio = (size.x > size.y ? size.x : size.y);
-    ratio = 50 / ratio;
-    defense_obj_set_scale(defense, VECT2F(ratio, ratio));
+    VFUNC(defense, set_size, VECT2U(50, 50));
     scene_add_obj(scene, defense, NULL);
 }

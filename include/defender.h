@@ -17,6 +17,8 @@
 typedef enum {
     GR_DEFAULT,
     GR_TERRAIN,
+    GR_TOWER,
+    GR_ROAD,
     GR_DEFENSE,
     GR_ENEMY,
     GR_MISSILE
@@ -33,6 +35,8 @@ typedef struct enemy_data_s {
     float hp;
     float speed;
     int tile_step;
+    shape_obj_t *lifebar;
+    float lifebar_size;
 } enemy_data_t;
 
 typedef struct defense_obj_s {
@@ -79,7 +83,10 @@ typedef struct game_scene_data_s {
     int cash;
     int score;
     int wave;
+    int tower_hp;
+    int max_tower_hp;
     sfInt64 elapsed;
+    sfInt64 elapsed_wave;
 } game_scene_data_t;
 
 int init_game(char *mappath);
@@ -115,6 +122,7 @@ char *get_env_var(char **envp, char *goal);
 
 // GAME NPC
 void *missile_new(void *launcher, char *aspect);
+void missile_update(hub_t *hub, obj_t *missile);
 
 // DEFENSES
 void *defense_new(char *aspect, int lvl, sfVector2f pos);
@@ -124,6 +132,7 @@ void defense_destroy(void *defense);
 void defense_obj_set_pos(void *obj, sfVector2f pos);
 void defense_obj_set_origin(void *obj, sfVector2f origin);
 void defense_obj_set_scale(void *obj, sfVector2f scale);
+void defense_obj_set_size(void *obj, sfVector2u size);
 void defense_obj_set_rotation(void *obj, float angle);
 void defense_obj_render(void *obj, hub_t *hub);
 sfVector2f defense_obj_get_pos(void *obj);
@@ -148,8 +157,13 @@ void *enemy_data_new(float max_hp, float speed);
 void enemy_follow_mouse(hub_t *hub, sfEvent evt);
 void enemy_move(hub_t *hub, obj_t *enemy);
 void enemy_move_evt(hub_t *hub, sfEvent evt);
-void enemy_spawn(scene_t *scene);
 void spawn_enemy(hub_t *hub, sfEvent evt);
+void enemy_set_size(void *obj, sfVector2u size);
+void enemy_set_scale(void *obj, sfVector2f scale);
+void enemy_set_position(void *obj, sfVector2f pos);
+void enemy_spawn(scene_t *scene, char *aspect, float multiplier);
+void enemy_render(void *obj, hub_t *hub);
+void enemy_update_lifebar(anim_obj_t *enemy);
 
 // CREATE SCENES
 void menu_scene_create(hub_t *hub);
@@ -157,8 +171,6 @@ void pres_scene_create(hub_t *hub);
 void options_scene_create(hub_t *hub);
 int game_scene_create(hub_t *hub);
 void pause_scene_create(hub_t *hub);
-
-void test_scene_create(hub_t *hub);
 
 // PRESENTATION SCENE
 void pres_animate_text(hub_t *hub, sfEvent evt);
@@ -193,6 +205,7 @@ void towers_preview(hub_t *hub, sfEvent evt);
 void emp_preview(hub_t *hub, sfEvent evt);
 int tool_preview(hub_t *hub, sfEvent evt);
 void create_tower_lifebar(scene_t *game);
+void update_tower_lifebar_evt(hub_t *hub, sfEvent evt);
 void create_price_txts(scene_t *game);
 void game_mouse_evt_update_btns(hub_t *hub, sfEvent evt);
 void game_create_sounds(hub_t *hub, scene_t *game);
@@ -200,6 +213,8 @@ void create_emp_anim(scene_t *game, hub_t *hub);
 void drop_emp_explosion(scene_t *scene, sfVector2f pos);
 void create_emp_anim(scene_t *game, hub_t *hub);
 void update_cash(hub_t *hub, sfEvent evt);
+void game_scene_create_data(scene_t *scene);
+void game_scene_data_dtor(void *extra);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);

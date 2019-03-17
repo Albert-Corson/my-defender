@@ -10,8 +10,10 @@
 void enemy_dtor(void *enemy)
 {
     anim_obj_t *st_enemy = (anim_obj_t *)enemy;
+    enemy_data_t *extra = st_enemy->extra;
 
     FAIL_IF_VOID(!st_enemy || !st_enemy->extra);
+    rect_destroy(extra->lifebar);
     free(st_enemy->extra);
     st_enemy->extra = NULL;
     anim_obj_dtor(enemy);
@@ -42,6 +44,8 @@ void *enemy_data_new(float max_hp, float speed)
     extra->max_hp = max_hp;
     extra->speed = speed;
     extra->tile_step = 0;
+    extra->lifebar = rect_new(VECT2U(50, 7.5), sfRed);
+    extra->lifebar_size = 50;
     return (extra);
 }
 
@@ -51,11 +55,15 @@ void *enemy_new(char *aspect, sfVector2f pos, float life_multiplier)
 
     FAIL_IF(!aspect || !st_enemy, NULL);
     enemy_ctor(st_enemy, aspect, life_multiplier);
+    st_enemy->vtable->set_size = enemy_set_size;
+    st_enemy->vtable->set_scale = enemy_set_scale;
+    st_enemy->vtable->set_position = enemy_set_position;
+    st_enemy->vtable->render = enemy_render;
     VFUNC(st_enemy, set_position, pos);
     return ((void *)st_enemy);
 }
 
-void enemy_spawn(scene_t *scene)
+void enemy_spawn(scene_t *scene, char *aspect, float multiplier)
 {
     game_scene_data_t *data = scene->extra;
     sfVector2f pos = VECT2F(31 * 50, 0);
@@ -63,7 +71,7 @@ void enemy_spawn(scene_t *scene)
 
     FAIL_IF_VOID(!data || !data->map);
     pos.y = find_spawn_y(data->map) * 50;
-    enemy = enemy_new("mothership_2", pos, 1);
+    enemy = enemy_new(aspect, pos, multiplier);
     VFUNC(enemy, set_size, VECT2U(50, 50));
     scene_add_obj(scene, enemy, NULL);
 }

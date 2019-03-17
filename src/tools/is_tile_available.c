@@ -15,8 +15,7 @@ static int check_tile(obj_t *tmp, sfFloatRect rect)
     FAIL_IF(!tmp, 0);
     if (!tmp->is_alive)
         return (0);
-    // if (grp != GR_DEFENSE && grp != GR_TOWER && grp != GR_ROAD)
-    if (grp != GR_DEFENSE)
+    if (grp != GR_DEFENSE && grp != GR_TOWER && grp != GR_ROAD)
         return (0);
     pos = VGET(tmp, get_position);
     if (!sfFloatRect_contains(&rect, pos.x, pos.y))

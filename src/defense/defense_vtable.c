@@ -25,7 +25,7 @@ void defense_obj_vtable_ctor_set(void *obj_vtable)
     st_obj_vtable->set_position = defense_obj_set_pos;
     st_obj_vtable->set_rotation = defense_obj_set_rotation;
     st_obj_vtable->set_scale = defense_obj_set_scale;
-    st_obj_vtable->set_size = NULL;
+    st_obj_vtable->set_size = defense_obj_set_size;
     st_obj_vtable->set_radius = NULL;
     st_obj_vtable->set_texture = NULL;
 }

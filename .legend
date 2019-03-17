@@ -6,4 +6,11 @@ in the command line arguments:
     ./my_defender [map path]
 
 The map must be 32 characters wide and 16 tall. Any further character won't be 
-taken in consideration.
+taken in consideration. The map must have at least :
+    - a tower, made of 3x3 tiles
+    - a road starting from the very right side, and going to the tower
+
+## TILES ##
+    ' ' - ROAD
+    '#' - GRASS
+    'O' - TOWER

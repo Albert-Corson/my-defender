@@ -7,38 +7,13 @@
 
 #include "defender.h"
 
-void game_scene_data_dtor(void *extra)
-{
-    game_scene_data_t *data = extra;
-    int line = 0;
-
-    while (line < 16) {
-        free(data->map[line]);
-        ++line;
-    }
-    free(data->map);
-    data->wave = 0;
-    data->cash = 0;
-}
-
-void game_scene_create_data(scene_t *scene)
-{
-    game_scene_data_t *data = malloc(sizeof(game_scene_data_t));
-
-    data->map = NULL;
-    data->wave = 1;
-    data->cash = 500;
-    data->elapsed = 0;
-    data->dtor = game_scene_data_dtor;
-    scene->extra = data;
-}
-
 void game_scene_add_evts(scene_t *game)
 {
     scene_add_evt(game, evt_new(game_mouse_evt_update_btns, inputs), NULL);
     scene_add_evt(game, evt_new(outline_focused_btn, inputs), "focused_btn");
     scene_add_evt(game, evt_new(select_defenses, inputs), NULL);
     scene_add_evt(game, evt_new(defense_update_evt, context), NULL);
+    scene_add_evt(game, evt_new(update_tower_lifebar_evt, context), NULL);
     scene_add_evt(game, evt_new(update_cash, context), NULL);
     scene_add_evt(game, evt_new(game_pause, inputs), "pause");
 }
@@ -58,6 +33,12 @@ void game_scene_create_objs(scene_t *game, hub_t *hub)
     create_emp_anim(game, hub);
 }
 
+static void enemy_circle_dtor(void *obj)
+{
+    free(((obj_t *)obj)->extra);
+    circle_dtor(obj);
+}
+
 int game_scene_create(hub_t *hub)
 {
     scene_t *game = scene_new();
@@ -69,7 +50,7 @@ int game_scene_create(hub_t *hub)
     status = parse_map(game, hub->mappath);
     write(2, "Invalid map.\n", (status == 0 ? 14 : 0));
     game_scene_create_objs(game, hub);
-    enemy_spawn(game);
+    enemy_spawn(game, "mothership_2", 1);
     game_create_sounds(hub, game);
     game_scene_add_evts(game);
     hub_add_scene(hub, game, "game_scene");

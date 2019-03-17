@@ -16,8 +16,9 @@ static void enemy_circle_dtor(void *obj)
 void pres_create_defense(scene_t *pres)
 {
     defense_obj_t *defense = defense_new("rocket", 3, VECT2F(800, 290));
-    shape_obj_t *enemy = circle_new(10, 15, sfTransparent);
+    shape_obj_t *enemy = circle_new(25, 15, sfTransparent);
 
+    VFUNC(enemy, set_origin, VECT2F(25, 25));
     enemy->group = GR_ENEMY;
     enemy->extra = enemy_data_new(100, 3);
     enemy->dtor = enemy_circle_dtor;
@@ -41,7 +42,7 @@ static void create_tower_icon(scene_t *pres)
 
 void pres_scene_create(hub_t *hub)
 {
-    scene_t *pres = scene_new();
+    scene_t *pres = scene_new();                                                                                                                  
     text_obj_t *press_text = text_obj_new("Press a key to start", sfRed, 30);
     text_obj_t *game_name = text_obj_new("TOWER DEFENSE", sfWhite, 100);
 

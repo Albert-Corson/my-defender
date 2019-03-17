@@ -30,8 +30,12 @@ anim_obj_t *create_tile(scene_t *scene, char **map, sfVector2i coords)
     VFUNC(tile, set_size, VECT2U(50, 50));
     VFUNC(tile, set_position, VECT2F(coords.x * 50, coords.y * 50));
     tile->group = GR_TERRAIN;
-    if (map[coords.y][coords.x] == ' ')
+    if (map[coords.y][coords.x] == ' ') {
+        tile->group = GR_ROAD;
         tile->nbr = -1;
+    } else if (map[coords.y][coords.x] == 'O') {
+        tile->group = GR_TOWER;
+    }
     scene_add_obj(scene, tile, NULL);
     free(tilepath);
     return (tile);

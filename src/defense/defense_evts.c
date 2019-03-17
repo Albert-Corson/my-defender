@@ -7,16 +7,28 @@
 
 #include "defender.h"
 
-void missile_update(obj_t *missile);
+void acquire_target(hub_t *hub, defense_obj_t *defense)
+{
+    obj_t *begin = ((scene_t *)hub->scenes)->objs;
+    obj_t *curr = NULL;
+    float range = defense->range;
+    float distance = 0;
+
+    while (list_poll((void *)begin, (void **)&curr)) {
+        distance = objs_distance(defense, curr);
+        if (curr->group == GR_ENEMY && curr->state && distance <= range) {
+            defense->target = curr;
+            return;
+        }
+    }
+}
 
 void defense_lock_target(hub_t *hub, obj_t *obj)
 {
     defense_obj_t *defense = (defense_obj_t *)obj;
-    float range = defense->range;
-    obj_t *tower = (obj_t *)defense->tower;
     obj_t *target = defense->target;
-    obj_t *begin = ((scene_t *)hub->scenes)->objs;
-    obj_t *curr = NULL;
+    obj_t *tower = defense->tower;
+    float range = defense->range;
 
     if (target) {
         if (!target->state || objs_distance(obj, target) > range) {
@@ -26,12 +38,7 @@ void defense_lock_target(hub_t *hub, obj_t *obj)
             return;
         }
     }
-    while (list_poll((void *)begin, (void **)&curr)) {
-        if (curr->group == GR_ENEMY && objs_distance(obj, curr) <= range) {
-            defense->target = curr;
-            return;
-        }
-    }
+    acquire_target(hub, defense);    
 }
 
 void defense_fire(hub_t *hub, obj_t *obj)
@@ -63,9 +70,10 @@ void defense_update_evt(hub_t *hub, sfEvent evt)
             defense_lock_target(hub, curr);
             defense_fire(hub, curr);
         } else if (curr->state && curr->group == GR_MISSILE) {
-            missile_update(curr);
+            missile_update(hub, curr);
         }
         if (curr->state && curr->group == GR_ENEMY) {
+            enemy_update_lifebar((void *)curr);
             enemy_move(hub, (obj_t *)curr);
         }
     }
