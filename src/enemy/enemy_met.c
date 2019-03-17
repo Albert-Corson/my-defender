@@ -40,6 +40,8 @@ void enemy_kill(scene_t *scene, obj_t *enemy, sfBool reward)
     enemy_data_t *enemy_data = enemy->extra;
 
     scene_data->alive_enemies--;
+    if (scene_data->alive_enemies <= 0)
+        scene_data->elapsed_wave = 0;
     enemy_data->hp = 0;
     if (reward) {
         scene_data->cash += 50;

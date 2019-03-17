@@ -52,8 +52,8 @@ void update_wave_evt(hub_t *hub, sfEvent evt)
 
     evt = evt;
     delay = delay < 100 ? 100 : delay;
-    if (end_of_wave && data->elapsed_wave / 1000 > 5000) {
-        data->elapsed_wave -= 5000 * 1000;
+    if (end_of_wave && data->elapsed_wave / 1000 > 2000) {
+        data->elapsed_wave -= 2000 * 1000;
         data->wave++;
         data->enemies_count = data->wave * 2;
     }

@@ -56,6 +56,7 @@ SRC			=	src/main.c									\
 				src/enemy/enemy_evts.c						\
 				src/parsing/checks.c						\
 				src/parsing/parser.c						\
+				src/parsing/tiles.c							\
 				src/parsing/textures.c						\
 				src/parsing/pathfinding/check_path.c
 

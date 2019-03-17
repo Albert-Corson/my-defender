@@ -100,6 +100,7 @@ void show_usage(void);
 int check_map(char *mappath);
 int check_path(char **map, anim_obj_t *tile);
 int parse_map(scene_t *scene, char *mappath);
+anim_obj_t *create_tile(scene_t *scene, char **map, sfVector2i coords);
 char *get_grass_texture(char **map, sfVector2i coords);
 char *get_grass_road_texture(char **map, sfVector2i coords);
 char *get_tower_texture(char **map, sfVector2i coords);

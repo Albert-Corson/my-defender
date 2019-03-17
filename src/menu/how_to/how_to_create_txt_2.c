@@ -60,8 +60,8 @@ void emp_txt(scene_t *how_to)
 
 void upgrade_txt(scene_t *how_to)
 {
-    char *str_1 = "UPGRADE DEFENSES:\nFirst level gives better firerate,";
-    char *str_2 = " second level improves damages\ncost: $300";
+    char *str_1 = "UPGRADE DEFENSES:\nFirst level gives better firerate, ";
+    char *str_2 = "csecond level improves damages\ncost: $300";
     char *str = my_format("%s%s", str_1, str_2);
     text_obj_t *txt = text_obj_new(str, sfBlack, 20);
     anim_obj_t *up = NULL;
