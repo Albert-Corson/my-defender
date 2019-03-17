@@ -23,6 +23,9 @@ SRC			=	src/main.c									\
 				src/menu/options/options_evt.c				\
 				src/menu/options/options_scene.c			\
 				src/menu/options/options_btn_action.c		\
+				src/menu/how_to/how_to_scene.c				\
+				src/menu/how_to/how_to_create_txt.c			\
+				src/menu/how_to/how_to_create_txt_2.c		\
 				src/pres_screen/pres_scene.c				\
 				src/pres_screen/pres_evt.c					\
 				src/game/game_scene.c						\

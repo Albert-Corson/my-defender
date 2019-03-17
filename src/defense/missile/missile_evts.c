@@ -41,8 +41,10 @@ void missile_update(hub_t *hub, obj_t *missile)
     if (sfFloatRect_contains(&target_box, pos.x, pos.y)) {
         if (target->state)
             target_extra->hp -= sender->dps;
-        if (target_extra->hp <= 0)
+        if (target_extra->hp <= 0) {
             enemy_kill(hub->scenes, target, sfTrue);
+            obj_sound_apply((obj_t *)sender, sfSound_play);
+        }
         obj_kill(missile);
     } else
         missile_follow_target(missile);

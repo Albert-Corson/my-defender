@@ -68,3 +68,23 @@ void menu_show_game(hub_t *hub, void *btn)
     if (focus && !active)
         st_btn->mouse_evt->focus = sfFalse;
 }
+
+void menu_show_how_to(hub_t *hub, void *btn)
+{
+    scene_t *game = list_fetch(hub->scenes, "how_to_scene");
+    input_obj_t *st_btn = btn;
+    sfBool hover = st_btn->mouse_evt->hover;
+    sfBool focus = st_btn->mouse_evt->focus;
+    sfBool active = st_btn->mouse_evt->active;
+
+    if (focus && !active && hover) {
+        scene_sound_apply(hub->scenes, sfSound_play);
+        hub->scenes = game ? game : hub->scenes;
+    }
+    if (active && hover)
+        rect_set_fill_color(st_btn->background, RGBA(100, 100, 100, 255));
+    else if (focus)
+        rect_set_fill_color(st_btn->background, sfBlack);
+    if (focus && !active)
+        st_btn->mouse_evt->focus = sfFalse;
+}

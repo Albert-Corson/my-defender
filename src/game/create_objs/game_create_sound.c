@@ -16,8 +16,6 @@ void game_create_sounds(hub_t *hub, scene_t *game)
     scene_add_obj(game, new, "sfx_erease");
     new = sound_obj_new(hub, "emp_explo");
     scene_add_obj(game, new, "sfx_explosion");
-    new = sound_obj_new(hub, "missile_explo");
-    scene_add_obj(game, new, "sfx_missile_explo");
     new = sound_obj_new(hub, "upgrade");
     scene_add_obj(game, new, "sfx_upgrade");
 }

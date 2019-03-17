@@ -12,18 +12,23 @@ void menu_create_buttons(hub_t *hub, scene_t *menu)
     input_obj_t *play = NULL;
     input_obj_t *optn = NULL;
     input_obj_t *quit = NULL;
+    input_obj_t *how_to = NULL;
 
-    play = create_btn(RECT(1075, 250, 500, 100), sfBlack, 50, "Play");
-    optn = create_btn(RECT(1075, 425, 500, 100), sfBlack, 50, "Options");
-    quit = create_btn(RECT(1075, 600, 500, 100), sfBlack, 50, "Quit");
-    quit->on_active = menu_quit_game;
-    optn->on_active = menu_show_options;
+    play = create_btn(RECT(1075, 225, 500, 100), sfBlack, 50, "Play");
+    optn = create_btn(RECT(1075, 375, 500, 100), sfBlack, 50, "Options");
+    how_to = create_btn(RECT(1075, 525, 500, 100), sfBlack, 50, "How to play");
+    quit = create_btn(RECT(1075, 675, 500, 100), sfBlack, 50, "Quit");
     play->on_active = menu_show_game;
+    optn->on_active = menu_show_options;
+    how_to->on_active = menu_show_how_to;
+    quit->on_active = menu_quit_game;
     obj_set_sound_buffer(hub, play, "mouse_hover");
-    obj_set_sound_buffer(hub, quit, "mouse_hover");
     obj_set_sound_buffer(hub, optn, "mouse_hover");
+    obj_set_sound_buffer(hub, how_to, "mouse_hover");
+    obj_set_sound_buffer(hub, quit, "mouse_hover");
     scene_add_obj(menu, play, "play_btn");
     scene_add_obj(menu, optn, "opt_btn");
+    scene_add_obj(menu, how_to, "how_to_btn");
     scene_add_obj(menu, quit, "quit_btn");
 }
 

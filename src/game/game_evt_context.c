@@ -64,3 +64,16 @@ void update_wave_evt(hub_t *hub, sfEvent evt)
         data->alive_enemies++;
     }
 }
+
+void update_wave_text(hub_t *hub, sfEvent evt)
+{
+    scene_t *scene = hub->scenes;
+    game_scene_data_t *data = scene ? scene->extra : NULL;
+    text_obj_t *text = list_fetch(scene->objs, "wave_text");
+    char *str = my_format("WAVE: %d", data ? data->wave : 0);
+
+    evt = evt;
+    FAIL_IF_VOID(!scene || !text);
+    text_obj_set_string(text, str);
+    free(str);
+}

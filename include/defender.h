@@ -116,9 +116,9 @@ int create_scenes(hub_t *hub);
 input_obj_t *create_btn(sfFloatRect box, sfColor bg, int txt_size, char *txt);
 input_obj_t *create_img_btn(char *path, sfVector2f pos);
 anim_obj_t *create_anim_obj(char *path, sfVector2f pos, int nb_frame, uint lim);
-void create_defense(scene_t *scene, char *aspect, int lvl, sfVector2f pos);
-void sell_defense(scene_t *scene, sfVector2f pos);
-void upgrade_defense(scene_t *scene, sfVector2f pos);
+void create_defense(hub_t *hub, char *aspect, int lvl, sfVector2f pos);
+void sell_defense(hub_t *hub, sfVector2f pos);
+void upgrade_defense(hub_t *hub, sfVector2f pos);
 void reset_game(hub_t *hub);
 char *get_env_var(char **envp, char *goal);
 
@@ -187,6 +187,7 @@ void menu_quit_game(hub_t *hub, void *obj);
 void menu_show_options(hub_t *hub, void *obj);
 void menu_show_game(hub_t *hub, void *obj);
 void menu_show_pres(hub_t *hub, sfEvent evt);
+void menu_show_how_to(hub_t *hub, void *btn);
 
 // OPTIONS SCENE
 void options_show_menu(hub_t *hub, sfEvent evt);
@@ -194,6 +195,15 @@ void change_volume_slider(hub_t *hub, void *obj);
 void change_sfx_slider(hub_t *hub, void *obj);
 void change_music_slider(hub_t *hub, void *obj);
 void back_btn_action(hub_t *hub, void *btn);
+
+// HOW TO PLAY SCENE
+void how_to_scene_create(hub_t *hub);
+void how_to_create_txt(scene_t *how_to);
+void canon_txt(scene_t *how_to);
+void rocket_txt(scene_t *how_to);
+void emp_txt(scene_t *how_to);
+void upgrade_txt(scene_t *how_to);
+void sell_txt(scene_t *how_to);
 
 // GAME SCENE
 void game_pause(hub_t *hub, sfEvent evt);
@@ -219,6 +229,7 @@ void create_emp_anim(scene_t *game, hub_t *hub);
 void update_cash(hub_t *hub, sfEvent evt);
 void game_scene_create_data(scene_t *scene);
 void game_scene_data_dtor(void *extra);
+void update_wave_text(hub_t *hub, sfEvent evt);
 
 // PAUSE SCENE
 void pause_menu_action(hub_t *hub, void *obj);
